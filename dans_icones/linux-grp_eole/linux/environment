@@ -1,0 +1,5 @@
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/=http://172.18.248.1:3129/"
+http_proxy=http://172.18.248.1:3128/
+https_proxy=http://172.18.248.1:3128/
+ftp_proxy=http://172.18.248.1:3128/
+no_proxy="localhost,127.0.0.1,192.168.0.0/16,172.18.248.0/16,.crdp-lyon.fr,.crdplyon.lan,col-bdn.re"
