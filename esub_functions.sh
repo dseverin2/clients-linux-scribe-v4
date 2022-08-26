@@ -15,6 +15,7 @@ else
 	echo "Fichier config.cfg absent ! Interruption de l'installation."
 	exit
 fi
+touch $logfile
 
 # Ajout locate
 sudo apt install locate -y
@@ -31,6 +32,7 @@ function majIntegrdom {
 		offlineVersion=""
 		echo "Fichier _VERSION absent !"
 	fi
+
 	if [ "$offlineVersion" -lt "$onlineVersion" ]; then
 		echo "Une nouvelle version du script est en ligne. Voulez-vous mettre à jour ? o/[N]"
 		read -r autorisationMaj
