@@ -9,7 +9,7 @@
 # - 10/10/2020 (Lecture DVD dans le fichier config)
 # - 27/06/2022 (Prise en charge wallpaper XFCE)
 # - 08/07/2022 (Prise en charge de Jammy Jellyfish 22.04
-# TEST : ligne 318 (pam delay 10sw)
+# TEST : Chercher MODIFS (pam delay 10sw)
 
 
 # Testé & validé pour les distributions suivantes :
@@ -290,11 +290,31 @@ Auth:
 #auth ldap
 ########################################################################
 writelog "13/42-Définition de auth ldap"
-echo "[open_ldap]
-nss_passwd=passwd:  files ldap
-nss_group=group: files ldap
-nss_shadow=shadow: files ldap
-nss_netgroup=netgroup: nis" > /etc/auth-client-config/profile.d/open_ldap 2>> $logfile
+#MODIFS LE IF 20 et 20.04
+if [ "$DISTRIB_RELEASE" = "20.04" ] || [ "$DISTRIB_RELEASE" = "20" ] ; then 
+	echo "# pre_auth-client-config # passwd:         compat systemd
+	passwd:  files ldap
+	# pre_auth-client-config # group:          compat systemd
+	group: files ldap
+	# pre_auth-client-config # shadow:         compat
+	shadow: files ldap
+	gshadow:        files
+	hosts:          files mdns4_minimal [NOTFOUND=return] dns myhostname
+	networks:       files
+	protocols:      db files
+	services:       db files
+	ethers:         db files
+	rpc:            db files
+	# pre_auth-client-config # netgroup:       nis
+	netgroup: nis
+	" > /etc/nsswitch.conf 2>> $logfile
+else
+	echo "[open_ldap]
+	nss_passwd=passwd:  files ldap
+	nss_group=group: files ldap
+	nss_shadow=shadow: files ldap
+	nss_netgroup=netgroup: nis" > /etc/auth-client-config/profile.d/open_ldap 2>> $logfile
+fi
 
 ########################################################################
 #application de la conf nsswitch
@@ -315,6 +335,7 @@ Session:
        optional                        pam_mkhomedir.so silent" > /usr/share/pam-configs/mkhomedir 2>> $logfile
 
 addtoend /etc/pam.d/common-auth "auth    required     pam_group.so use_first_pass" 2>> $logfile
+# MODIFS
 addtoend /etc/pam.d/common-auth "auth  optional  pam_faildelay.so  delay=10000000"
 
 
@@ -445,6 +466,24 @@ if ! grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null; then
 	sed -i "/<\!-- Volume definitions -->/a\ $homes" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
+writelog "---~/Groupes"
+groupes="<volume user=\"*\" fstype=\"cifs\" server=\"$ip_scribe\" path=\"groupes\" mountpoint=\"~/Groupes\" />"
+if ! grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null; then 
+	sed -i "/<\!-- Volume definitions -->/a\ $groupes" /etc/security/pam_mount.conf.xml 2>> $logfile
+fi
+
+writelog "---~/Commun"
+commun="<volume user=\"*\" fstype=\"cifs\" server=\"$ip_scribe\" path=\"commun\" mountpoint=\"~/commun\" />"
+if ! grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null; then 
+	sed -i "/<\!-- Volume definitions -->/a\ $commun" /etc/security/pam_mount.conf.xml 2>> $logfile
+fi
+
+writelog "---~/Professeurs"
+professeurs="<volume user=\"*\" fstype=\"cifs\" server=\"$ip_scribe\" path=\"professeurs\" mountpoint=\"~/professeurs\" />"
+if ! grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null; then 
+	sed -i "/<\!-- Volume definitions -->/a\ $professeurs" /etc/security/pam_mount.conf.xml 2>> $logfile
+fi
+
 writelog "---/tmp/netlogon (DomainAdmins)"
 netlogon="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"netlogon\" mountpoint=\"/tmp/netlogon\"  sgrp=\"DomainUsers\" />"
 if ! grep "/tmp/netlogon" /etc/security/pam_mount.conf.xml  >/dev/null; then
@@ -497,9 +536,41 @@ echo "enabled=0" > /etc/default/rapport 2>> $logfile
 writelog "31/42-suppression du menu messages"
 apt purge -y indicator-messages  2>> $logfile
 
+#MODIFS
 writelog "32/42-Changement page d'accueil firefox"
 addtoend /usr/lib/firefox/defaults/pref/channel-prefs.js "$pagedemarragepardefaut"  2>> $logfile
+if [ "$DISTRIB_RELEASE" = "20.04" ] || [ "$DISTRIB_RELEASE" = "20" ] ; then 
+  if [ "$DISTRIB_RELEASE" = "20" ] ; then
+  echo "user_pref(\"browser.startup.homepage\", \"$pagedemarragepardefaut\");" >> /etc/firefox/syspref.js
+  echo "lockPref(\"browser.startup.homepage\", \"$pagedemarragepardefaut\" );" >> /etc/firefox/syspref.js
+  echo "user_pref(\"browser.startup.homepage\", \"$pagedemarragepardefaut\");" >> /usr/lib/firefox/defaults/pref/all-user.js
+  echo "lockPref(\"browser.startup.homepage\", \"$pagedemarragepardefaut\" );" >> /usr/lib/firefox/defaults/pref/all-user.js
+  sed -i 's/^browser\.startup\.homepage=.*$/browser.startup.homepage="http:\/\/lite.qwant.com"/' /usr/share/ubuntu-system-adjustments/firefox/distribution.ini 
+  fi
+######################################################################################################################
+# Ci-dessus pour Mint n'ayant pas une version de firefox > 80 
+# Ubuntu emplacement choisi par les distribution pour forcer les page
+# /usr/lib/firefox/defaults/pref/vendor.js
+# /usr/lib/chromium-browser/master_preferences && sudo rm /usr/lib/firefox/ubuntumate.cfg
+# /usr/lib/firefox/defaults/pref/all-ubuntumate.js
+# CI DESSOUS utilisation de https://github.com/mozilla/policy-templates/blob/master/README.md#homepage compatible firefox V 80 +
+# écriture dans les deux emplacements possible (cf doc) mais fonctione avec /etc/firefox/policies/policies
+######################################################################################################################
+mkdir /etc/firefox/policies
+echo "{
+  \"policies\": {
+    \"Homepage\": {
+      \"URL\": \"$pagedemarragepardefaut\",
+      \"Locked\": true,
+      \"StartPage\": \"homepage\" 
+    },
+  \"OverrideFirstRunPage\": \"\"
+  }
+}" >> /etc/firefox/policies/policies.json
 
+#cp /etc/firefox/policies.json /usr/lib/firefox/distribution/policies.json 
+
+fi
 writelog "33/42-Installation de logiciels basiques"
 apt install -y vim htop 2>> $logfile
 
@@ -508,9 +579,15 @@ if [ "$version" = "trusty" ]; then
 	addtoend /etc/sudoers 'Defaults        env_keep += "DISPLAY XAUTHORITY"' 2>> $logfile
 fi
 
+#MODIFS
 # Spécifique base 16.04 ou 18.04 : pour le fonctionnement du dossier /etc/skel 
 if [ "$version" = "xenial" ] || [ "$version" = "bionic" ]  || [ "$version" = "focal" ] || [ "$version" = "jammy" ]; then
-	sed -i "30i\session optional        pam_mkhomedir.so" /etc/pam.d/common-session 2>> $logfile
+	if [ "$version" = "xenial" ] || [ "$version" = "bionic" ]; then
+		sed -i "30i\session optional        pam_mkhomedir.so" /etc/pam.d/common-session 2>> $logfile
+	elif [ "$version" = "focal" ] || [ "$version" = "jammy" ]; then
+		sed -i "30i\session optional        pam_umask=0022 skel=/etc/skel" /etc/pam.d/common-session 
+		sed -i "30i\session optional        pam_mkhomedir.so" /etc/pam.d/common-session
+	fi
 	writelog "35/42-Création de raccourcis sur le bureau + dans dossier utilisateur (commun+perso+lespartages)"
 	if [ ! -e skel.tar.gz ]; then
 		wget http://nux87.free.fr/pour_script_integrdom/skel.tar.gz
