@@ -9,6 +9,7 @@
 # - 10/10/2020 (Lecture DVD dans le fichier config)
 # - 27/06/2022 (Prise en charge wallpaper XFCE)
 # - 08/07/2022 (Prise en charge de Jammy Jellyfish 22.04
+# TEST : ligne 318 (pam delay 10sw)
 
 
 # Testé & validé pour les distributions suivantes :
@@ -314,6 +315,7 @@ Session:
        optional                        pam_mkhomedir.so silent" > /usr/share/pam-configs/mkhomedir 2>> $logfile
 
 addtoend /etc/pam.d/common-auth "auth    required     pam_group.so use_first_pass" 2>> $logfile
+addtoend /etc/pam.d/common-auth "auth  optional  pam_faildelay.so  delay=10000000"
 
 
 ########################################################################
