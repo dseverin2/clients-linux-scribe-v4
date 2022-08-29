@@ -96,7 +96,6 @@ if [ -e ./esub_functions.sh ]; then
 	apt install net-tools python -y
 	versionPython=$(python -V 2>&1 | grep -Po '(?<=Python )(.+)')
 	# Verification de l'existence d'une mise à jour des scripts sur le git
-	majIntegrdom
 	writelog "2/42-Fichiers de configuration... OK"
 else
 	echo "Fichier esub_functions.sh absent ! Interruption de l'installation."
@@ -117,6 +116,8 @@ if $installdepuisdomaine; then
 		exit
 	fi
 fi
+
+majIntegrdom
 
 while [[ -z "$versionPython" ]]; do
     echo "-----Python non installé : installation en cours-----"
