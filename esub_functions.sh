@@ -51,7 +51,7 @@ function majIntegrdom {
 			chmod +x ./*.sh
 			clear
 			echo "Scripts mis à jour... reconfiguration"
-			if [ -e ./esub_functions.sh ]; then source ./Configurer.sh; fi
+			source ./Configurer.sh
 		else
 			echo "Aucune modification apportée aux scripts présents"
 		fi
