@@ -41,12 +41,8 @@ function majIntegrdom {
 			wget --no-check-certificate https://github.com/dseverin2/clients-linux-scribe-v4/archive/master.zip
 			if [ -e master.zip ]; then
 				unzip master.zip
-				cp -fr clients-linux-scribe-master/* .
-				rm -fr clients-linux-scribe-master/ master.zip
-			elif [ -e clients-linux-scribe-v4-main.zip ]; then
-				unzip clients-linux-scribe-v4-main.zip
 				cp -fr clients-linux-scribe-v4-main/* .
-				rm -fr clients-linux-scribe-v4-main/ clients-linux-scribe-v4-main.zip
+				rm -fr clients-linux-scribe-v4-main/ master.zip
 			fi
 			chmod +x ./*.sh
 			clear
