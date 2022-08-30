@@ -549,7 +549,7 @@ apt purge -y indicator-messages  2>> $logfile
 #MODIFS
 writelog "32/42-Changement page d'accueil firefox"
 addtoend /usr/lib/firefox/defaults/pref/channel-prefs.js "$pagedemarragepardefaut"  2>> $logfile
-[ "$version" = "focal" ] || [ "$version" = "jammy" ] ; then 
+if [ "$version" = "focal" ] || [ "$version" = "jammy" ] ; then 
   echo "user_pref(\"browser.startup.homepage\", \"$pagedemarragepardefaut\");" >> /etc/firefox/syspref.js
   echo "lockPref(\"browser.startup.homepage\", \"$pagedemarragepardefaut\" );" >> /etc/firefox/syspref.js
   echo "user_pref(\"browser.startup.homepage\", \"$pagedemarragepardefaut\");" >> /usr/lib/firefox/defaults/pref/all-user.js
