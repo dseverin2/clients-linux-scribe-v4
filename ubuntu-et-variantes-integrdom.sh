@@ -619,10 +619,9 @@ if [ "$version" = "xenial" ] || [ "$version" = "bionic" ]  || [ "$version" = "fo
 		sed -i "30i\session optional        pam_mkhomedir.so" /etc/pam.d/common-session
 	fi
 	writelog "35/42-Création de raccourcis sur le bureau + dans dossier utilisateur (commun+perso+lespartages)"
-	if [ ! -e skel.tar.gz ]; then
-		wget http://nux87.free.fr/pour_script_integrdom/skel.tar.gz
-	fi
-	tar -xzf skel.tar.gz -C /etc/ 2>> $logfile
+	# Avec l'ancien skel...
+	#tar -xzf skel.tar.gz -C /etc/ 2>> $logfile
+	tar -xzf skel.tar.gz -C /etc/skel/ 2>> $logfile
 	rm -f skel.tar.gz 2>> $logfile
 fi
 
