@@ -43,7 +43,7 @@ if [ "$UID" = "10000" ]; then
 	mkdir -p $HOME/Desktop/Bureaux\ Autres\ Utilisateurs/Eleves
 	cp /tmp/netlogon/icones/$gm_esu/_Machine/Bureau/*.desktop  $HOME/Desktop/Bureaux\ Autres\ Utilisateurs/Eleves/
 	cp /tmp/netlogon/icones/$gm_esu/eleves/Bureau/*.desktop  $HOME/Desktop/Bureaux\ Autres\ Utilisateurs/Eleves/	
-	chmod +x $HOME/Desktop/*.desktop $HOME/Desktop/Bureaux\ Autres\ Utilisateurs/Profs/*.desktop $HOME/Desktop/Bureaux\ Autres\ Utilisateurs/Eleves/*.desktop
+	#chmod +x $HOME/Desktop/*.desktop $HOME/Desktop/Bureaux\ Autres\ Utilisateurs/Profs/*.desktop $HOME/Desktop/Bureaux\ Autres\ Utilisateurs/Eleves/*.desktop
 else
 	case $groupe in
 	10001)
@@ -51,21 +51,21 @@ else
 		rm -f $HOME/Desktop/*.desktop
 		cp /tmp/netlogon/icones/$gm_esu/_Machine/Bureau/*.desktop  $HOME/Desktop/
 		cp /tmp/netlogon/icones/$gm_esu/professeurs/Bureau/*.desktop  $HOME/Desktop/
-		chmod +x $HOME/Desktop/*.desktop
+		#chmod +x $HOME/Desktop/*.desktop
 		;;
 	10002)
 		variable=Eleve
 		rm -f $HOME/Desktop/*.desktop
 		cp /tmp/netlogon/icones/$gm_esu/_Machine/Bureau/*.desktop  $HOME/Desktop/
 		cp /tmp/netlogon/icones/$gm_esu/eleves/Bureau/*.desktop  $HOME/Desktop/
-		chmod +x $HOME/Desktop/*.desktop
+		#chmod +x $HOME/Desktop/*.desktop
 		;;
 	10004)
 		variable=Administratif
 		rm -f $HOME/Desktop/*.desktop
 		cp /tmp/netlogon/icones/$gm_esu/_Machine/Bureau/*.desktop  $HOME/Desktop/
 		cp /tmp/netlogon/icones/$gm_esu/professeurs/Bureau/*.desktop  $HOME/Desktop/
-		chmod +x $HOME/Desktop/*.desktop
+		#chmod +x $HOME/Desktop/*.desktop
 		;;
 	*)
 		variable=undefined
@@ -75,6 +75,11 @@ else
 		;;
 	esac
 fi
+
+# Définition du flag "trusted" pour tous les raccourcis du bureau
+find ~/Desktop -type f -name *.desktop -exec gio set "{}" "metadata::trusted" yes \; -exec chmod a+x {} \;
+
+# Pour sketchup 8 (install partagée playonlinux)
 if [ -e /usr/local/bin/sketchup.sh ]; then
     bash -c "sudo /usr/local/bin/sketchup.sh $(whoami) > ~/.sketchup.log 2>&1"
 fi
