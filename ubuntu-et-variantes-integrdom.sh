@@ -467,20 +467,64 @@ fi
 writelog "INITBLOC" "24/42-Paramétrage pour remplir pam_mount.conf" "---/media/Serveur_Scribe"
 
 eclairng="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"eclairng\" mountpoint=\"/media/Serveur_Scribe\" />"
-homes="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"perso\" mountpoint=\"~/Documents\" />"
-groupes="<volume user=\"*\" fstype=\"cifs\" server=\"$ip_scribe\" path=\"groupes\" mountpoint=\"~/Groupes\" />"
-commun="<volume user=\"*\" fstype=\"cifs\" server=\"$ip_scribe\" path=\"commun\" mountpoint=\"~/commun\" />"
-professeurs="<volume user=\"*\" fstype=\"cifs\" server=\"$ip_scribe\" path=\"professeurs\" mountpoint=\"~/professeurs\" />"
-netlogon="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"netlogon\" mountpoint=\"/tmp/netlogon\"  sgrp=\"DomainUsers\" />"
+grep "/media/Serveur_Scribe" /etc/security/pam_mount.conf.xml  >/dev/null
+if [ $? != 0 ]
+then
+  sed -i "/<\!-- Volume definitions -->/a\ $eclairng" /etc/security/pam_mount.conf.xml
+else
+  echo "eclairng déjà présent"
+fi
 
-if ! grep "/media/Serveur_Scribe" /etc/security/pam_mount.conf.xml  >/dev/null; then
-	sed -i "/<\!-- Volume definitions -->/a\ $eclairng" /etc/security/pam_mount.conf.xml 2>> $logfile
-	sed -i "/<\!-- Volume definitions -->/a\ $homes" /etc/security/pam_mount.conf.xml 2>> $logfile
-	sed -i "/<\!-- Volume definitions -->/a\ $groupes" /etc/security/pam_mount.conf.xml 2>> $logfile
-	sed -i "/<\!-- Volume definitions -->/a\ $commun" /etc/security/pam_mount.conf.xml 2>> $logfile
-	sed -i "/<\!-- Volume definitions -->/a\ $professeurs" /etc/security/pam_mount.conf.xml 2>> $logfile
-	sed -i "/<\!-- Volume definitions -->/a\ $netlogon" /etc/security/pam_mount.conf.xml 2>> $logfile
-	sed -i "/<\!-- pam_mount parameters: Volume-related -->/a\ <cifsmount>mount -t cifs //%(SERVER)/%(VOLUME) %(MNTPT) -o \"noexec,nosetuids,mapchars,cifsacl,serverino,nobrl,iocharset=utf8,user=%(USER),uid=%(USERUID)%(before=\\",\\" OPTIONS),vers=1.0\"</cifsmount>" /etc/security/pam_mount.conf.xml 2>> $logfile
+homes="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"perso\" mountpoint=\"~/Documents\" />"
+grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null
+if [ $? != 0 ]
+then sed -i "/<\!-- Volume definitions -->/a\ $homes" /etc/security/pam_mount.conf.xml
+else
+  echo "homes déjà présent"
+fi
+
+groupes="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"groupes\" mountpoint=\"~/Groupes\" />"
+grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null
+if [ $? != 0 ]
+then
+  sed -i "/<\!-- Volume definitions -->/a\ $groupes" /etc/security/pam_mount.conf.xml
+else
+  echo "groupes déjà présent"
+fi
+
+commun="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"commun\" mountpoint=\"~/Commun\" />"
+grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null
+if [ $? != 0 ]
+then
+  sed -i "/<\!-- Volume definitions -->/a\ $commun" /etc/security/pam_mount.conf.xml
+else
+  echo "commun déjà présent"
+fi
+
+professeurs="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"professeurs\" mountpoint=\"~/professeurs\" />"
+grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null
+if [ $? != 0 ]
+then
+  sed -i "/<\!-- Volume definitions -->/a\ $professeurs" /etc/security/pam_mount.conf.xml
+else
+  echo "professeurs déjà présent"
+fi
+
+netlogon="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"netlogon\" mountpoint=\"/tmp/netlogon\"  sgrp=\"DomainUsers\" />"
+grep "/tmp/netlogon" /etc/security/pam_mount.conf.xml  >/dev/null
+if [ $? != 0 ]
+then
+  sed -i "/<\!-- Volume definitions -->/a\ $netlogon" /etc/security/pam_mount.conf.xml
+else
+  echo "netlogon déjà présent"
+fi
+
+grep "<cifsmount>mount -t cifs //%(SERVER)/%(VOLUME) %(MNTPT) -o \"noexec,nosetuids,mapchars,cifsacl,serverino,nobrl,iocharset=utf8,user=%(USER),uid=%(USERUID)%(before=\\",\\" OPTIONS)\"</cifsmount>" /etc/security/pam_mount.conf.xml  >/dev/null
+if [ $? != 0 ]
+then
+  sed -i "/<\!-- pam_mount parameters: Volume-related -->/a\ <cifsmount>mount -t cifs //%(SERVER)/%(VOLUME) %(MNTPT) -o \"noexec,nosetuids,mapchars,cifsacl,serverino,nobrl,iocharset=utf8,user=%(USER),uid=%(USERUID)%(before=\\",\\" OPTIONS),vers=1.0\"</cifsmount>" /etc/security/pam_mount.conf.xml
+else
+  echo "mount.cifs déjà présent"
 fi
 writelog "ENDBLOC"
 ########################################################################
