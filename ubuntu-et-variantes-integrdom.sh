@@ -466,7 +466,7 @@ fi
 ########################################################################
 writelog "INITBLOC" "24/42-Paramétrage pour remplir pam_mount.conf" "---/media/Serveur_Scribe"
 
-scribesrv="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"scribesrv\" mountpoint=\"/media/Serveur_Scribe\" />"
+eclairng="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"eclairng\" mountpoint=\"/media/Serveur_Scribe\" />"
 homes="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"perso\" mountpoint=\"~/Documents\" />"
 groupes="<volume user=\"*\" fstype=\"cifs\" server=\"$ip_scribe\" path=\"groupes\" mountpoint=\"~/Groupes\" />"
 commun="<volume user=\"*\" fstype=\"cifs\" server=\"$ip_scribe\" path=\"commun\" mountpoint=\"~/commun\" />"
@@ -474,7 +474,7 @@ professeurs="<volume user=\"*\" fstype=\"cifs\" server=\"$ip_scribe\" path=\"pro
 netlogon="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"netlogon\" mountpoint=\"/tmp/netlogon\"  sgrp=\"DomainUsers\" />"
 
 if ! grep "/media/Serveur_Scribe" /etc/security/pam_mount.conf.xml  >/dev/null; then
-	sed -i "/<\!-- Volume definitions -->/a\ $scribesrv" /etc/security/pam_mount.conf.xml 2>> $logfile
+	sed -i "/<\!-- Volume definitions -->/a\ $eclairng" /etc/security/pam_mount.conf.xml 2>> $logfile
 	sed -i "/<\!-- Volume definitions -->/a\ $homes" /etc/security/pam_mount.conf.xml 2>> $logfile
 	sed -i "/<\!-- Volume definitions -->/a\ $groupes" /etc/security/pam_mount.conf.xml 2>> $logfile
 	sed -i "/<\!-- Volume definitions -->/a\ $commun" /etc/security/pam_mount.conf.xml 2>> $logfile
