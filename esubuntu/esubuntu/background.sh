@@ -98,9 +98,19 @@ else
 	gsettings set org.gnome.desktop.background picture-uri "file:///"$wallpaper""
 fi
 
+######################################################################
+#                            PARAM CONKY                             #
+######################################################################
 echo "Lancement de conky avec lecture du fichier de conf :" >> $logfile
 cat /tmp/netlogon/icones/$gm_esu/conky/conky.cfg >> $logfile
-conky -c /tmp/netlogon/icones/$gm_esu/conky/conky.cfg
+cp /tmp/netlogon/icones/$gm_esu/conky/conky.cfg ~/.conky.cfg -fr
+
+# Récupération de l'interface ethernet active
+interfaceeth=$(ifconfig | grep UP,BROADCAST,RUNNING,MULTICAST | awk '{print $1}' | sed '/://g')
+if grep "Adresse IP : \${addr ens5}" ~/.conky.cfg > /dev/null; then
+	sed -i "s/Adresse IP : \${addr ens5}/Adresse IP : \${addr $interfaceeth}/g" ~/.conky.cfg >> $logfile
+fi
+conky -c ~/.conky.cfg
 
 echo "Lancement du gpo lecture fichier gset du groupe esu :" >> $logfile
 cp /tmp/netlogon/icones/$gm_esu/linux/gset/gset.sh /tmp
