@@ -210,6 +210,7 @@ echo "install firefox"
 sudo apt install firefox firefox-locale-fr -y
 
 echo "install chromium"
+sudo add-apt-repository ppa:phd/chromium-browser -y
 echo '
 Package: *
 Pin: release o=LP-PPA-phd-chromium-browser
