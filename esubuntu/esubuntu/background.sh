@@ -25,7 +25,7 @@ fi
 
 echo "Le PC est dans le groupe esu $gm_esu" >> $logfile
 
-sleep 3
+sleep 2
 
 #lecture parametres utilisateur
 if [ "$UID" = "10000" ]; then
