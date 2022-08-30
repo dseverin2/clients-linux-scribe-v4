@@ -294,7 +294,7 @@ Auth:
 ########################################################################
 writelog "13/42-Définition de auth ldap"
 #MODIFS LE IF 20 et 20.04
-if [ "$DISTRIB_RELEASE" = "20.04" ] || [ "$DISTRIB_RELEASE" = "20" ] ; then 
+if [ "$version" = "focal" ] || [ "$version" = "jammy" ] ; then 
 	echo "# pre_auth-client-config # passwd:         compat systemd
 	passwd:  files ldap
 	# pre_auth-client-config # group:          compat systemd
@@ -542,14 +542,12 @@ apt purge -y indicator-messages  2>> $logfile
 #MODIFS
 writelog "32/42-Changement page d'accueil firefox"
 addtoend /usr/lib/firefox/defaults/pref/channel-prefs.js "$pagedemarragepardefaut"  2>> $logfile
-if [ "$DISTRIB_RELEASE" = "20.04" ] || [ "$DISTRIB_RELEASE" = "20" ] ; then 
-  if [ "$DISTRIB_RELEASE" = "20" ] ; then
+[ "$version" = "focal" ] || [ "$version" = "jammy" ] ; then 
   echo "user_pref(\"browser.startup.homepage\", \"$pagedemarragepardefaut\");" >> /etc/firefox/syspref.js
   echo "lockPref(\"browser.startup.homepage\", \"$pagedemarragepardefaut\" );" >> /etc/firefox/syspref.js
   echo "user_pref(\"browser.startup.homepage\", \"$pagedemarragepardefaut\");" >> /usr/lib/firefox/defaults/pref/all-user.js
   echo "lockPref(\"browser.startup.homepage\", \"$pagedemarragepardefaut\" );" >> /usr/lib/firefox/defaults/pref/all-user.js
   sed -i 's/^browser\.startup\.homepage=.*$/browser.startup.homepage="http:\/\/lite.qwant.com"/' /usr/share/ubuntu-system-adjustments/firefox/distribution.ini 
-  fi
 ######################################################################################################################
 # Ci-dessus pour Mint n'ayant pas une version de firefox > 80 
 # Ubuntu emplacement choisi par les distribution pour forcer les page
