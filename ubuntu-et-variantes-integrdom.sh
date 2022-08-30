@@ -465,32 +465,32 @@ fi
 #Paramétrage pour remplir pam_mount.conf
 ########################################################################
 writelog "INITBLOC" "24/42-Paramétrage pour remplir pam_mount.conf" "---/media/Serveur_Scribe"
-eclairng="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"eclairng\" mountpoint=\"/media/Serveur_Scribe\" />"
+scribesrv="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"scribesrv\" mountpoint=\"/media/Serveur_Scribe\" />"
 if ! grep "/media/Serveur_Scribe" /etc/security/pam_mount.conf.xml  >/dev/null; then
-  sed -i "/<\!-- Volume definitions -->/a\ $eclairng" /etc/security/pam_mount.conf.xml 2>> $logfile
+  sed -i "/<\!-- Volume definitions -->/a\ $scribesrv" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
 writelog "---~/Documents => Perso (scribe)"
 homes="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"perso\" mountpoint=\"~/Documents\" />"
-if ! grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null; then 
+if ! grep "~/Documents" /etc/security/pam_mount.conf.xml  >/dev/null; then 
 	sed -i "/<\!-- Volume definitions -->/a\ $homes" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
 writelog "---~/Groupes"
 groupes="<volume user=\"*\" fstype=\"cifs\" server=\"$ip_scribe\" path=\"groupes\" mountpoint=\"~/Groupes\" />"
-if ! grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null; then 
+if ! grep "Groupes" /etc/security/pam_mount.conf.xml  >/dev/null; then 
 	sed -i "/<\!-- Volume definitions -->/a\ $groupes" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
 writelog "---~/Commun"
 commun="<volume user=\"*\" fstype=\"cifs\" server=\"$ip_scribe\" path=\"commun\" mountpoint=\"~/commun\" />"
-if ! grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null; then 
+if ! grep "commun" /etc/security/pam_mount.conf.xml  >/dev/null; then 
 	sed -i "/<\!-- Volume definitions -->/a\ $commun" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
 writelog "---~/Professeurs"
 professeurs="<volume user=\"*\" fstype=\"cifs\" server=\"$ip_scribe\" path=\"professeurs\" mountpoint=\"~/professeurs\" />"
-if ! grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null; then 
+if ! grep "professeurs" /etc/security/pam_mount.conf.xml  >/dev/null; then 
 	sed -i "/<\!-- Volume definitions -->/a\ $professeurs" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
