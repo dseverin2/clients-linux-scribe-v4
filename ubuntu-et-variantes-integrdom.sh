@@ -620,9 +620,16 @@ if [ "$version" = "xenial" ] || [ "$version" = "bionic" ]  || [ "$version" = "fo
 	fi
 	writelog "35/42-Création de raccourcis sur le bureau + dans dossier utilisateur (commun+perso+lespartages)"
 	# Avec l'ancien skel...
-	#tar -xzf skel.tar.gz -C /etc/ 2>> $logfile
-	tar -xzf skel.tar.gz -C /etc/skel/ 2>> $logfile
-	rm -f skel.tar.gz 2>> $logfile
+	# tar -xzf skel.tar.gz -C /etc/ 2>> $logfile
+	
+	# Détermination du skel à importer
+	if [ -e ~/Desktop ]; then
+		skelfile=skel-desktop.tar.gz
+	elif [ -e ~/Bureau ]; then
+		skelfile=skel-bureau.tar.gz
+	fi
+	tar -xzf $skelfile -C /etc/skel/ 2>> $logfile
+	rm -f $skelfile 2>> $logfile
 fi
 
 # Suppression de notification de mise à niveau
