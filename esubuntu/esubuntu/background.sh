@@ -93,8 +93,8 @@ else
 fi
 
 echo "Lancement de conky avec lecture du fichier de conf :" >> $logfile
-cat /tmp/netlogon/icones/posteslinux/conky/conky.cfg >> $logfile
-conky -c /tmp/netlogon/icones/posteslinux/conky/conky.cfg
+cat /tmp/netlogon/icones/$gm_esu/conky/conky.cfg >> $logfile
+conky -c /tmp/netlogon/icones/$gm_esu/conky/conky.cfg
 
 echo "Lancement du gpo lecture fichier gset du groupe esu :" >> $logfile
 cp /tmp/netlogon/icones/$gm_esu/linux/gset/gset.sh /tmp
