@@ -78,6 +78,7 @@ fi
 
 # Définition du flag "trusted" pour tous les raccourcis du bureau
 find ~/Desktop -type f -name "*.desktop" -exec gio set "{}" "metadata::trusted" yes \; -exec chmod a+x {} \;
+find ~/Bureau -type f -name "*.desktop" -exec gio set "{}" "metadata::trusted" yes \; -exec chmod a+x {} \;
 
 # Pour sketchup 8 (install partagée playonlinux)
 if [ -e /usr/local/bin/sketchup.sh ]; then
