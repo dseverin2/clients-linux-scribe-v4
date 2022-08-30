@@ -268,6 +268,13 @@ echo "Unattended-Upgrade::Allowed-Origins {
 
 #
 
+#
+# Suppression network manager au démarrage
+#
+if grep ".set.enabled=true" /var/lib/NetworkManager/NetworkManager-intern.conf > /dev/null; then
+	sed -i "s/.set.enabled=true/.set.enabled=false/g" /var/lib/NetworkManager/NetworkManager-intern.conf 2>> $logfile
+fi
+
 ########################################################################
 # Configuration du fichier pour le LDAP /etc/ldap.conf
 ########################################################################
