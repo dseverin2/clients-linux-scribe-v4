@@ -4,7 +4,7 @@
 # - ver 1.0.3
 # - 31 Juin 2018
 # - CALPETARD Olivier - AMI - lycee Antoine ROUSSIN
-# - le fichiers conf de conky se trouve dans icone/postelinux/conky/conky.cfg
+# - le fichiers conf de conky se trouve dans icone/$gm_esu/conky/conky.cfg
 
 #groupe machine
 gm_esu=grp_eole

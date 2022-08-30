@@ -1,11 +1,10 @@
 #!/bin/bash
 #### partie de configuration de conky ####
 # - récupère la valeur du groupe et classe pour affiche dans conky sur le bureau 
-# - ver 1.0.4
-# - 20 Sept 2021
+# - ver 1.0.3
+# - 31 Juin 2018
 # - CALPETARD Olivier - AMI - lycee Antoine ROUSSIN
-# - SEVERIN Didier - RRUPN CLG Bois de Nèfles
-# - le fichiers conf de conky se trouve dans icone/$gm_esu/conky/conky.cfg
+# - le fichiers conf de conky se trouve dans icone/postelinux/conky/conky.cfg
 
 #groupe machine
 gm_esu=grp_eole
@@ -22,10 +21,10 @@ g_esu=$(cat $HOME/gr_scribe.txt)
 g_classe=$(cat $HOME/gr_classe.txt)
 
 
-if [ "$g_esu" = "eleves" ]
+if [ $g_esu = "eleves" ]
 then
 sed 's/domainUsers//g' $HOME/gr_classe.txt
-echo -e "Bureau : $g_esu"
+echo -e "\t Bureau : $g_esu"
 echo -e "\t Groupe : $gm_esu"
 else
 echo -e "Bureau : $g_esu"
