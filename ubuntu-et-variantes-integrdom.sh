@@ -526,7 +526,7 @@ if grep "LinuxMint" /etc/lsb-release > /dev/null; then
 	apt purge -y mintwelcome hexchat hexchat-common libespeak1 libsonic0 libspeechd2 python3-speechd speech-dispatcher speech-dispatcher-audio-plugins gnome-orca adobe-flash-properties-gtk mate-screensaver mate-screensaver-common brltty mono-runtime-common avahi-daemon xscreensaver-data-extra xscreensaver-data xscreensaver-gl-extra xscreensaver-gl java-common icedtea-netx-common pix pix-data onboard warpinator timeshift celluloid caja-sendto 2>> $logfile;
 elif grep "Zorin" /etc/lsb-release > /dev/null; then
 	writelog "29/42-Suppression d'applications par défaut (sous Zorin)"
-	apt purge -y gnome-tour 2>> $logfile;
+	apt purge -y gnome-tour gnome-shell-portal-helper 2>> $logfile;
 fi
 
 writelog "30/42-Suppression de l'envoi des rapport d'erreurs"
