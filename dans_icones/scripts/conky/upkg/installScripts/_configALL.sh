@@ -36,7 +36,7 @@ echo "--- Configuration de la photocopieuse"
 # Vérification de la version du gestionnaire de code PIN photocopieuse (Ne jamais enlever)
 echo "Recuperation du gestionnaire code de photocopieuse"
 
-sudo wget https://github.com/dseverin2/clients-linux-scribe/raw/master/apps/recup_pin/recup_pin.sh -O /tmp/recup_pin.sh
+sudo wget -nc https://github.com/dseverin2/clients-linux-scribe/raw/master/apps/recup_pin/recup_pin.sh -O /tmp/recup_pin.sh
 if [ -s /tmp/recup_pin.sh ]; then
 	sudo cmp /tmp/recup_pin.sh /usr/bin/recup_pin/recup_pin.sh 1>/dev/null 2>&1;
 	if [ $? -eq 1 ]; then

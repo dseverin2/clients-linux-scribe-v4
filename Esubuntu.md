@@ -41,7 +41,7 @@ par exemple si votre serveur Amon est en 172.16.0.252 et avec le port 3128 :
 
 puis si vous avez le message suivant "Incapable d'établir une connexion SSL", il faut rajouter l'argument suivant : --no-check-certificate, ce qui donne par exemple :
 
-<code>wget https://raw.githubusercontent.com/dane-lyon/clients-linux-scribe/master/ubuntu-et-variantes-integrdom.sh --no-check-certificate</code>
+<code>wget -nc https://raw.githubusercontent.com/dane-lyon/clients-linux-scribe/master/ubuntu-et-variantes-integrdom.sh --no-check-certificate</code>
 
 #### Paramétrage de upkg (équivalent de WPKG pour Windows)
 

@@ -13,10 +13,10 @@ apt-get install -y arduino
 # Installation de mBlock 4.0.4 (après récupération du .deb)
 apt-get -y install libgconf-2-4 
 if [ ! -e ./mBlock_4.0.4_amd64.deb ]; then
-	wget "$wgetparams" --no-check-certificate http://mblock.makeblock.com/mBlock4.0/mBlock_4.0.4_amd64.deb
+	wget -nc "$wgetparams" --no-check-certificate http://mblock.makeblock.com/mBlock4.0/mBlock_4.0.4_amd64.deb
 fi
 if [ ! -e ./mLink-1.2.0-amd64.deb ]; then
-	wget "$wgetparams" --no-check-certificate https://dl.makeblock.com/mblock5/linux/mLink-1.2.0-amd64.deb
+	wget -nc "$wgetparams" --no-check-certificate https://dl.makeblock.com/mblock5/linux/mLink-1.2.0-amd64.deb
 fi
 dpkg -i ./mBlock_4.0.4_amd64.deb
 dpkg -i ./mLink-1.2.0-amd64.deb
@@ -30,7 +30,7 @@ chmod 777 /opt/makeblock/mBlock/resources/web/tmp/project.sb2
 
 #Installation des librairies pour arduino
 cd /usr/share/arduino/lib || exit
-wget https://github.com/Makeblock-official/Makeblock-Libraries/archive/master.zip
+wget -nc https://github.com/Makeblock-official/Makeblock-Libraries/archive/master.zip
 unzip master.zip
 
 

@@ -18,7 +18,7 @@ fi
 
 # Test Mise à jour
 function majIntegrdom {
-	wget --no-check-certificate -O /tmp/_VERSION https://raw.githubusercontent.com/dseverin2/clients-linux-scribe/master/_VERSION
+	wget -nc --no-check-certificate -O /tmp/_VERSION https://raw.githubusercontent.com/dseverin2/clients-linux-scribe/master/_VERSION
 	source /tmp/_VERSION
 	onlineVersion=$versionscript
 	if [ -e ./_VERSION ]; then
@@ -33,7 +33,7 @@ function majIntegrdom {
 		read -r autorisationMaj
 		if [ "$autorisationMaj" == "o" ] || [ "$autorisationMaj" == "O" ]; then
 			echo "Mise à jour du script..."
-			wget --no-check-certificate https://github.com/dseverin2/clients-linux-scribe/archive/master.zip
+			wget -nc --no-check-certificate https://github.com/dseverin2/clients-linux-scribe/archive/master.zip
 			unzip master.zip
 			cp -fr clients-linux-scribe-master/* .
 			rm -fr clients-linux-scribe-master/ master.zip

@@ -103,7 +103,7 @@ f_action_get() {
 		echo ""
 		notify-send -i system-software-update "$MY_PROG" "$NS_INSTALL $1" -t 5000
 		cd $DOWNLOAD_DIR
-		wget "$2" --no-check-certificate
+		wget -nc "$2" --no-check-certificate
 		sudo apt install -y ./"${2##*/}"
 		rm *.deb
 	fi
@@ -117,7 +117,7 @@ f_action_get_appimage() {
 		echo ""
 		notify-send -i system-software-update "$MY_PROG" "$NS_INSTALL $1" -t 5000
 		cd $DOWNLOAD_DIR
-		wget "$2" --no-check-certificate
+		wget -nc "$2" --no-check-certificate
 		chmod u+x "${2##*/}"
 	fi
 }

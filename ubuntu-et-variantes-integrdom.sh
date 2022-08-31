@@ -225,7 +225,7 @@ elif [ -e /usr/bin/chromium ]; then
 fi
 
 writelog "7/42-Installation de auth-client-config"
-wget http://archive.ubuntu.com/ubuntu/pool/universe/a/auth-client-config/auth-client-config_0.9ubuntu1_all.deb
+wget -nc http://archive.ubuntu.com/ubuntu/pool/universe/a/auth-client-config/auth-client-config_0.9ubuntu1_all.deb
 dpkg -i auth-client-config_0.9ubuntu1_all.deb
 rm -f auth-client-config_0.9ubuntu1_all.deb
 
@@ -406,7 +406,7 @@ if [ "$(command -v mdm)" = "/usr/sbin/mdm" ]; then # si MDM est installé (ancie
 	writelog "20/42-Modification de l'ancien gestionnaire de session MDM (pour Mint <17.2)"
 	{
 		cp -f /etc/mdm/mdm.conf /etc/mdm/mdm_old.conf #backup du fichier de config de mdm
-		wget --no-check-certificate https://raw.githubusercontent.com/dane-lyon/fichier-de-config/master/mdm.conf
+		wget -nc --no-check-certificate https://raw.githubusercontent.com/dane-lyon/fichier-de-config/master/mdm.conf
 		mv -f mdm.conf /etc/mdm/
 	} 2>> $logfile
 fi
@@ -660,7 +660,7 @@ if $postinstalladditionnel; then
 	if [ "$versionnum" != "" ]; then 
 		writelog "INITBLOC" "40/42-PostInstallation avancée"
 		{
-			sudo -u "$SUDO_USER" wget --no-check-certificate https://github.com/simbd/Ubuntu_"$versionnum"LTS_PostInstall/archive/master.zip
+			sudo -u "$SUDO_USER" wget -nc --no-check-certificate https://github.com/simbd/Ubuntu_"$versionnum"LTS_PostInstall/archive/master.zip
 			sudo -u "$SUDO_USER" unzip -o master.zip -d .
 			sudo -u "$SUDO_USER" chmod +x Ubuntu_"$versionnum"LTS_PostInstall-master/*.sh
 			sudo -u "$SUDO_USER" ./Ubuntu_"$versionnum"LTS_PostInstall-master/Postinstall_Ubuntu-"$versionnum"*.sh

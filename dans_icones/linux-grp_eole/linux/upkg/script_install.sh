@@ -4,7 +4,7 @@ sudo dpkg --configure -a
 
 # Vérification de la version du gestionnaire de code PIN photocopieuse (Ne jamais enlever)
 echo "Recuperation du gestionnaire code de photocopieuse"
-sudo wget https://raw.githubusercontent.com/dseverin2/clients-linux-scribe/master/apps/recup_pin/recup_pin.sh -O /tmp/recup_pin.sh
+sudo wget -nc https://raw.githubusercontent.com/dseverin2/clients-linux-scribe/master/apps/recup_pin/recup_pin.sh -O /tmp/recup_pin.sh
 sudo cmp /tmp/recup_pin.sh /usr/bin/recup_pin/recup_pin.sh 1>/dev/null 2>&1;
 if [ $? -eq 1 ]; then
 	sudo mv /tmp/recup_pin.sh /usr/bin/recup_pin/recup_pin.sh
@@ -13,7 +13,7 @@ fi
 
 # Vérification de la version du fichier groupe.sh
 echo "Recuperation du gestionnaire de groupe EOLE"
-sudo wget https://raw.githubusercontent.com/dseverin2/clients-linux-scribe/master/esubuntu/esubuntu/groupe.sh -O /tmp/groupe.sh
+sudo wget -nc https://raw.githubusercontent.com/dseverin2/clients-linux-scribe/master/esubuntu/esubuntu/groupe.sh -O /tmp/groupe.sh
 sudo cmp /tmp/groupe.sh /etc/esubuntu/groupe.sh 1>/dev/null 2>&1;
 if [ $? -eq 1 ]; then
 	sudo mv /tmp/groupe.sh /etc/esubuntu/groupe.sh

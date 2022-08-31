@@ -22,7 +22,7 @@ sudo apt install locate -y
 
 # Test Mise à jour
 function majIntegrdom {
-	wget --no-check-certificate -O /tmp/_VERSION https://github.com/dseverin2/clients-linux-scribe-v4/raw/main/_VERSION
+	wget -nc --no-check-certificate -O /tmp/_VERSION https://github.com/dseverin2/clients-linux-scribe-v4/raw/main/_VERSION
 	source /tmp/_VERSION
 	onlineVersion=$versionscript
 	if [ -e ./_VERSION ]; then
@@ -38,7 +38,7 @@ function majIntegrdom {
 		read -r autorisationMaj
 		if [ "$autorisationMaj" == "o" ] || [ "$autorisationMaj" == "O" ]; then
 			echo "Mise à jour du script..."
-			wget --no-check-certificate https://github.com/dseverin2/clients-linux-scribe-v4/archive/master.zip
+			wget -nc --no-check-certificate https://github.com/dseverin2/clients-linux-scribe-v4/archive/master.zip
 			if [ -e master.zip ]; then
 				unzip master.zip
 				cp -fr clients-linux-scribe-v4-main/* .

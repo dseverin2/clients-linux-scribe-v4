@@ -4,7 +4,7 @@ echo "EBEAM : installation des dépendances"
 apt-get install libusb-dev yasm libvpx. Libx264. kazam onboard libboost-all-dev libboost-thread-dev -y
 
 echo "EBEAM : téléchargement et extraction de l\'archive"
-wget http://down.myequil.com/dn/setup/Scrapbook_linux/eBeam-Interactive_3.6.tar.gz
+wget -nc http://down.myequil.com/dn/setup/Scrapbook_linux/eBeam-Interactive_3.6.tar.gz
 tar xvf eBeam-Interactive_3.6.tar.gz
 rm -fr eBeam-Interactive_3.6.tar.gz README.txt
 

@@ -8,7 +8,7 @@ fi
 # Vérification de la version du gestionnaire de code PIN photocopieuse (Ne jamais enlever)
 local = /usr/bin/recup_pin/recup_pin.sh
 distant = /tmp/recup_pin.sh
-sudo wget https://raw.githubusercontent.com/dseverin2/clients-linux-scribe/master/apps/recup_pin/recup_pin.sh -O $distant
+sudo wget -nc https://raw.githubusercontent.com/dseverin2/clients-linux-scribe/master/apps/recup_pin/recup_pin.sh -O $distant
 sudo cmp $local $distant 1>/dev/null 2>&1;
 if [ $? -eq 1 ]; then
 	sudo mv $distant $local
