@@ -4,7 +4,7 @@
 # - récupère la valeur du groupe et attribue en fonction les fonds ecran générés par esu
 # - gestion des restriction gsetting
 # - Préparation des icônes du bureau
-# - ver 2.6
+# - ver 2.8
 # - 31 août 2022
 # - CALPETARD Olivier
 # - SEVERIN Didier 
@@ -118,6 +118,9 @@ cp /tmp/netlogon/icones/$gm_esu/conky/conky.cfg ~/.conky.cfg -fr
 interfaceeth=$(ifconfig | grep UP,BROADCAST,RUNNING,MULTICAST | awk '{print $1}' | sed 's/://g')
 if grep "Adresse IP : \${addr interfaceeth}" ~/.conky.cfg > /dev/null; then
 	sed -i "s/Adresse IP : \${addr interfaceeth}/Adresse IP : \${addr $interfaceeth}/g" ~/.conky.cfg >> $logfile
+fi
+if grep "posteslinux" ~/.conky.cfg > /dev/null; then
+	sed -i "s/posteslinux/$gm_esu/g" ~/.conky.cfg >> $logfile
 fi
 conky -c ~/.conky.cfg
 
