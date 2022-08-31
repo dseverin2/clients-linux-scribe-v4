@@ -33,8 +33,10 @@ writelog "---Détermination du répertoire de lancement"
 updatedb
 
 chemin = $(dirname $(realpath $0)) 
-writelog "------Trouvé $chemin"
+writelog "------Répertoire d'exec : $chemin"
 chmod -R +x $chemin
+gm_esu=$salle
+writelog "------Groupe : $gm_esu
 
 writelog "---Création des dossiers upkg et esubuntu"
 if [ -e /usr/local/upkg_client/ ]; then
@@ -79,12 +81,16 @@ writelog "ENDBLOC"
 ##############################################################################
 ### Auto paramétrage de gset, firefox et conky
 ##############################################################################
+if grep "posteslinux" "$chemin"/icones/gm_esu/linux/firefox.js > /dev/null; then
+	sed -i "s/posteslinux/$gm_esu/g" "$chemin"/icones/gm_esu/linux/firefox.js >> $logfile
+fi
 sed -i -e "s/RNE_ETAB/$rne_etab/g" -e "s/IP_SCRIBE/$scribe_def_ip/g" -e "s/IP_PRONOTE/$pronote/g" -e "s/PORTAIL/$portail/g" -e "s/SALLEESU/$salle/g" "$chemin"/icones/gm_esu/linux/firefox.js
 
 sed -i -e "s/GSETPROXY/$gset_proxy/g" -e "s/SUBNET/$subnet/g" "$chemin"/icones/gm_esu/linux/gset/gset.sh
 
-interfaceeth=`ip -br link | grep 'UP' | grep -v 'OWN' | awk '{ print $1 }'`
-sed -i -e "s/INTERFACEETH/$interfaceeth/g" "$chemin"/icones/posteslinux/conky/conky.cfg
+if grep "INTERFACEETH" "$chemin"/icones/"$gm_esu"/conky/conky.cfg > /dev/null; then
+	sed -i "s/INTERFACEETH/$interfaceeth/g" "$chemin"/icones/"$gm_esu"/conky/conky.cfg >> $logfile
+fi
 
 ##############################################################################
 ### Utilisation d'un proxy authentifiant
