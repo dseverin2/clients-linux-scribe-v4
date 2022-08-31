@@ -628,6 +628,7 @@ if [ "$version" = "xenial" ] || [ "$version" = "bionic" ]  || [ "$version" = "fo
 	elif [ -e ~/Bureau ]; then
 		skelfile=skel-bureau.tar.gz
 	fi
+rm -fr /etc/skel/*
 	tar -xzf $skelfile -C /etc/skel/ 2>> $logfile
 	rm -f $skelfile 2>> $logfile
 fi
