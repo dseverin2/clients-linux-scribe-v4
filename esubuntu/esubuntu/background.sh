@@ -106,7 +106,7 @@ cat /tmp/netlogon/icones/$gm_esu/conky/conky.cfg >> $logfile
 cp /tmp/netlogon/icones/$gm_esu/conky/conky.cfg ~/.conky.cfg -fr
 
 # Récupération de l'interface ethernet active
-interfaceeth=$(ifconfig | grep UP,BROADCAST,RUNNING,MULTICAST | awk '{print $1}' | sed '/://g')
+interfaceeth=$(ifconfig | grep UP,BROADCAST,RUNNING,MULTICAST | awk '{print $1}' | sed 's/://g')
 if grep "Adresse IP : \${addr ens5}" ~/.conky.cfg > /dev/null; then
 	sed -i "s/Adresse IP : \${addr ens5}/Adresse IP : \${addr $interfaceeth}/g" ~/.conky.cfg >> $logfile
 fi
