@@ -623,12 +623,8 @@ if [ "$version" = "xenial" ] || [ "$version" = "bionic" ]  || [ "$version" = "fo
 	# tar -xzf skel.tar.gz -C /etc/ 2>> $logfile
 	
 	# Détermination du skel à importer
-	if [ -e ~/Desktop ]; then
-		skelfile=skel-desktop.tar.gz
-	elif [ -e ~/Bureau ]; then
-		skelfile=skel-bureau.tar.gz
-	fi
-rm -fr /etc/skel/*
+	if [ -e ~/Desktop ]; then skelfile=skel-desktop.tar.gz; elif [ -e ~/Bureau ]; then skelfile=skel-bureau.tar.gz; fi
+        rm -fr /etc/skel/*
 	tar -xzf $skelfile -C /etc/skel/ 2>> $logfile
 	rm -f $skelfile 2>> $logfile
 fi
