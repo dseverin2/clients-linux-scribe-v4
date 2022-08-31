@@ -6,7 +6,6 @@ wget -nc http://download.tuxfamily.org/polyglotte/archives/msfonts-config2.zip -
 unzip -o ./tmp_dl/msfonts-config2.zip -d /etc/fonts/
 apt-get install gsfonts gsfonts-other gsfonts-x11 ttf-mscorefonts-installer t1-xfree86-nonfree fonts-alee ttf-ancient-fonts fonts-arabeyes fonts-arphic-bkai00mp fonts-arphic-bsmi00lp fonts-arphic-gbsn00lp fonts-arphic-gkai00mp fonts-atarismall fonts-dustin fonts-f500 fonts-sil-gentium ttf-georgewilliams ttf-isabella fonts-larabie-deco fonts-larabie-straight fonts-larabie-uncommon ttf-sjfonts ttf-staypuft ttf-summersby fonts-ubuntu-title ttf-xfree86-nonfree xfonts-intl-european xfonts-jmk xfonts-terminus fonts-liberation ubuntu-restricted-extras -y
 
-
 # Extension CMathsOOo
 CMinstallfile="CmathOOo.oxt"	
 if [ ! -e $CMinstallfile ]; then
@@ -52,4 +51,3 @@ fc-cache -f -v
 rm -fr ./*.oxt
 sudo apt-get clean -y
 sudo apt-get autoremove -y
-fi
