@@ -1,0 +1,4 @@
+APT::Get::AllowUnauthenticated 1;
+Acquire::http::proxy "http://apt.esubuntu:Zaf1r4poRSrt4dkkfs2d12z5@172.18.248.1:3129/";
+Acquire::ftp::proxy "ftp://apt.esubuntu:Zaf1r4poRSrt4dkkfs2d12z5@172.18.248.1:3129/";
+Acquire::https::proxy "https://apt.esubuntu:Zaf1r4poRSrt4dkkfs2d12z5@172.18.248.1:3129/";

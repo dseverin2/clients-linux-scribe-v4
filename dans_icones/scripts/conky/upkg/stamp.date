@@ -1,0 +1,60 @@
+27 avr 2022
+Del firefox et firefox-locale-fr
+Ajout firefox-esr91 et firefox-esr-fr
+Update Profils
+
+11 mar 2022
+MaJ profilFirefox
+
+29 nov 2021
+Cheese (WebCam)
+
+07 oct 2021-3
+Mod https dans apt.conf.d/20proxy
+
+24 sept 2021
+Force chromium
+
+20 sept 2021--a
+MaJ Conky_scribe.sh
+
+17 sept 2021
+MaJ groupe.sh & background.sh
+
+08 sept 2021
+Install SweetHome3D
+
+07 sept 2021 (v4)
+MaJ User APT
+
+03 sept 2021
+Libreoffice 7.2 maj
+Filius
+Chromium
+
+15 juin 2021
+Shutter & Flameshot
+Install OBS Studio + VirtualCam
+MaJ mBlock&mLink
+Pavucontrol
+
+30 avr 2021-4
+Maj Veyon + Params
+Supp WPS Office
+MaJ ActivInspire
+
+14 mar 2021
+Màj /etc/sudoers
+Ajout Gnucharmap
+MaJ background.sh
+
+18 dec 2020
+Orca
+ActivBoard 20.04
+Mod dpkg --configure -a
+Snapd
+
+10 nov 2020
+Geogebra
+Suppression mise en veille
+MaJ groupe.sh

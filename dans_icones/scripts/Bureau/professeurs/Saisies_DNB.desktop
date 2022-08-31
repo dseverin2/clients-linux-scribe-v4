@@ -1,0 +1,32 @@
+[Desktop Entry]
+Version=1.0
+Name=Firefox Web Browser
+Name[fr]=Navigateur Web Firefox
+Comment=Browse the World Wide Web
+Comment[fr]=Naviguer sur le Web
+GenericName=Web Browser
+GenericName[fr]=Navigateur Web
+Keywords=Internet;WWW;Browser;Web;Explorer
+Keywords[fr]=Internet;WWW;Browser;Web;Explorateur
+Exec=chromium %u "https://exacyc.orion.education.fr/cyccorrecteur/portal/login"
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=/media/Serveur_Scribe/commun/logiciels/LINUX/index.png
+Categories=GNOME;GTK;Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/webm;application/x-xpinstall;
+StartupNotify=true
+Actions=NewWindow;NewPrivateWindow;
+Name[fr_FR]=Saisies DNB
+
+[Desktop Action NewWindow]
+Name=Open a New Window
+Name[fr]=Ouvrir une nouvelle fenêtre
+Exec=chromium
+OnlyShowIn=Unity;
+
+[Desktop Action NewPrivateWindow]
+Name=Open a New Private Window
+Name[fr]=Ouvrir une nouvelle fenêtre de navigation privée
+Exec=chromium --incognito
+OnlyShowIn=Unity;

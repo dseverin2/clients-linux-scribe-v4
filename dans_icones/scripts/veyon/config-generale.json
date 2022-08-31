@@ -1,0 +1,620 @@
+{
+    "AccessControl": {
+        "AccessControlRulesProcessingEnabled": "false",
+        "AccessRestrictedToUserGroups": true,
+        "AuthorizedUserGroups": [
+            "professeurs",
+            "administrateur",
+            "Administrators"
+        ],
+        "DataBackend": "{14bacaaa-ebe5-449c-b881-5b382f952571}",
+        "DomainGroupsEnabled": "true",
+        "UserGroupsBackend": "2917cdeb-ac13-4099-8715-20368254a367"
+    },
+    "Authentication": {
+        "KeyAuthenticationEnabled": "true",
+        "LogonAuthenticationEnabled": "false",
+        "Method": "0",
+        "PrivateKeyBaseDir": "/media/Serveur_Scribe/commun/logiciels/Veyon/Keys/private",
+        "PublicKeyBaseDir": "/media/Serveur_Scribe/commun/logiciels/Veyon/Keys/public"
+    },
+    "BuiltinDirectory": {
+        "NetworkObjects": {
+            "JsonStoreArray": [
+                {
+                    "Name": "INFO",
+                    "Type": 2,
+                    "Uid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}"
+                },
+                {
+                    "Name": "LABO",
+                    "Type": 2,
+                    "Uid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}"
+                },
+                {
+                    "HostAddress": "INFO-02",
+                    "Name": "INFO-02",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{2a3bee35-0747-4434-8a1e-89226d243a7c}"
+                },
+                {
+                    "HostAddress": "LABO-01",
+                    "Name": "LABO-01",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{87337151-b165-46e5-bbf7-29f786426cd2}"
+                },
+                {
+                    "HostAddress": "LABO-02",
+                    "MacAddress": "00-19-99-75-7f-93",
+                    "Name": "LABO-02",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{2e02d305-cb87-4bf6-b3ca-86a69380327d}"
+                },
+                {
+                    "HostAddress": "LABO-03",
+                    "MacAddress": "00-19-99-75-7d-f4",
+                    "Name": "LABO-03",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{22742ae0-1246-42c1-b239-8be66a845bfc}"
+                },
+                {
+                    "HostAddress": "INFO-03",
+                    "MacAddress": "74:27:ea:b4:61:4d",
+                    "Name": "INFO-03",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{108ae078-06c9-4992-b72d-101f1759ab6b}"
+                },
+                {
+                    "HostAddress": "INFO-04",
+                    "MacAddress": "74:27:ea:b4:60:a9",
+                    "Name": "INFO-04",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{e50ca4ad-7a17-4f91-af0e-3e30574f0aae}"
+                },
+                {
+                    "HostAddress": "INFO-05",
+                    "MacAddress": "74:27:ea:b4:62:49",
+                    "Name": "INFO-05",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{52e050aa-d445-4d01-9ce0-fd820558b53a}"
+                },
+                {
+                    "HostAddress": "INFO-06",
+                    "MacAddress": "74:27:ea:b4:60:ca",
+                    "Name": "INFO-06",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{7dd013b4-3546-4636-87ac-89aeb65286f2}"
+                },
+                {
+                    "HostAddress": "INFO-07",
+                    "MacAddress": "74:27:ea:b4:60:c1",
+                    "Name": "INFO-07",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{54ee6666-292f-4b6e-a653-403eb955105c}"
+                },
+                {
+                    "HostAddress": "INFO-08",
+                    "MacAddress": "74:27:ea:b4:60:b8",
+                    "Name": "INFO-08",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{a9982c1f-b2ef-4c7f-8eab-505d84aedce5}"
+                },
+                {
+                    "HostAddress": "INFO-09",
+                    "MacAddress": "74:27:ea:b4:62:9f",
+                    "Name": "INFO-09",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{7698eebb-0ff9-4b4d-9c73-94310fe1aac9}"
+                },
+                {
+                    "HostAddress": "INFO-01",
+                    "MacAddress": "74:27:ea:b4:60:cb",
+                    "Name": "INFO-01",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{9447d22b-1b01-49cb-ae00-da6d283fd212}"
+                },
+                {
+                    "HostAddress": "INFO-11",
+                    "MacAddress": "74:27:ea:b4:63:09",
+                    "Name": "INFO-11",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{6e7dec68-f58a-41a0-9bf3-09dcf8d4ca4f}"
+                },
+                {
+                    "HostAddress": "INFO-12",
+                    "MacAddress": "74:27:ea:b4:62:41",
+                    "Name": "INFO-12",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{de82a2a8-24b7-43d0-9a7c-15ec6cd25dcb}"
+                },
+                {
+                    "HostAddress": "INFO-13",
+                    "MacAddress": "54:be:f7:34:83:a4",
+                    "Name": "INFO-13",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{9dbecc50-f6e2-4a1c-9817-92b4188e77a6}"
+                },
+                {
+                    "HostAddress": "INFO-14",
+                    "MacAddress": "54:be:f7:34:97:00",
+                    "Name": "INFO-14",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{fb67a278-784f-4c84-8ef6-f29b307aecf1}"
+                },
+                {
+                    "HostAddress": "INFO-15",
+                    "MacAddress": "54:be:f7:34:97:6d",
+                    "Name": "INFO-15",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{a979f591-a484-42cf-812c-72c43bd99f82}"
+                },
+                {
+                    "HostAddress": "INFO-16",
+                    "MacAddress": "54:be:f7:34:95:82",
+                    "Name": "INFO-16",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{fcd09f7d-7f7d-4c6d-8438-f73d99028f2b}"
+                },
+                {
+                    "HostAddress": "INFO-17",
+                    "MacAddress": "54:be:f7:34:98:d7",
+                    "Name": "INFO-17",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{484d329a-0ccd-4253-b680-ebfcd7b18d52}"
+                },
+                {
+                    "HostAddress": "INFO-18",
+                    "MacAddress": "54:be:f7:34:98:9e",
+                    "Name": "INFO-18",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{561e95cb-4086-4a12-8ef9-3886d40f0604}"
+                },
+                {
+                    "HostAddress": "INFO-19",
+                    "MacAddress": "00:19:99:93:cc:45",
+                    "Name": "INFO-19",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{4d9fab90-12e0-4723-a628-42fac8208f21}"
+                },
+                {
+                    "HostAddress": "INFO-20",
+                    "MacAddress": "54:be:f7:34:86:6e",
+                    "Name": "INFO-20",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{fc2da289-2961-451e-a134-f510b665bbc6}"
+                },
+                {
+                    "HostAddress": "INFO-21",
+                    "MacAddress": "00:19:99:c2:2e:c4",
+                    "Name": "INFO-21",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{3b723f34-8cdb-4ea1-8dec-a5a845f20ce1}"
+                },
+                {
+                    "HostAddress": "INFO-22",
+                    "MacAddress": "54:be:f7:34:84:ab",
+                    "Name": "INFO-22",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{2d760eb5-778e-4494-82f5-c24bf5443cb9}"
+                },
+                {
+                    "Name": "T1",
+                    "Type": 2,
+                    "Uid": "{84d12796-01cf-474c-8657-0d3ef4ebf5a2}"
+                },
+                {
+                    "Name": "T2",
+                    "Type": 2,
+                    "Uid": "{1e647b72-7f38-4d99-bd73-b8730fd844b8}"
+                },
+                {
+                    "Name": "T3",
+                    "Type": 2,
+                    "Uid": "{dcb61e54-6081-4bbd-99ab-37de34371c1d}"
+                },
+                {
+                    "HostAddress": "LABO-04",
+                    "MacAddress": "00-19-99-75-7d-f8",
+                    "Name": "LABO-04",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{2e88147f-bff0-4ebe-b929-98a662a54a88}"
+                },
+                {
+                    "HostAddress": "INFO-10",
+                    "MacAddress": "00:19:99:c2:30:f8",
+                    "Name": "INFO-10",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{a9c2b7cb-e446-4a64-8f87-53826254a3af}"
+                },
+                {
+                    "HostAddress": "LABO-05",
+                    "MacAddress": "00-19-99-75-7d-f0",
+                    "Name": "LABO-05",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{d69fac3a-42f0-48b1-9684-dcf204551286}"
+                },
+                {
+                    "HostAddress": "LABO-06",
+                    "Name": "LABO-06",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{0a73c681-0419-4991-a217-8ae3b40a9237}"
+                },
+                {
+                    "HostAddress": "LABO-07",
+                    "MacAddress": "00-19-99-75-7f-dd",
+                    "Name": "LABO-07",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{0786364e-046a-4abe-9b15-0143bea0cb2a}"
+                },
+                {
+                    "HostAddress": "LABO-08",
+                    "MacAddress": "00-19-99-75-80-be",
+                    "Name": "LABO-08",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{771b015e-fa55-4243-b649-7062e92b98be}"
+                },
+                {
+                    "HostAddress": "LABO-09",
+                    "MacAddress": "00-19-99-75-7f-9b",
+                    "Name": "LABO-09",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{52448f67-494b-4a87-823f-612e7d018219}"
+                },
+                {
+                    "HostAddress": "LABO-10",
+                    "Name": "LABO-10",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{9c2b40a3-164a-4b86-a086-000d717f0d76}"
+                },
+                {
+                    "HostAddress": "LABO-11",
+                    "Name": "LABO-11",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{3e93c6ad-3c0c-4a67-8408-5beae1ecf2d8}"
+                },
+                {
+                    "HostAddress": "LABO-12",
+                    "MacAddress": "00-19-99-75-7f-9d",
+                    "Name": "LABO-12",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{41e8a9d8-8c87-433d-a28c-6bb3d3e6e9d6}"
+                },
+                {
+                    "HostAddress": "LABO-13",
+                    "Name": "LABO-13",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{ee598703-4475-41de-8d33-d2b31621d35f}"
+                },
+                {
+                    "HostAddress": "LABO-14",
+                    "MacAddress": "00-19-99-75-7e-08",
+                    "Name": "LABO-14",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{3f700cfa-0551-4b99-b8c4-77e0293ad197}"
+                },
+                {
+                    "HostAddress": "LABO-15",
+                    "MacAddress": "00-19-99-75-7d-9b",
+                    "Name": "LABO-15",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{e95434d0-02b4-459e-a9e2-27105b749c5d}"
+                },
+                {
+                    "HostAddress": "LABO-16",
+                    "Name": "LABO-16",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{a051d113-c123-4b79-b387-236e80ed2a2b}"
+                },
+                {
+                    "HostAddress": "LABO-17",
+                    "Name": "LABO-17",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{e13f3d9a-26c5-4ffd-9d60-35a4b4d2fc22}"
+                },
+                {
+                    "HostAddress": "LABO-18",
+                    "Name": "LABO-18",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{d09979a6-63b8-4812-b506-6c12c16e318a}"
+                },
+                {
+                    "HostAddress": "LABO-19",
+                    "Name": "LABO-19",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{8e178813-2d7d-488f-a071-dc43d0add544}"
+                },
+                {
+                    "HostAddress": "LABO-20",
+                    "Name": "LABO-20",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{2d7e1810-2d4d-4ac6-9440-dac510f29fe5}"
+                },
+                {
+                    "HostAddress": "LABO-21",
+                    "Name": "LABO-21",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{e293cc41-30c3-47e1-8ca9-c7d0c82fc684}"
+                },
+                {
+                    "HostAddress": "LABO-22",
+                    "Name": "LABO-22",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{abca9ba5-e54d-4583-a557-a1bc66b7b532}"
+                },
+                {
+                    "HostAddress": "LABO-23",
+                    "Name": "LABO-23",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{c41704c7-1b56-4d08-8e2d-b2d25cc556cc}"
+                },
+                {
+                    "HostAddress": "LABO-24",
+                    "Name": "LABO-24",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{37daf563-5099-41ac-b02f-2014840cd7fe}"
+                },
+                {
+                    "HostAddress": "LABO-25",
+                    "Name": "LABO-25",
+                    "ParentUid": "{d467cf2f-05ee-4c43-b56b-51898c4efac3}",
+                    "Type": 3,
+                    "Uid": "{e5d381a1-4cff-45f7-890f-a3847968172b}"
+                },
+                {
+                    "HostAddress": "INFO-23",
+                    "MacAddress": "54:be:f7:34:85:7a",
+                    "Name": "INFO-23",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{63e85b72-3114-4aa3-89da-2a7a9d7749f8}"
+                },
+                {
+                    "HostAddress": "INFO-24",
+                    "MacAddress": "54:be:f7:16:94:95",
+                    "Name": "INFO-24",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{a1c7398f-431d-4e7d-a0d4-507bde7d7ef1}"
+                },
+                {
+                    "HostAddress": "INFO-25",
+                    "Name": "INFO-25",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{7e3065a9-adc7-4410-a8b1-867a52acaf36}"
+                },
+                {
+                    "HostAddress": "INFO-26",
+                    "MacAddress": "54:be:f7:34:95:49",
+                    "Name": "INFO-26",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{a75b4d75-b848-48c2-a1c1-3cc98989fb13}"
+                },
+                {
+                    "HostAddress": "INFO-27",
+                    "MacAddress": "54:be:f7:34:95:86",
+                    "Name": "INFO-27",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{c3905b92-5c6b-419d-b4c5-7c4d63376a4a}"
+                },
+                {
+                    "HostAddress": "INFO-28",
+                    "MacAddress": "54:be:f7:34:98:c4",
+                    "Name": "INFO-28",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{d4d241da-0047-4559-939d-e71b75b48c1a}"
+                },
+                {
+                    "HostAddress": "INFO-29",
+                    "MacAddress": "54:be:f7:34:96:89",
+                    "Name": "INFO-29",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{92712710-ee8f-48ec-bf78-90d2bd141dcf}"
+                },
+                {
+                    "HostAddress": "INFO-30",
+                    "MacAddress": "54:be:f7:34:91:e3",
+                    "Name": "INFO-30",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{fe6dac3d-243f-46b9-88f1-4c173588d064}"
+                },
+                {
+                    "HostAddress": "INFO-31",
+                    "MacAddress": "54:be:f7:34:89:be",
+                    "Name": "INFO-31",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{e90a7ea1-f2b6-4dea-b50c-1af1c0e1a150}"
+                },
+                {
+                    "HostAddress": "INFO-32",
+                    "MacAddress": "00:19:99:c2:30:9e",
+                    "Name": "INFO-32",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{ff127b40-dfd7-4487-a6ad-fa24baef5bd6}"
+                },
+                {
+                    "HostAddress": "INFO-33",
+                    "Name": "INFO-33",
+                    "ParentUid": "{bb51ff23-129a-4b25-8020-5c6a94d48f0f}",
+                    "Type": 3,
+                    "Uid": "{d920cf94-e593-4903-a28c-30d08450fb49}"
+                }
+            ]
+        }
+    },
+    "Core": {
+        "ApplicationVersion": "5",
+        "InstallationID": "ce63d379-7ca4-4f3d-b253-7917fe2d167f",
+        "PluginVersions": {
+            "JsonStoreObject": {
+                "{14bacaaa-ebe5-449c-b881-5b382f952571}": "1.1",
+                "{1b08265b-348f-4978-acaa-45d4f6b90bd9}": "1.1",
+                "{1baa01e0-02d6-4494-a766-788f5b225991}": "1.0",
+                "{1bdb0d1c-f8eb-4d21-a093-d555a10f3975}": "1.1",
+                "{2917cdeb-ac13-4099-8715-20368254a367}": "1.1",
+                "{2ad98ccb-e9a5-43ef-8c4c-876ac5efbcb1}": "1.1",
+                "{387a0c43-1355-4ff6-9e1f-d098e9ce5127}": "1.1",
+                "{39d7a07f-94db-4912-aa1a-c4df8aee3879}": "1.1",
+                "{4122e8ca-b617-4e36-b851-8e050ed2d82e}": "1.2",
+                "{4790bad8-4c56-40d5-8361-099a68f0c24b}": "1.1",
+                "{63928a8a-4c51-4bfd-888e-9e13c6f3907a}": "1.1",
+                "{67dfc1c1-8f37-4539-a298-16e74e34fd8b}": "1.1",
+                "{6f0a491e-c1c6-4338-8244-f823b0bf8670}": "1.2",
+                "{80580500-2e59-4297-9e35-e53959b028cd}": "1.2",
+                "{85f6c631-e75a-4c78-8cb2-a7f3f502015a}": "1.1",
+                "{8ae6668b-9c12-4b29-9bfc-ff89f6604164}": "1.1",
+                "{a54ee018-42bf-4569-90c7-0d8470125ccf}": "1.1",
+                "{b47bcae0-24ff-4bf5-869c-484d64af5c4c}": "1.1",
+                "{d4bb9c42-9eef-4ecb-8dd5-dfd84b355481}": "1.0",
+                "{e11bee03-b99c-465c-bf90-7e5339b83f6b}": "1.0",
+                "{ee322521-f4fb-482d-b082-82a79003afa7}": "1.1"
+            }
+        }
+    },
+    "Demo": {
+        "FramebufferUpdateInterval": "100",
+        "KeyFrameInterval": "1",
+        "MemoryLimit": "320"
+    },
+    "Directories": {
+        "Screenshots": "/media/Serveur_Scribe/commun/logiciels/Veyon/INFO/Screenshots",
+        "UserConfiguration": "/media/Serveur_Scribe/commun/logiciels/Veyon/INFO/Config"
+    },
+    "ExternalVncServer": {
+        "Password": "6c5132f5ce049198d457f15ded8abd0f4b041296ff0681ce1e11d57e025b88a4ae7102f2ccb44a2d446d354351dede2fbf80c98e2132b70ad9f7a96f1204a3d46ad25f8da9e1db248498a05ebaf4889c4e65d8c52de078db3884cb39ef3646a039f0ddac66b36c4a20e874b4c89f05b79769e43cdc98add5086a940dc2125ef7853f7bfea9713d9eac7bfffe62367776e2510d8cb243bc5e759bb64835af98b3d253582ebc7ac595da9396a290c7b7c25dd2660f85941225de72347ebf7221c6d330043489c9db24bebf808019cec1f668fdba4297f91a9ce716f7aa0ed7ce808edcd4ad8a0c33ec861c490c0ef4691a9432615ad46c7bd9c8c596367881513de6e7dac56b21d875a6b36544ace2202e5abc40850c974f6a3f3cc7af7b9d086aacb99bcd2c7dd585cb769439f91294e5a48f1aebe97057c5f719a2d3ec738fceca21dbce7b60403dad5899695fb85f89266632e719093ac26fafd971e47bf0ad0c7ad434faf2819530ca1a4613b04fbcaa2cdd9b559b6bf9a3b7ad810067b00a41c1683a71aa9cfdac500ce19664b6aa2f28eecbdab5be454d9e65a3994f22b99f300a77dd1b157fade01a458454d83d566e96ad3d0a25b30167583f78f2be6dadb80062b90da4d85e7a1b4907c67efa7d0bdf85b18cb7e979dc947f7a1c9bef9b665349a664868ed1f73511c2902b2f1e0144ff79d8f6934a6ce3297423f43e",
+        "ServerPort": "5900"
+    },
+    "LDAP": {
+        "BindDN": "",
+        "BindPassword": "61b881a0cacfce3ab3b6a8fce79867248e9f3255abb24f91a9adc46d742ac2f3c7995d683fbdb4309f26f6a4633ddc221819c7d606411b2e87c8b9fd60a9549b42feb9bbb09b3fda23bf96b4e06a2d47f965256e72dec1a65186f806191102bd7a784ad9ef999ca7a42e4291daf1b0c41f09233476edda5afc5a2ca3aa8c8849c0c1323f30e9559866ac1800ffc8e74af37a5a971c01aca164cb59e82cf53a79b94cbeb674279a681d9f65dcc7e70a2f5e40e5067c79e33c7294b89d70d2ef998c1aaf745427c96b0c335bbcb18b392cf3f96f4b01815709a1d5cd7f678bd69082ed186e573d220a34e292a12a9fa6d101b602b87e27b082f2ee1e91c2056dfec6ef121686cfb65540af33b82fcd5d5f478999c25a40b04656df56c4d8799bf2534f0c6061528f7f1660e252dc428b598e341ace216c2b93c1b8ca9e595d36e45248a7957e6ddd4abe8aa6a235ef8abaeeaf01953fd5e84dc4fb26f2f573a1e7cfe4b1e4afa042206e3a8c5e0c21637ec216f73dd9bf91b82a48435b40c48744383e69b57376e97cfa00246f8508f522a95a6f51fd5ad5db86fab2b2660d8194e1e3c98b64566849dc4a6ac1fc37d00bbda064776821a08ab79d01d2bbd2b5b197c6095d9f5ad00e6331ee190fadb29bac52ecc7abc2162a8f1e706684c99769e6a9f523bb3e17d15e28e4065aef120c3df64a95ff315c59dad4fcc79fc3b3cb",
+        "ComputerContainersFilter": "",
+        "ComputerGroupsFilter": "",
+        "ComputerLocationAttribute": "",
+        "ComputerLocationsByAttribute": "false",
+        "ComputerLocationsByContainer": "false",
+        "ComputersFilter": "",
+        "LocationNameAttribute": "",
+        "ServerHost": "",
+        "ServerPort": "389",
+        "UserGroupsFilter": "",
+        "UserLoginNameAttribute": "",
+        "UsersFilter": ""
+    },
+    "LocalData": {
+        "NetworkObjects": {
+            "JsonStoreArray": [
+            ]
+        }
+    },
+    "Logging": {
+        "LogFileDirectory": "/media/Serveur_Scribe/commun/logiciels/Veyon/INFO/Temp",
+        "LogFileRotationCount": "10",
+        "LogFileRotationEnabled": "false",
+        "LogFileSizeLimit": "100",
+        "LogFileSizeLimitEnabled": "false",
+        "LogLevel": "4",
+        "LogToStdErr": "true",
+        "LogToSystem": "false",
+        "LogToWindowsEventLog": "false"
+    },
+    "Master": {
+        "AccessControlForMasterEnabled": "true",
+        "AllowAddingHiddenLocations": "false",
+        "AutoAdjustMonitoringIconSize": true,
+        "AutoOpenComputerSelectPanel": "false",
+        "AutoSelectCurrentLocation": true,
+        "AutoSwitchToCurrentRoom": "true",
+        "ComputerMonitoringBackgroundColor": "#ffffff",
+        "ComputerMonitoringUpdateInterval": "1000",
+        "ConfirmUnsafeActions": "false",
+        "EmptyRoomsHidden": "true",
+        "HideComputerFilter": "false",
+        "HideEmptyLocations": "false",
+        "HideLocalComputer": "true",
+        "LocalComputerHidden": "true",
+        "OnlyCurrentRoomVisible": "true",
+        "ShowCurrentLocationOnly": "false"
+    },
+    "Network": {
+        "DemoServerPort": "11400",
+        "FeatureWorkerManagerPort": "11300",
+        "FirewallExceptionEnabled": "1",
+        "PrimaryServicePort": "11100",
+        "VeyonServerPort": "11100",
+        "VncServerPort": "11200"
+    },
+    "NetworkObjectDirectory": {
+        "Plugin": "{00000000-0000-0000-0000-000000000000}",
+        "UpdateInterval": "60"
+    },
+    "Service": {
+        "Arguments": "",
+        "Autostart": "true",
+        "HideTrayIcon": "false",
+        "SoftwareSASEnabled": "1"
+    },
+    "UI": {
+        "ApplicationName": "",
+        "EnableHighDPIScaling": "false",
+        "Language": ""
+    },
+    "UltraVNC": {
+        "CaptureLayeredWindows": "true",
+        "Configured": "true",
+        "LowAccuracy": "true",
+        "PollFullScreen": "true"
+    }
+}

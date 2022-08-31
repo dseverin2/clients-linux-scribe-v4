@@ -1,0 +1,32 @@
+[Desktop Entry]
+Version=1.0
+Name=ENT Métice
+Name[fr]=ENT Métice
+Comment=Browse the World Wide Web
+Comment[fr]=Naviguer sur le Web
+GenericName=Web Browser
+GenericName[fr]=Navigateur Web
+Keywords=Internet;WWW;Browser;Web;Explorer;ENT;METICE
+Keywords[fr]=Internet;WWW;Browser;Web;Explorateur;ENT;METICE
+Exec=chromium %u "http://metice.ac-reunion.fr"
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=/tmp/netlogon/icones/posteslinux/icones/metice.png
+Categories=GNOME;GTK;Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/webm;application/x-xpinstall;
+StartupNotify=true
+Actions=NewWindow;NewPrivateWindow;
+Name[fr_FR]=Métice
+
+[Desktop Action NewWindow]
+Name=Open a New Window
+Name[fr]=Ouvrir une nouvelle fenêtre
+Exec=chromium
+OnlyShowIn=Unity;
+
+[Desktop Action NewPrivateWindow]
+Name=Open a New Private Window
+Name[fr]=Ouvrir une nouvelle fenêtre de navigation privée
+Exec=chromium --incognito
+OnlyShowIn=Unity;

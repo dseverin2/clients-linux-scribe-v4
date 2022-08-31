@@ -1,0 +1,9 @@
+#!/bin/bash
+ /etc/apt/apt.conf.d/20proxy  >/dev/null
+if [ $? != 0 ]; then
+	echo 'APT::Get::AllowUnauthenticated 1;
+Acquire::http::proxy "http://$user:$pass@$scribe:$port/";
+Acquire::ftp::proxy "ftp://$user:$pass@$scribe:$port/";
+Acquire::https::proxy "https://$user:$pass@$scribe:$port/";' | tee /etc/apt/apt.conf.d/20proxy
+fi
+
