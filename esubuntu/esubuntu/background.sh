@@ -1,11 +1,11 @@
 #!/bin/bash
 
 #### changement de fond ecran ouverture de session ubuntu ####
-# - récupère la valeur du groupe et attribut en fonction les fond ecran génére par esu
+# - récupère la valeur du groupe et attribue en fonction les fonds ecran générés par esu
 # - gestion des restriction gsetting
 # - Préparation des icônes du bureau
 # - ver 2.6
-# - 27 juin 2022
+# - 31 août 2022
 # - CALPETARD Olivier
 # - SEVERIN Didier 
 
@@ -26,6 +26,11 @@ fi
 echo "Le PC est dans le groupe esu $gm_esu" >> $logfile
 
 sleep 2
+
+
+######################################################################
+#                            PARAM ICONES DE BUREAU                  #
+######################################################################
 
 #lecture parametres utilisateur
 if [ "$UID" = "10000" ]; then
@@ -86,6 +91,10 @@ if [ -e /usr/local/bin/sketchup.sh ]; then
 fi
 echo "Groupe trouvé : $variable" >> $logfile
 
+######################################################################
+#                            PARAM WALLPAPER                         #
+######################################################################
+
 wallpaper=$(cat /tmp/netlogon/icones/$gm_esu/$variable.txt)
 echo "Wallpaper : $wallpaper" >> $logfile
 
@@ -107,11 +116,15 @@ cp /tmp/netlogon/icones/$gm_esu/conky/conky.cfg ~/.conky.cfg -fr
 
 # Récupération de l'interface ethernet active
 interfaceeth=$(ifconfig | grep UP,BROADCAST,RUNNING,MULTICAST | awk '{print $1}' | sed 's/://g')
-if grep "Adresse IP : \${addr ens5}" ~/.conky.cfg > /dev/null; then
-	sed -i "s/Adresse IP : \${addr ens5}/Adresse IP : \${addr $interfaceeth}/g" ~/.conky.cfg >> $logfile
+if grep "Adresse IP : \${addr interfaceeth}" ~/.conky.cfg > /dev/null; then
+	sed -i "s/Adresse IP : \${addr interfaceeth}/Adresse IP : \${addr $interfaceeth}/g" ~/.conky.cfg >> $logfile
 fi
 conky -c ~/.conky.cfg
 
+
+######################################################################
+#                            PARAM GSET                              #
+######################################################################
 echo "Lancement du gpo lecture fichier gset du groupe esu :" >> $logfile
 cp /tmp/netlogon/icones/$gm_esu/linux/gset/gset.sh /tmp
 chmod +x /tmp/gset.sh
