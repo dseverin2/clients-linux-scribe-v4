@@ -32,6 +32,8 @@ initlog
 # Récupération de la version d'ubuntu
 getversion
 
+baseapps=$(dirname $(realpath $0))
+
 # désactiver mode intéractif pour automatiser l'installation de wireshark
 export DEBIAN_FRONTEND="noninteractive"
 
@@ -52,15 +54,12 @@ apt remove mintwelcome -y
 writelog "Installation des logiciels de TBI"
 if $activinspire; then
 	writelog "---ActivInspire"
-	source TBI/installActivInspire.sh
+	source $baseapps"/TBI/installActivInspire.sh"
 fi
 if $ebeam; then
 	writelog "---Ebeam"
-	source TBI/installEbeam.sh
+	source $baseapps"/TBI/installEbeam.sh"
 fi
-
-writelog "Installation de Scratux"
-source ./installScratux.sh
 
 #########################################
 # Paquets uniquement pour Trusty (14.04)
@@ -76,7 +75,7 @@ if [ "$version" = "trusty" ] ; then
 
 	writelog "---Google Earth"
 	apt-get install -y libfontconfig1:i386 libx11-6:i386 libxrender1:i386 libxext6:i386 libgl1-mesa-glx:i386 libglu1-mesa:i386 libglib2.0-0:i386 libsm6:i386
-	if [ ! -e ./google-earth-stable_current_i386.deb ]; then
+	if [ ! -e google-earth-stable_current_i386.deb ]; then
 		wget "$wgetparams"  https://dl.google.com/dl/earth/client/current/google-earth-stable_current_i386.deb --no-check-certificate; 
 	fi
 	dpkg -i google-earth-stable_current_i386.deb ; apt-get -fy install
@@ -97,13 +96,13 @@ if [ "$version" = "xenial" ] ; then
 	apt-install idle-python3.5 x265 ;
 
 	writelog "---Google Earth"
-	if [ ! -e ./google-earth-stable_current_amd64.deb ]; then
+	if [ ! -e google-earth-stable_current_amd64.deb ]; then
 		wget "$wgetparams" --no-check-certificate https://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb 
 	fi
-	if [ ! -e ./lsb-core_4.1+Debian13+nmu1_amd64.deb ]; then
+	if [ ! -e lsb-core_4.1+Debian13+nmu1_amd64.deb ]; then
 		wget "$wgetparams" --no-check-certificate http://ftp.fr.debian.org/debian/pool/main/l/lsb/lsb-core_4.1+Debian13+nmu1_amd64.deb
 	fi
-	if [ ! -e ./lsb-security_4.1+Debian13+nmu1_amd64.deb ]; then
+	if [ ! -e lsb-security_4.1+Debian13+nmu1_amd64.deb ]; then
 		wget "$wgetparams" --no-check-certificate http://ftp.fr.debian.org/debian/pool/main/l/lsb/lsb-security_4.1+Debian13+nmu1_amd64.deb 
 	fi
 	dpkg -i lsb*.deb ; dpkg -i google-earth*.deb ; apt install -fy
@@ -127,7 +126,7 @@ if [ "$version" = "bionic" ] ; then
 	apt-get install -y idle-python3.6 x265
 
 	writelog "---Google Earth Pro x64" 
-	if [ ! -e ./google-earth-pro-stable_current_amd64.deb ]; then
+	if [ ! -e google-earth-pro-stable_current_amd64.deb ]; then
 		wget "$wgetparams" --no-check-certificate https://dl.google.com/dl/earth/client/current/google-earth-pro-stable_current_amd64.deb ; dpkg -i google-earth-pro-stable_current_amd64.deb ; apt install -fy
 	fi
 	rm /etc/apt/sources.list.d/google-earth* ; rm google-earth-pro* #dépot google retiré volontairement
@@ -154,10 +153,10 @@ if [ "$version" = "focal" ] ; then
 	apt-get install -y idle-python3.6 x265
 
 	writelog "---Google Earth Pro x64" 
-	if [ ! -e ./google-earth-pro-stable_current_amd64.deb ]; then
+	if [ ! -e google-earth-pro-stable_current_amd64.deb ]; then
 		wget "$wgetparams" --no-check-certificate https://dl.google.com/dl/earth/client/current/google-earth-pro-stable_current_amd64.deb ; dpkg -i google-earth-pro-stable_current_amd64.deb ; apt install -fy
 	fi
-	rm /etc/apt/sources.list.d/google-earth* ; rm google-earth-pro* #dépot google retiré volontairement
+	rm /etc/apt/sources.list.d/google-earth* ; #dépot google retiré volontairement
 
 	writelog "---Celestia"
 	if [ -e Celestia_pour_focal.sh ]; then
@@ -200,7 +199,7 @@ writelog "INITBLOC" "[ Bureautique ]"
 if [ ! -e onlyoffice-desktopeditors_amd64.deb ]; then
 	wget "$wgetparams" --no-check-certificate https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb
 fi
-dpkg -i onlyoffice-desktopeditors_amd64.deb ; apt-get -fy install ; rm -f onlyoffice-desktopeditors_amd64.deb
+dpkg -i onlyoffice-desktopeditors_amd64.deb ; apt-get -fy install
 apt-get install -y freeplane scribus gnote xournal cups-pdf okular
 writelog "ENDBLOC"
 
@@ -229,7 +228,7 @@ apt-get install -y gparted vim pyrenamer rar unrar htop diodon p7zip-full gdebi
 writelog "ENDBLOC"
 
 writelog "Wireshark"
-debconf-set-selections <<< "wireshark-common/install-setuid true"
+debconf-set-selections <<< "wireshark-common/install-setuid: true"
 apt-get install -y wireshark 
 sed -i -e "s/,dialout/,dialout,wireshark/g" /etc/security/group.conf
 
@@ -246,9 +245,10 @@ writelog "ENDBLOC"
 writelog "INITBLOC" "[ Programmation ]"
 apt-get install -y ghex geany imagemagick gcolor2
 apt-get install -y python3-pil.imagetk python3-pil traceroute python3-tk #python3-sympy
-wget https://github.com/scratux/scratux/releases/download/1.4.1/scratux_1.4.1_amd64.deb /tmp/scratux_1.4.1_amd64.deb
+if [ ! -e /tmp/scratux_1.4.1_amd64.deb ]; then
+	wget https://github.com/scratux/scratux/releases/download/1.4.1/scratux_1.4.1_amd64.deb /tmp/scratux_1.4.1_amd64.deb
+fi
 sudo dpkg -i /tmp/scratux_1.4.1_amd64.deb
-rm -f /tmp/scratux_1.4.1_amd64.deb
 writelog "ENDBLOC"
 
 writelog "INITBLOC" "[ Serveur ]"
@@ -272,7 +272,7 @@ if [ "$version" = "bionic" ] || [ "$version" = "focal" ] || [ "$version" = "jamm
 	dpkg -i ganttproject* ; apt install -fy
 	
 	writelog "---mBlock"
-	source installmBlock.sh	
+	source $baseapps"/installmBlock.sh"	
 	
 	writelog "---Xia (alias ImageActive)"
 	echo "deb http://repository.crdp.ac-versailles.fr/debian xia main" | sudo tee /etc/apt/sources.list.d/xia.list
