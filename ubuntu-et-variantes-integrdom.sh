@@ -210,14 +210,14 @@ echo "install firefox"
 sudo apt install firefox firefox-locale-fr --install-suggests -y 
 
 echo "install chromium"
-sudo add-apt-repository ppa:xtradeb/apps -y
 echo '
 Package: *
 Pin: release o=LP-PPA-phd-chromium-browser
 Pin-Priority: 1001
 ' | sudo tee /etc/apt/preferences.d/phd-chromium-browser
+sudo add-apt-repository ppa:phd/chromium-browser -y
 sudo apt update
-sudo apt install chromium --install-suggests-y
+sudo apt install chromium-browser --install-suggests-y
 if [ -e /usr/bin/chromium-browser ]; then
         sudo ln -s /usr/bin/chromium-browser /usr/bin/chromium
 elif [ -e /usr/bin/chromium ]; then
