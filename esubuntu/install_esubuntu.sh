@@ -1,10 +1,11 @@
 #!/bin/bash
 #### installation et complement script dane de lyon ####
 # - installation du pc dans un groupe et gestion proxy authentifie
-# - ver 2.2
-# - 08 Juillet 2022
+# - ver 2.4
+# - 31 Août 2022
 # - CALPETARD Olivier - AMI - lycee Antoine ROUSSIN
 # - SEVERIN Didier - RRUPN - Collège Bois de Nèfles
+# Dernière modification ligne 34 remplacement de locate par pwd
 
 #############################################
 # Run using sudo, of course.
@@ -30,11 +31,9 @@ getversion
 
 writelog "---Détermination du répertoire de lancement"
 updatedb
-locate version_esubuntu.txt > files_tmp
-sed -i -e "s/version_esubuntu.txt//g" files_tmp
-read chemin < files_tmp
-echo $chemin
 
+chemin = $(dirname $(realpath $0)) 
+writelog "------Trouvé $chemin"
 chmod -R +x $chemin
 
 writelog "---Création des dossiers upkg et esubuntu"
@@ -57,10 +56,10 @@ if [ "$version" = "trusty" ] || [ "$version" = "xenial" ] ; then
 fi
 apt-get install -y zenity conky conky-all
 
-writelog "---Copie des fichiers esubuntu de $chemin"esubuntu/" vers /etc/esubuntu" "---Et de "$chemin"xdg_autostart vers /etc/xdg/autostart"
-sudo cp "$chemin"esubuntu/* /etc/esubuntu/
+writelog "---Copie des fichiers esubuntu de $chemin"/esubuntu/" vers /etc/esubuntu" "---Et de "$chemin"/xdg_autostart vers /etc/xdg/autostart"
+sudo cp "$chemin"/esubuntu/* /etc/esubuntu/
 sudo chmod +x /etc/esubuntu/*.sh
-sudo cp "$chemin"xdg_autostart/* /etc/xdg/autostart/
+sudo cp "$chemin"/xdg_autostart/* /etc/xdg/autostart/
 writelog "---Attribution des droits sur les fichiers /etc/xdg/autostart"
 sudo chmod +x /etc/xdg/autostart/cntlm.desktop
 sudo chmod +x /etc/xdg/autostart/message_scribe.desktop
@@ -71,7 +70,7 @@ writelog "INITBLOC" "---Gestion du groupe" "------Configuration de la salle"
 echo "$salle" > /etc/GM_ESU
 
 writelog "------Lancement du script prof_firefox en mode sudo"
-sudo "$chemin"firefox/prof_firefox.sh
+sudo "$chemin"/firefox/prof_firefox.sh
 
 writelog "------Inscription de upkg dans crontab"
 echo "*/15 *  * * * root /etc/esubuntu/groupe.sh" > /etc/crontab
@@ -80,12 +79,12 @@ writelog "ENDBLOC"
 ##############################################################################
 ### Auto paramétrage de gset, firefox et conky
 ##############################################################################
-sed -i -e "s/RNE_ETAB/$rne_etab/g" -e "s/IP_SCRIBE/$scribe_def_ip/g" -e "s/IP_PRONOTE/$pronote/g" -e "s/PORTAIL/$portail/g" -e "s/SALLEESU/$salle/g" "$chemin"icones/gm_esu/linux/firefox.js
+sed -i -e "s/RNE_ETAB/$rne_etab/g" -e "s/IP_SCRIBE/$scribe_def_ip/g" -e "s/IP_PRONOTE/$pronote/g" -e "s/PORTAIL/$portail/g" -e "s/SALLEESU/$salle/g" "$chemin"/icones/gm_esu/linux/firefox.js
 
-sed -i -e "s/GSETPROXY/$gset_proxy/g" -e "s/SUBNET/$subnet/g" "$chemin"icones/gm_esu/linux/gset/gset.sh
+sed -i -e "s/GSETPROXY/$gset_proxy/g" -e "s/SUBNET/$subnet/g" "$chemin"/icones/gm_esu/linux/gset/gset.sh
 
 interfaceeth=`ip -br link | grep 'UP' | grep -v 'OWN' | awk '{ print $1 }'`
-sed -i -e "s/INTERFACEETH/$interfaceeth/g" "$chemin"icones/posteslinux/conky/conky.cfg
+sed -i -e "s/INTERFACEETH/$interfaceeth/g" "$chemin"/icones/posteslinux/conky/conky.cfg
 
 ##############################################################################
 ### Utilisation d'un proxy authentifiant
@@ -94,7 +93,7 @@ sed -i -e "s/INTERFACEETH/$interfaceeth/g" "$chemin"icones/posteslinux/conky/con
 writelog "INITBLOC" "Téléchargement + Mise en place du proxy authentifiant"
 
 if [ "$proxauth" = "yes" ] ; then 
-  sudo "$chemin"install_proxy_auth.sh
+  sudo "$chemin"/install_proxy_auth.sh
 else
   # supression du cntlm 
   rm -f /etc/xdg/autostart/cntlm*
