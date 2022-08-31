@@ -442,7 +442,7 @@ system-db:gdm
 file-db:/usr/share/gdm/greeter-dconf-defaults" > /etc/dconf/profile/gdm 2>> $logfile
 
 	writelog "---23a-Suppression de la liste des utilisateurs au login"
-	mkdir /etc/dconf/db/gdm.d 2>> $logfile
+	if [ ! -e /etc/dconf/db/gdm.d ]; then mkdir /etc/dconf/db/gdm.d 2>> $logfile; fi
 	echo "[org/gnome/login-screen]
 # Do not show the user list
 disable-user-list=true" > /etc/dconf/db/gdm.d/00-login-screen
@@ -625,6 +625,7 @@ if [ "$version" = "xenial" ] || [ "$version" = "bionic" ]  || [ "$version" = "fo
 	# Détermination du skel à importer
 	if [ -e ~/Desktop ]; then skelfile=skel-desktop.tar.gz; elif [ -e ~/Bureau ]; then skelfile=skel-bureau.tar.gz; fi
         rm -fr /etc/skel/*
+	if [ ! -e /etc/skel ]; then mkdir /etc/skel; fi
 	tar -xzf $skelfile -C /etc/skel/ 2>> $logfile
 	rm -f $skelfile 2>> $logfile
 fi
