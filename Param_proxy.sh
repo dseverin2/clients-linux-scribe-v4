@@ -65,8 +65,8 @@ Acquire::https::proxy \"http://$scribeuserapt:$scribepass@$proxy_def_ip:$proxy_a
 		apt update
 	fi
 	apt install snapd -y
-	snap set system proxy.http="http://$proxy_def_ip:$proxy_def_port"
-	snap set system proxy.https="http://$proxy_def_ip:$proxy_def_port"
+	snap set system proxy.http="http://$scribeuserapt:$scribepass@$proxy_def_ip:$proxy_def_port"
+	snap set system proxy.https="http://$scribeuserapt:$scribepass@$proxy_def_ip:$proxy_def_port"
 fi
 
 # Modification pour ne pas avoir de problème lors du rafraichissement des dépots avec un proxy
