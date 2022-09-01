@@ -23,6 +23,7 @@ fi
 
 echo '//
 pref("autoadmin.global_config_url", "file:///tmp/netlogon/icones/'$gm_esu'/linux/firefox.js", locked); '> /usr/lib/firefox/firefox.cfg
+mkdir -p /usr/lib/firefox/browser/defaults/preferences
 cp /usr/lib/firefox/firefox.cfg /usr/lib/firefox/browser/defaults/firefox.cfg
 
 
