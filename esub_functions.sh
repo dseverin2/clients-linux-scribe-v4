@@ -87,8 +87,11 @@ function writelog {
 function getversion {	
 	# Pour identifier le numéro de la version (14.04, 16.04...)
 	. /etc/lsb-release
-	
-	version=$DISTRIB_CODENAME
+	if [ "$DISTRIB_CODENAME"=="una" ]; then
+		version="focal"
+	else
+		version=$DISTRIB_CODENAME
+	fi
 }
 
 # Ecriture du 1er paramètre à la suite du fichier indiqué par le 2e argument
