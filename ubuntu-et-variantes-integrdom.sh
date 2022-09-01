@@ -86,6 +86,7 @@ if [ "$UID" -ne "0" ]; then
 	echo "Il faut etre root pour executer ce script. ==> sudo "
 	exit 
 fi 
+sudo -u "$SUDO_USER" find . -type f -name "*.sh" -exec chmod a+x {} \;
 
 # Verification de la présence des fichiers contenant les fonctions et variables communes
 if [ -e ./esub_functions.sh ]; then
@@ -189,7 +190,7 @@ if $esubuntu; then
 
 	# Déplacement/extraction de l'archive + lancement par la suite
 	writelog "---6a-Modification des droits et copie des fichiers de configuration"
-	chmod -R +x ./esubuntu 2>> $logfile
+	chmod -R a+x ./esubuntu 2>> $logfile
 	writelog "---6b-Lancement du script d'installation"
 	./esubuntu/install_esubuntu.sh 2>> $logfile
 
@@ -300,6 +301,7 @@ Auth:
 #auth ldap
 ########################################################################
 writelog "13/42-Définition de auth ldap"
+apt install auth-client-config -y 2>> $logfile
 #MODIFS LE IF 20 et 20.04
 if [ "$version" = "focal" ] || [ "$version" = "jammy" ] ; then 
 	echo "# pre_auth-client-config # passwd:         compat systemd
@@ -324,14 +326,8 @@ else
 	nss_group=group: files ldap
 	nss_shadow=shadow: files ldap
 	nss_netgroup=netgroup: nis" > /etc/auth-client-config/profile.d/open_ldap 2>> $logfile
+	auth-client-config -t nss -p open_ldap 2>> $logfile
 fi
-
-########################################################################
-#application de la conf nsswitch
-########################################################################
-writelog "14/42-Application de la configuration nsswitch depuis auth-client-config"
-apt install auth-client-config -y 2>> $logfile
-auth-client-config -t nss -p open_ldap 2>> $logfile
 
 ########################################################################
 #modules PAM mkhomdir pour pam-auth-update
