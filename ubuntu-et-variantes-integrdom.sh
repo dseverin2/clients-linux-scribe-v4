@@ -104,8 +104,7 @@ else
 fi
 
 # Lancement de la configuration
-# test avec sudo -u "$SUDO_USER" source ./Configurer.sh
-if [ -e ./esub_functions.sh ]; then source ./Configurer.sh; fi
+source ./Configurer.sh
 
 ### Paramétrage Proxy
 if $installdepuisdomaine; then
