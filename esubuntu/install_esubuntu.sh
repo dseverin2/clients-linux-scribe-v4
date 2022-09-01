@@ -32,9 +32,9 @@ getversion
 writelog "---Détermination du répertoire de lancement"
 updatedb
 
-chemin = $(dirname $(realpath $0)) 
+chemin=$(dirname $(realpath $0)) 
 writelog "------Répertoire d'exec : $chemin"
-chmod -R +x $chemin
+chmod -R a+x $chemin
 gm_esu=$salle
 writelog "------Groupe : $gm_esu
 
@@ -111,5 +111,5 @@ writelog "ENDBLOC"
 
 ## 3 dernières lignes non activés car ce script est appelé par l'autre (intgrdom) et il ne faut pas interrompre pendant l'install
 #echo "C'est fini ! bienvenue dans le groupe $salle..."
-#echo "Pour compléter le système installer un serveur apt-cacher et un poste pour gérer les impressions des autre"
+#echo "Pour compléter le système installer un serveur apt-cacher et un poste pour gérer les impressions des autres"
 #exit
