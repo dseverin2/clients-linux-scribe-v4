@@ -36,7 +36,7 @@ chemin=$(dirname $(realpath $0))
 writelog "------Répertoire d'exec : $chemin"
 chmod -R a+x $chemin
 gm_esu=$salle
-writelog "------Groupe : $gm_esu
+writelog "------Groupe : $gm_esu"
 
 writelog "---Création des dossiers upkg et esubuntu"
 if [ -e /usr/local/upkg_client/ ]; then
