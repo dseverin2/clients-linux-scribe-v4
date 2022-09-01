@@ -279,9 +279,12 @@ if [ "$version" = "bionic" ] || [ "$version" = "focal" ] || [ "$version" = "jamm
 	source $baseapps"/installmBlock.sh"	
 	
 	writelog "---Xia (alias ImageActive)"
-	echo "deb http://repository.crdp.ac-versailles.fr/debian xia main" | sudo tee /etc/apt/sources.list.d/xia.list
-	wget -nc "$wgetparams" -q http://repository.crdp.ac-versailles.fr/crdp.gpg -O - | sudo apt-key add -; 
-	apt-get update; apt-get install xia -y
+	wget -nc "$wgetparams" --no-check-certificate https://xia.funraiders.org/download/xia-3-inkscape.deb
+	sudo dpkg -i xia-3-inkscape.deb
+	apt install --fix-broken -y
+	#echo "deb http://repository.crdp.ac-versailles.fr/debian xia main" | sudo tee /etc/apt/sources.list.d/xia.list
+	#wget -nc "$wgetparams" -q http://repository.crdp.ac-versailles.fr/crdp.gpg -O - | sudo apt-key add -; 
+	#apt-get update; apt-get install xia -y
 	
 	writelog "---Marble (avec le moins de dépendance KDE possible)"
 	apt install --no-install-recommends marble -y
