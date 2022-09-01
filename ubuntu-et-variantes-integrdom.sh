@@ -614,15 +614,10 @@ if [ "$version" = "xenial" ] || [ "$version" = "bionic" ]  || [ "$version" = "fo
 		sed -i "30i\session optional        pam_mkhomedir.so" /etc/pam.d/common-session
 	fi
 	writelog "35/42-Création de raccourcis sur le bureau + dans dossier utilisateur (commun+perso+lespartages)"
-	# Avec l'ancien skel...
-	# tar -xzf skel.tar.gz -C /etc/ 2>> $logfile
 	
 	# Détermination du skel à importer
-	if [ -e ~/Desktop ]; then skelfile=skel-desktop.tar.gz; elif [ -e ~/Bureau ]; then skelfile=skel-bureau.tar.gz; fi
-        rm -fr /etc/skel/*
-	if [ ! -e /etc/skel ]; then mkdir /etc/skel; fi
-	tar -xzf $skelfile -C /etc/skel/ 2>> $logfile
-	rm -f $skelfile 2>> $logfile
+	if [ ! -e /etc/skel ]; then mkdir /etc/skel; else rm -fr /etc/skel/*; fi
+	tar -xzf $skelArchive -C /etc/skel/ 2>> $logfile
 fi
 
 # Suppression de notification de mise à niveau
