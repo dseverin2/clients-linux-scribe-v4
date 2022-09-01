@@ -12,3 +12,4 @@ wget -nc -O- https://bintray.com/user/downloadSubjectPublicKey?username=bintray 
 echo "deb https://dl.bintray.com/celestia/releases-deb bionic universe" | sudo tee /etc/apt/sources.list.d/celestia-obs.list
 apt update 
 apt install celestia -y
+rm -f /etc/apt/sources.list.d/celestia-obs.list
