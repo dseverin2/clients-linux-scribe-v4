@@ -217,7 +217,7 @@ Pin-Priority: 1001
 ' | sudo tee /etc/apt/preferences.d/phd-chromium-browser
 sudo add-apt-repository ppa:phd/chromium-browser -y
 sudo apt update
-sudo apt install chromium-browser --install-suggests-y
+sudo apt install chromium-browser --install-suggests -y
 if [ -e /usr/bin/chromium-browser ]; then
         sudo ln -s /usr/bin/chromium-browser /usr/bin/chromium
 elif [ -e /usr/bin/chromium ]; then
