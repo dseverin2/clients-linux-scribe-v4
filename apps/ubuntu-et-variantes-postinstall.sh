@@ -203,17 +203,17 @@ dpkg -i onlyoffice-desktopeditors_amd64.deb ; apt-get -fy install
 apt-get install -y freeplane scribus gnote xournal cups-pdf okular
 writelog "ENDBLOC"
 
-writelog "INITBLOC" "[ Web ]"
-apt-get install -y chromium-browser chromium-browser-l10n; 
-if grep LinuxMint /etc/lsb-release; then
-	printf "Package: firefox*\nPin: release o=Ubuntu\nPin-Priority: 800" | tee /etc/apt/preferences.d/firefox.pref
-	apt remove firefox firefox-locale-fr firefox-locale-en
-	apt clean all
-	apt update
-fi # On remplace les packets firefox de Mint par ceux de Ubuntu (plus récents)
-apt-get install -y firefox firefox-locale-fr
-apt-get install -y adobe-flashplugin ; #permet d'avoir flash en même temps pour firefox et chromium
-writelog "ENDBLOC"
+#writelog "INITBLOC" "[ Web ]"
+#apt-get install -y chromium-browser chromium-browser-l10n; 
+#if grep LinuxMint /etc/lsb-release; then
+#	printf "Package: firefox*\nPin: release o=Ubuntu\nPin-Priority: 800" | tee /etc/apt/preferences.d/firefox.pref
+#	apt remove firefox firefox-locale-fr firefox-locale-en -y
+#	apt clean all
+#	apt update
+#fi # On remplace les packets firefox de Mint par ceux de Ubuntu (plus récents)
+#apt-get install -y firefox firefox-locale-fr
+#apt-get install -y adobe-flashplugin ; #permet d'avoir flash en même temps pour firefox et chromium
+#writelog "ENDBLOC"
 
 writelog "INITBLOC" "[ Video / Audio ]"
 apt-get install -y imagination openshot audacity vlc x264 ffmpeg2theora flac vorbis-tools lame oggvideotools mplayer ogmrip goobox
