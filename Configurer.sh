@@ -101,4 +101,5 @@ if [ "$reb" != "" ]; then sed -i -e "s/^reboot=.*/reboot=$reb/g" "$conf"; fi
 
 sed -i -e "s/TRUE/true/g" "$conf"
 sed -i -e "s/FALSE/false/g" "$conf"
+sudo -u "$SUDO_USER" ./getDesktopName.sh
 source "$conf"
