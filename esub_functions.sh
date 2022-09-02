@@ -87,7 +87,7 @@ function writelog {
 function getversion {	
 	# Pour identifier le numéro de la version (14.04, 16.04...)
 	. /etc/lsb-release
-	if [ "$DISTRIB_CODENAME"=="una" ] || [ "$DISTRIB_CODENAME"=="uma" ] || [ "$DISTRIB_CODENAME"=="ulyssa" ] || [ "$DISTRIB_CODENAME"=="ulyana" ] || ; then
+	if [ "$DISTRIB_CODENAME"=="una" ] || [ "$DISTRIB_CODENAME"=="uma" ] || [ "$DISTRIB_CODENAME"=="ulyssa" ] || [ "$DISTRIB_CODENAME"=="ulyana" ] ; then
 		version="focal"
 	elif [ "$DISTRIB_CODENAME"=="vanessa" ]; then
 		version="jammy"
