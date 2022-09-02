@@ -17,9 +17,6 @@ else
 fi
 touch $logfile
 
-# Ajout locate
-sudo apt install locate -y
-
 # Test Mise à jour
 function majIntegrdom {
 	wget -nc --no-check-certificate -O /tmp/_VERSION https://github.com/dseverin2/clients-linux-scribe-v4/raw/main/_VERSION
