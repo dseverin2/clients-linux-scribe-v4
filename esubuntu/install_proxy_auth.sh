@@ -30,30 +30,27 @@ fi
 
 #determiner le repertoire de lancement
 updatedb
-locate version_esubuntu.txt > files_tmp
-sed -i -e "s/version_esubuntu.txt//g" files_tmp
-read chemin < files_tmp
-echo $chemin
+chemin=$(dirname $(realpath $0)) 
 
 #creation des parametres etablissement
-echo "NOM_ETAB=\"$nom_etab\"" > "$chemin"esubuntu/param_etab.conf
-echo "DOMAINENAME=\"$nom_domaine\"" >> "$chemin"esubuntu/param_etab.conf
-echo "PROXY=\"$proxy\"" >> "$chemin"esubuntu/param_etab.conf
-echo "NOPROXY=\"$proxy_env_noproxy\"" >> "$chemin"esubuntu/param_etab.conf
-echo "PORTCNTLM=\"$port_cntlm\"" >> "$chemin"esubuntu/param_etab.conf
-echo "TYPE_AUTH=\"$type_cntlm\"" >> "$chemin"esubuntu/param_etab.conf
-echo "AIDE=\"$sos_info\"">> "$chemin"esubuntu/param_etab.conf
+echo "NOM_ETAB=\"$nom_etab\"" > "$chemin"/esubuntu/param_etab.conf
+echo "DOMAINENAME=\"$nom_domaine\"" >> "$chemin"/esubuntu/param_etab.conf
+echo "PROXY=\"$proxy\"" >> "$chemin"/esubuntu/param_etab.conf
+echo "NOPROXY=\"$proxy_env_noproxy\"" >> "$chemin"/esubuntu/param_etab.conf
+echo "PORTCNTLM=\"$port_cntlm\"" >> "$chemin"/esubuntu/param_etab.conf
+echo "TYPE_AUTH=\"$type_cntlm\"" >> "$chemin"/esubuntu/param_etab.conf
+echo "AIDE=\"$sos_info\"">> "$chemin"/esubuntu/param_etab.conf
 
 #installation de cntlm 
 sudo apt-get install cntlm 
 
 # copie des fichiers
-sudo cp "$chemin"esubuntu/cntlm.sh /etc/esubuntu/
-sudo cp "$chemin"esubuntu/reconf_cntlm.sh /etc/esubuntu/
+sudo cp "$chemin"/esubuntu/cntlm.sh /etc/esubuntu/
+sudo cp "$chemin"/esubuntu/reconf_cntlm.sh /etc/esubuntu/
 sudo chmod +x /etc/esubuntu/*.sh
 sudo cp "$chemin"xdg_autostart/cntlm.desktop /etc/xdg/autostart/
 sudo chmod +x /etc/xdg/autostart/cntlm.desktop
-sudo cp "$chemin"esubuntu/param_etab.conf /etc/esubuntu/
+sudo cp "$chemin"/esubuntu/param_etab.conf /etc/esubuntu/
 sudo chmod 755 /etc/esubuntu/param_etab.conf
 
 #configuration de cntlm système pour ne pas faire d'interférence avec celui de lutilisateur
