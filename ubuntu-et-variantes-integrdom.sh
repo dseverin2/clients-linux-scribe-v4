@@ -663,7 +663,12 @@ fi
 writelog "41/42-Nettoyage de la station avant clonage"
 {
 	apt-get -y autoremove --purge
-	apt-get -y clean
+	apt clean -y
+	apt update --fix-missing -y
+	apt install -f -y
+	dpkg --configure -a
+	apt upgrade -y
+	apt dist-upgrade -y
 } 2>> $logfile
 clear
 
