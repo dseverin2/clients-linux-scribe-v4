@@ -266,11 +266,7 @@ echo "Unattended-Upgrade::Allowed-Origins {
 //      \"${distro_id}:${distro_codename}-backports\";
 };" >> /etc/apt/apt.conf.d/50unattended-upgrades 2>> $logfile
 
-#
-
-#
 # Suppression network manager au démarrage
-#
 if grep ".set.enabled=true" /var/lib/NetworkManager/NetworkManager-intern.conf > /dev/null; then
 	sed -i "s/.set.enabled=true/.set.enabled=false/g" /var/lib/NetworkManager/NetworkManager-intern.conf 2>> $logfile
 fi
@@ -302,31 +298,31 @@ Auth:
 writelog "13/42-Définition de auth ldap"
 apt install auth-client-config -y 2>> $logfile
 #MODIFS LE IF 20 et 20.04
-if [ "$version" = "focal" ] || [ "$version" = "jammy" ] ; then 
-	echo "# pre_auth-client-config # passwd:         compat systemd
-	passwd:  files ldap
-	# pre_auth-client-config # group:          compat systemd
-	group: files ldap
-	# pre_auth-client-config # shadow:         compat
-	shadow: files ldap
-	gshadow:        files
-	hosts:          files mdns4_minimal [NOTFOUND=return] dns myhostname
-	networks:       files
-	protocols:      db files
-	services:       db files
-	ethers:         db files
-	rpc:            db files
-	# pre_auth-client-config # netgroup:       nis
-	netgroup: nis
-	" > /etc/nsswitch.conf 2>> $logfile
-else
+#if [ "$version" = "focal" ] || [ "$version" = "jammy" ] ; then 
+#	echo "# pre_auth-client-config # passwd:         compat systemd
+#	passwd:  files ldap
+#	# pre_auth-client-config # group:          compat systemd
+#	group: files ldap
+#	# pre_auth-client-config # shadow:         compat
+#	shadow: files ldap
+#	gshadow:        files
+#	hosts:          files mdns4_minimal [NOTFOUND=return] dns myhostname
+#	networks:       files
+#	protocols:      db files
+#	services:       db files
+#	ethers:         db files
+#	rpc:            db files
+#	# pre_auth-client-config # netgroup:       nis
+#	netgroup: nis
+#	" > /etc/nsswitch.conf 2>> $logfile
+#else
 	echo "[open_ldap]
 	nss_passwd=passwd:  files ldap
 	nss_group=group: files ldap
 	nss_shadow=shadow: files ldap
 	nss_netgroup=netgroup: nis" > /etc/auth-client-config/profile.d/open_ldap 2>> $logfile
 	auth-client-config -t nss -p open_ldap 2>> $logfile
-fi
+#fi
 
 ########################################################################
 #modules PAM mkhomdir pour pam-auth-update
