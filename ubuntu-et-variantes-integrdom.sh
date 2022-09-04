@@ -297,31 +297,39 @@ Auth:
 ########################################################################
 writelog "13/42-Définition de auth ldap"
 apt install auth-client-config -y 2>> $logfile
-#MODIFS LE IF 20 et 20.04
-#if [ "$version" = "focal" ] || [ "$version" = "jammy" ] ; then 
-#	echo "# pre_auth-client-config # passwd:         compat systemd
-#	passwd:  files ldap
-#	# pre_auth-client-config # group:          compat systemd
-#	group: files ldap
-#	# pre_auth-client-config # shadow:         compat
-#	shadow: files ldap
-#	gshadow:        files
-#	hosts:          files mdns4_minimal [NOTFOUND=return] dns myhostname
-#	networks:       files
-#	protocols:      db files
-#	services:       db files
-#	ethers:         db files
-#	rpc:            db files
-#	# pre_auth-client-config # netgroup:       nis
-#	netgroup: nis
-#	" > /etc/nsswitch.conf 2>> $logfile
+
+paramnsswitchfile(){
+echo " pre_auth-client-config # passwd:         compat systemd
+passwd:  files ldap
+# pre_auth-client-config # group:          compat systemd
+group: files ldap
+# pre_auth-client-config # shadow:         compat
+shadow: files ldap
+gshadow:        files
+hosts:          files mdns4_minimal [NOTFOUND=return] dns myhostname
+networks:       files
+protocols:      db files
+services:       db files
+ethers:         db files
+rpc:            db files
+# pre_auth-client-config # netgroup:       nis
+netgroup: nis
+" > /etc/nsswitch.conf 2>> $logfile
+}
+
+paramopenldap(){
+echo "[open_ldap]
+nss_passwd=passwd:  files ldap
+nss_group=group: files ldap
+nss_shadow=shadow: files ldap
+nss_netgroup=netgroup: nis" > /etc/auth-client-config/profile.d/open_ldap 2>> $logfile
+auth-client-config -t nss -p open_ldap 2>> $logfile
+}
+
+#if [ "$version" != "focal" ] && [ "$version" != "jammy" ] ; then 
+	paramopenldap
 #else
-	echo "[open_ldap]
-	nss_passwd=passwd:  files ldap
-	nss_group=group: files ldap
-	nss_shadow=shadow: files ldap
-	nss_netgroup=netgroup: nis" > /etc/auth-client-config/profile.d/open_ldap 2>> $logfile
-	auth-client-config -t nss -p open_ldap 2>> $logfile
+#	paramnsswitchfile
 #fi
 
 ########################################################################
@@ -458,64 +466,37 @@ fi
 writelog "INITBLOC" "24/42-Paramétrage pour remplir pam_mount.conf" "---/media/Serveur_Scribe"
 
 eclairng="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"eclairng\" mountpoint=\"/media/Serveur_Scribe\" />"
-grep "/media/Serveur_Scribe" /etc/security/pam_mount.conf.xml  >/dev/null
-if [ $? != 0 ]
-then
+if ! grep "/media/Serveur_Scribe" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $eclairng" /etc/security/pam_mount.conf.xml
-else
-  echo "eclairng déjà présent"
 fi
 
 homes="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"perso\" mountpoint=\"~/Documents\" />"
-grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null
-if [ $? != 0 ]
-then sed -i "/<\!-- Volume definitions -->/a\ $homes" /etc/security/pam_mount.conf.xml
-else
-  echo "homes déjà présent"
+if ! grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null; then
+ sed -i "/<\!-- Volume definitions -->/a\ $homes" /etc/security/pam_mount.conf.xml
 fi
 
 groupes="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"groupes\" mountpoint=\"~/Groupes\" />"
-grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null
-if [ $? != 0 ]
-then
+if ! grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $groupes" /etc/security/pam_mount.conf.xml
-else
-  echo "groupes déjà présent"
 fi
 
 commun="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"commun\" mountpoint=\"~/Commun\" />"
-grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null
-if [ $? != 0 ]
-then
+if ! grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $commun" /etc/security/pam_mount.conf.xml
-else
-  echo "commun déjà présent"
 fi
 
 professeurs="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"professeurs\" mountpoint=\"~/professeurs\" />"
-grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null
-if [ $? != 0 ]
-then
+if ! grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $professeurs" /etc/security/pam_mount.conf.xml
-else
-  echo "professeurs déjà présent"
 fi
 
 netlogon="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"netlogon\" mountpoint=\"/tmp/netlogon\"  sgrp=\"DomainUsers\" />"
-grep "/tmp/netlogon" /etc/security/pam_mount.conf.xml  >/dev/null
-if [ $? != 0 ]
-then
+if ! grep "/tmp/netlogon" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $netlogon" /etc/security/pam_mount.conf.xml
-else
-  echo "netlogon déjà présent"
 fi
 
-grep "<cifsmount>mount -t cifs //%(SERVER)/%(VOLUME) %(MNTPT) -o \"noexec,nosetuids,mapchars,cifsacl,serverino,nobrl,iocharset=utf8,user=%(USER),uid=%(USERUID)%(before=\\",\\" OPTIONS)\"</cifsmount>" /etc/security/pam_mount.conf.xml  >/dev/null
-if [ $? != 0 ]
-then
+if ! grep "<cifsmount>mount -t cifs //%(SERVER)/%(VOLUME) %(MNTPT) -o \"noexec,nosetuids,mapchars,cifsacl,serverino,nobrl,iocharset=utf8,user=%(USER),uid=%(USERUID)%(before=\\",\\" OPTIONS)\"</cifsmount>" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- pam_mount parameters: Volume-related -->/a\ <cifsmount>mount -t cifs //%(SERVER)/%(VOLUME) %(MNTPT) -o \"noexec,nosetuids,mapchars,cifsacl,serverino,nobrl,iocharset=utf8,user=%(USER),uid=%(USERUID)%(before=\\",\\" OPTIONS),vers=1.0\"</cifsmount>" /etc/security/pam_mount.conf.xml
-else
-  echo "mount.cifs déjà présent"
 fi
 writelog "ENDBLOC"
 ########################################################################
@@ -621,14 +602,16 @@ writelog "36/42-Suppression de notification de mise à niveau"
 sed -r -i 's/Prompt=lts/Prompt=never/g' /etc/update-manager/release-upgrades 2>> $logfile
 
 # Enchainer sur un script de Postinstallation
-writelog "INITBLOC" "37/42-PostInstallation basique"
-{
-	mv ./$second_dir/ubuntu-et-variantes-postinstall.sh .
-	chmod +x ubuntu-et-variantes-postinstall.sh
-	./ubuntu-et-variantes-postinstall.sh
-	mv ubuntu-et-variantes-postinstall.sh $second_dir
-} 2>> $logfile
-writelog "ENDBLOC"
+if $postinstallbase; then
+	writelog "INITBLOC" "37/42-PostInstallation basique"
+	{
+		mv ./$second_dir/ubuntu-et-variantes-postinstall.sh .
+		chmod +x ubuntu-et-variantes-postinstall.sh
+		./ubuntu-et-variantes-postinstall.sh
+		mv ubuntu-et-variantes-postinstall.sh $second_dir
+	} 2>> $logfile
+	writelog "ENDBLOC"
+fi
 
 writelog "38/42-Installation du gestionnaire de raccourcis"
 apt-get install xbindkeys xbindkeys-config -y 2>> $logfile
