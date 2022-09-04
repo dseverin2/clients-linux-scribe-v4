@@ -207,7 +207,7 @@ writelog "ENDBLOC"
 writelog "INITBLOC" "[ Programmation ]"
 apt-get install -y ghex geany imagemagick gcolor2
 apt-get install -y python3-pil.imagetk python3-pil traceroute python3-tk #python3-sympy
-flatpak install flathub edu.mit.Scratch
+flatpak install flathub edu.mit.Scratch -y
 writelog "ENDBLOC"
 
 writelog "INITBLOC" "[ Serveur ]"
