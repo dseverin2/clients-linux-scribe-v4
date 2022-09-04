@@ -245,10 +245,7 @@ writelog "ENDBLOC"
 writelog "INITBLOC" "[ Programmation ]"
 apt-get install -y ghex geany imagemagick gcolor2
 apt-get install -y python3-pil.imagetk python3-pil traceroute python3-tk #python3-sympy
-if [ ! -e /tmp/scratux_1.4.1_amd64.deb ]; then
-	wget -nc https://github.com/scratux/scratux/releases/download/1.4.1/scratux_1.4.1_amd64.deb /tmp/scratux_1.4.1_amd64.deb
-fi
-sudo dpkg -i /tmp/scratux_1.4.1_amd64.deb
+flatpak install flathub edu.mit.Scratch
 writelog "ENDBLOC"
 
 writelog "INITBLOC" "[ Serveur ]"
