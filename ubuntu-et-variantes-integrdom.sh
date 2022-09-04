@@ -502,7 +502,7 @@ apt purge -y aisleriot gnome-mahjongg pidgin transmission-gtk gnome-mines gnome-
 writelog "--- Lot 2"
 apt purge -y hexchat hexchat-common libespeak1 libsonic0 libspeechd2 python3-speechd speech-dispatcher speech-dispatcher-audio-plugins gnome-orca adobe-flash-properties-gtk mate-screensaver mate-screensaver-common brltty mono-runtime-common avahi-daemon 2>> $logfile;
 writelog "--- Lot 3"
-apt purge -y gnome-tour gnome-shell-portal-helper xscreensaver-data-extra xscreensaver-data xscreensaver-gl-extra xscreensaver-gl icedtea-netx-common pix pix-data onboard warpinator timeshift celluloid caja-sendto 2>> $logfile;
+apt remove --purge -y gnome-tour zorin-gnome-tour-autostart gnome-shell-portal-helper xscreensaver-data-extra xscreensaver-data xscreensaver-gl-extra xscreensaver-gl icedtea-netx-common pix pix-data onboard warpinator timeshift celluloid caja-sendto 2>> $logfile;
 
 writelog "30/42-Suppression de l'envoi des rapport d'erreurs"
 echo "enabled=0" > /etc/default/rapport 2>> $logfile
