@@ -525,13 +525,8 @@ apt purge -y aisleriot gnome-mahjongg pidgin transmission-gtk gnome-mines gnome-
 
 if grep "LinuxMint" /etc/lsb-release > /dev/null; then
 	writelog "29/42-Suppression d'applications par défaut"
-	writelog "     --- 1/4"
-	apt purge -y mintwelcome hexchat hexchat-common 
-	writelog "     --- 2/4"
-	apt purge -y libespeak1 libsonic0 libspeechd2 python3-speechd speech-dispatcher speech-dispatcher-audio-plugins 
-	writelog "     --- 3/4"
-	apt purge -y gnome-orca adobe-flash-properties-gtk mate-screensaver mate-screensaver-common brltty mono-runtime-common avahi-daemon xscreensaver-data-extra xscreensaver-data xscreensaver-gl-extra xscreensaver-gl icedtea-netx-common pix pix-data onboard warpinator timeshift celluloid caja-sendto 2>> $logfile;
-	writelog "     --- FIN"
+	apt purge -y mintwelcome ;
+writelog "     --- FIN"
 elif grep "Zorin" /etc/lsb-release > /dev/null; then
 	writelog "29/42-Suppression d'applications par défaut (sous Zorin)"
 	apt purge -y gnome-tour gnome-shell-portal-helper 2>> $logfile;
