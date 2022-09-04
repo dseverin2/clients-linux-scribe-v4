@@ -40,36 +40,12 @@
 
 # --------------------------------------------------------------------------------------------------------------------
 
-### Changelog depuis version originale (pour 12.04/14.04 à l'époque) :
-# - paquet à installer smbfs remplacé par cifs-utils car il a changé de nom.
-# - ajout groupe dialout
-# - désinstallation de certains logiciels inutiles suivant les variantes
-# - ajout fonction pour programmer l'extinction automatique des postes le soir
-# - lecture dvd inclus
-# - changement du thème MDM par défaut pour Mint (pour ne pas voir l'userlist)
-# - ajout d'une ligne dans sudoers pour régler un problème avec GTK dans certains cas sur la 14.04
-# - changement page d'acceuil Firefox
-# - utilisation du Skel désormais compatible avec la 16.04
-# - ajout variable pour contrôle de la version
-# - suppression de la notification de mise à niveau (sinon par exemple en 14.04, s'affiche sur tous les comptes au démarrage)
-# - prise en charge du script Esubuntu (crée par Olivier CALPETARD)
-# - correction pour le montage des partages quand le noyau >= 4.13 dû au changement du protocole par défaut en SMB3
-# - modification config GDM pour la version de base en 18.04 avec GnomeShell pour ne pas afficher la liste des utilisateurs
-# - Ajout de raccourci pour le bureau + dossier de l'utilisateur pour les partages Perso, Documents et l'ensemble des partages.
-# - Suppression icone Amazon pour Ubuntu 18.04/GS
-# - Ajout de l'utilitaire "net-tools" pour la commande ifconfig
-# - Condition pour ne pas activer le PPA de conky si c'est une version supérieur à 16.04 (utilisé par Esubuntu)
-# - Ajout de Vim car logiciel utile de base (en alternative à nano)
-# - Changement de commande d'installation : apt-get => apt
-# - Applet réseau finalement non-supprimé
-# - Possibilité d'enchainer automatiquement avec le script de post-install une fois le script terminé (via 1 paramètre de commande) 
-# - Suppression de l'écran de démarrage d'Ubuntu avec Gnome de la 18.04
+### Changelog depuis version originale (à partir de la 16.04) :
 # - Mise en place d'un fichier de configuration centralisé
 # - Ajout de la possibilité de paramétrer une photocopieuse à code
 # - Récupération de auth-client-config pour Focal Fossa
 
 # --------------------------------------------------------------------------------------------------------------------
-
 
 ## Liste des contributeurs au script :
 # Christophe Deze - Rectorat de Nantes
