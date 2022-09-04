@@ -73,30 +73,36 @@ if [ "$rne" != "" ]; then sed -i -e "s/^rne_etab=.*/rne_etab=\"$rne\"/g" "$conf"
 retour=$(yad --title="Paramétrage Applications 3/3" --form\
  --field="Page d'accueil de Firefox":CBE\
  --field="Heure d'extinction auto":CBE\
+ --field="Installer logiciels recommandés":CHK\
  --field="Installer logiciels avancés":CHK\
  --field="Configurer pĥotocopieur":CHK\
  --field="Installer eBeam":CHK\
  --field="Installer activInspire":CHK\
+ --field="Installer WPS Office":CHK\
  --field="Installer Veyon":CHK\
  --field="Redémarrer à la fin":CHK\
- -- "$pagedemarragepardefaut" "$extinction" "$postinstallbase" "$postinstalladditionnel" "$ansible" "$config_photocopieuse" "$ebeam" "$activinspire" "$WPSOffice" "$LibreOffice" "$OpenOffice" "$Veyon" "$reboot")
+ -- "$pagedemarragepardefaut" "$extinction" "$postinstallbase" "$postinstalladditionnel" "$config_photocopieuse" "$ebeam" "$activinspire" "$WPSOffice" "$Veyon" "$reboot")
 echo "$retour"
 
 accueil=$(echo $retour | awk 'BEGIN {FS="|" } { print $1 }' | sed 's/\//\\\//g')
 if [ "$accueil" != "" ]; then sed -i -e "s/^pagedemarragepardefaut=.*/pagedemarragepardefaut=\"$accueil\"/g" "$conf"; fi
 shutd=$(echo $retour | awk 'BEGIN {FS="|" } { print $2 }')
 if [ "$shutd" != "" ]; then sed -i -e "s/^extinction=.*/extinction=\"$shutd\"/g" "$conf"; fi
-add=$(echo $retour | awk 'BEGIN {FS="|" } { print $3 }')
+base=$(echo $retour | awk 'BEGIN {FS="|" } { print $3 }')
+if [ "$base" != "" ]; then sed -i -e "s/^postinstallbase=.*/postinstallbase=$base/g" "$conf"; fi
+add=$(echo $retour | awk 'BEGIN {FS="|" } { print $4 }')
 if [ "$add" != "" ]; then sed -i -e "s/^postinstalladditionnel=.*/postinstalladditionnel=$add/g" "$conf"; fi
-copieur=$(echo $retour | awk 'BEGIN {FS="|" } { print $4 }')
+copieur=$(echo $retour | awk 'BEGIN {FS="|" } { print $5 }')
 if [ "$copieur" != "" ]; then sed -i -e "s/^config_photocopieuse=.*/config_photocopieuse=$copieur/g" "$conf"; fi
-ebe=$(echo $retour | awk 'BEGIN {FS="|" } { print $5 }')
+ebe=$(echo $retour | awk 'BEGIN {FS="|" } { print $6 }')
 if [ "$ebe" != "" ]; then sed -i -e "s/^ebeam=.*/ebeam=$ebe/g" "$conf"; fi
-prom=$(echo $retour | awk 'BEGIN {FS="|" } { print $6 }')
+prom=$(echo $retour | awk 'BEGIN {FS="|" } { print $7 }')
 if [ "$prom" != "" ]; then sed -i -e "s/^activinspire=.*/activinspire=$prom/g" "$conf"; fi
-vey=$(echo $retour | awk 'BEGIN {FS="|" } { print $7 }')
+wps=$(echo $retour | awk 'BEGIN {FS="|" } { print $8 }')
+if [ "$wps" != "" ]; then sed -i -e "s/^WPSOffice=.*/WPSOffice=$wps/g" "$conf"; fi
+vey=$(echo $retour | awk 'BEGIN {FS="|" } { print $9 }')
 if [ "$vey" != "" ]; then sed -i -e "s/^Veyon=.*/Veyon=$vey/g" "$conf"; fi
-reb=$(echo $retour | awk 'BEGIN {FS="|" } { print $8 }')
+reb=$(echo $retour | awk 'BEGIN {FS="|" } { print $10 }')
 if [ "$reb" != "" ]; then sed -i -e "s/^reboot=.*/reboot=$reb/g" "$conf"; fi
 
 sed -i -e "s/TRUE/true/g" "$conf"
