@@ -8,7 +8,7 @@
 # - 30/06/2020 (Paramétrage auth-client-config)
 # - 10/10/2020 (Lecture DVD dans le fichier config)
 # - 27/06/2022 (Prise en charge wallpaper XFCE)
-# - 08/07/2022 (Prise en charge de Jammy Jellyfish 22.04
+# - 08/07/2022 (Prise en charge de Jammy Jellyfish 22.04)
 # TEST : Chercher MODIFS (pam delay 10sw)
 
 
