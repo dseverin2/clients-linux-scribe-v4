@@ -75,9 +75,7 @@ if [ "$version" = "trusty" ] ; then
 
 	writelog "---Google Earth"
 	apt-get install -y libfontconfig1:i386 libx11-6:i386 libxrender1:i386 libxext6:i386 libgl1-mesa-glx:i386 libglu1-mesa:i386 libglib2.0-0:i386 libsm6:i386
-	if [ ! -e google-earth-stable_current_i386.deb ]; then
-		wget -nc "$wgetparams"  https://dl.google.com/dl/earth/client/current/google-earth-stable_current_i386.deb --no-check-certificate; 
-	fi
+	wget -nc "$wgetparams"  https://dl.google.com/dl/earth/client/current/google-earth-stable_current_i386.deb --no-check-certificate; 
 	dpkg -i google-earth-stable_current_i386.deb ; apt-get -fy install
 	writelog "ENDBLOC"
 fi
@@ -96,24 +94,14 @@ if [ "$version" = "xenial" ] ; then
 	apt-install idle-python3.5 x265 ;
 
 	writelog "---Google Earth"
-	if [ ! -e google-earth-stable_current_amd64.deb ]; then
-		wget -nc "$wgetparams" --no-check-certificate https://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb 
-	fi
-	if [ ! -e lsb-core_4.1+Debian13+nmu1_amd64.deb ]; then
-		wget -nc "$wgetparams" --no-check-certificate http://ftp.fr.debian.org/debian/pool/main/l/lsb/lsb-core_4.1+Debian13+nmu1_amd64.deb
-	fi
-	if [ ! -e lsb-security_4.1+Debian13+nmu1_amd64.deb ]; then
-		wget -nc "$wgetparams" --no-check-certificate http://ftp.fr.debian.org/debian/pool/main/l/lsb/lsb-security_4.1+Debian13+nmu1_amd64.deb 
-	fi
+	wget -nc "$wgetparams" --no-check-certificate https://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb 
+	wget -nc "$wgetparams" --no-check-certificate http://ftp.fr.debian.org/debian/pool/main/l/lsb/lsb-core_4.1+Debian13+nmu1_amd64.deb
+	wget -nc "$wgetparams" --no-check-certificate http://ftp.fr.debian.org/debian/pool/main/l/lsb/lsb-security_4.1+Debian13+nmu1_amd64.deb 
 	dpkg -i lsb*.deb ; dpkg -i google-earth*.deb ; apt install -fy
 
 	writelog "---Celestia"
 	wget -nc "$wgetparams" --no-check-certificate https://gitlab.com/simbd/Scripts_Ubuntu/-/blob/7925144bf30ed4c353b9676521d591dc35c97dde/Celestia_pour_Bionic.sh
-	if [ -e Celestia_pour_Bionic.sh ]; then
-		echo "Celestia_pour_Bionic.sh récupéré avec succès"
-	else
-		cp $second_dir/Celestia_pour_Bionic.sh .
-	fi
+	cp $second_dir/Celestia_pour_Bionic.sh .
 	chmod +x Celestia_pour_Bionic.sh ; ./Celestia_pour_Bionic.sh ; rm Celestia*
 	writelog "ENDBLOC"
 fi
@@ -126,18 +114,12 @@ if [ "$version" = "bionic" ] ; then
 	apt-get install -y idle-python3.6 x265
 
 	writelog "---Google Earth Pro x64" 
-	if [ ! -e google-earth-pro-stable_current_amd64.deb ]; then
-		wget -nc "$wgetparams" --no-check-certificate https://dl.google.com/dl/earth/client/current/google-earth-pro-stable_current_amd64.deb ; dpkg -i google-earth-pro-stable_current_amd64.deb ; apt install -fy
-	fi
+	wget -nc "$wgetparams" --no-check-certificate https://dl.google.com/dl/earth/client/current/google-earth-pro-stable_current_amd64.deb ; dpkg -i google-earth-pro-stable_current_amd64.deb ; apt install -fy
 	rm /etc/apt/sources.list.d/google-earth* ; rm google-earth-pro* #dépot google retiré volontairement
 
 	writelog "---Celestia"
 	wget -nc "$wgetparams" --no-check-certificate https://gitlab.com/simbd/Scripts_Ubuntu/-/blob/7925144bf30ed4c353b9676521d591dc35c97dde/Celestia_pour_Bionic.sh
-	if [ -e Celestia_pour_Bionic.sh ]; then
-		echo "Celestia_pour_Bionic.sh récupéré avec succès sur github"
-	else
-		cp $second_dir/Celestia_pour_Bionic.sh .
-	fi
+	cp $second_dir/Celestia_pour_Bionic.sh .
 	chmod +x Celestia_pour_Bionic.sh ; ./Celestia_pour_Bionic.sh ; rm Celestia*
 
 	writelog "---Pilote imprimante openprinting"
@@ -153,17 +135,11 @@ if [ "$version" = "focal" ] ; then
 	apt-get install -y idle-python3.6 x265
 
 	writelog "---Google Earth Pro x64" 
-	if [ ! -e google-earth-pro-stable_current_amd64.deb ]; then
-		wget -nc "$wgetparams" --no-check-certificate https://dl.google.com/dl/earth/client/current/google-earth-pro-stable_current_amd64.deb ; dpkg -i google-earth-pro-stable_current_amd64.deb ; apt install -fy
-	fi
+	wget -nc "$wgetparams" --no-check-certificate https://dl.google.com/dl/earth/client/current/google-earth-pro-stable_current_amd64.deb ; dpkg -i google-earth-pro-stable_current_amd64.deb ; apt install -fy
 	rm /etc/apt/sources.list.d/google-earth* ; #dépot google retiré volontairement
 
 	writelog "---Celestia"
-	if [ -e Celestia_pour_focal.sh ]; then
-		echo "Celestia_pour_focal.sh récupéré avec succès sur github"
-	else
-		cp $second_dir/Celestia_pour_focal.sh .
-	fi
+	cp $second_dir/Celestia_pour_focal.sh .
 	chmod +x Celestia_pour_focal.sh ; ./Celestia_pour_focal.sh ; rm Celestia*
 
 	writelog "---Pilote imprimante openprinting"
@@ -176,9 +152,7 @@ fi
 
 if [ "$version" != "bionic" ] && [ "$version" != "focal" ] && [ "$version" != "jammy" ] ; then  # Installation spécifique pour 14.04 ou 16.04
 	writelog "Drivers imprimantes pour les version < 18.04"
-	if [ ! -e ./openprinting-gutenprint_5.2.7-1lsb3.2_amd64.deb ]; then
-		wget -nc "$wgetparams" --no-check-certificate http://www.openprinting.org/download/printdriver/debian/dists/lsb3.2/contrib/binary-amd64/openprinting-gutenprint_5.2.7-1lsb3.2_amd64.deb
-	fi
+	wget -nc "$wgetparams" --no-check-certificate http://www.openprinting.org/download/printdriver/debian/dists/lsb3.2/contrib/binary-amd64/openprinting-gutenprint_5.2.7-1lsb3.2_amd64.deb
 	dpkg -i openprinting-gutenprint_5.2.7-1lsb3.2_amd64.deb ; apt-get -fy install ; rm openprinting-gutenprint*
 
 	writelog "Gdevelop (PPA pas encore actif pour la 18.04)"
@@ -196,24 +170,14 @@ writelog "Oracle Java 8"
 add-apt-repository -y ppa:webupd8team/java ; apt-get update ; echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections | apt-get install -y oracle-java8-installer
 
 writelog "INITBLOC" "[ Bureautique ]"
-if [ ! -e onlyoffice-desktopeditors_amd64.deb ]; then
-	wget -nc "$wgetparams" --no-check-certificate https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb
-fi
+wget -nc "$wgetparams" --no-check-certificate https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb
 dpkg -i onlyoffice-desktopeditors_amd64.deb ; apt-get -fy install
 apt-get install -y freeplane scribus gnote xournal cups-pdf okular
 writelog "ENDBLOC"
 
-#writelog "INITBLOC" "[ Web ]"
-#apt-get install -y chromium-browser chromium-browser-l10n; 
-#if grep LinuxMint /etc/lsb-release; then
-#	printf "Package: firefox*\nPin: release o=Ubuntu\nPin-Priority: 800" | tee /etc/apt/preferences.d/firefox.pref
-#	apt remove firefox firefox-locale-fr firefox-locale-en -y
-#	apt clean all
-#	apt update
-#fi # On remplace les packets firefox de Mint par ceux de Ubuntu (plus récents)
-#apt-get install -y firefox firefox-locale-fr
-#apt-get install -y adobe-flashplugin ; #permet d'avoir flash en même temps pour firefox et chromium
-#writelog "ENDBLOC"
+writelog "INITBLOC" "[ Web ]"
+apt-get install -y adobe-flashplugin ; #permet d'avoir flash en même temps pour firefox et chromium
+writelog "ENDBLOC"
 
 writelog "INITBLOC" "[ Video / Audio ]"
 apt-get install -y imagination openshot audacity vlc x264 ffmpeg2theora flac vorbis-tools lame oggvideotools mplayer ogmrip goobox
@@ -236,11 +200,9 @@ writelog "INITBLOC" "[ Mathématiques ]"
 apt-get install -y algobox carmetal scilab geophar
 writelog "ENDBLOC"
 
-
 writelog "INITBLOC" "[ Sciences ]"
 apt-get install -y stellarium avogadro python-mecavideo gnuplot -y
 writelog "ENDBLOC"
-
 
 writelog "INITBLOC" "[ Programmation ]"
 apt-get install -y ghex geany imagemagick gcolor2
@@ -267,9 +229,7 @@ if [ "$version" = "bionic" ] || [ "$version" = "focal" ] || [ "$version" = "jamm
 	
 	writelog "---GanttProject"
 	apt-get install -y openjdk-8-jre oenjdk-11-jre java-11-amazon-corretto-jdk bellsoft-java11-runtime
-	if [ ! -e ./ganttproject_2.8.11-r2396-1_all.deb ]; then
-		wget -nc "$wgetparams" --no-check-certificate https://dl.ganttproject.biz/ganttproject-2.8.11/ganttproject_2.8.11-r2396-1_all.deb
-	fi
+	wget -nc "$wgetparams" --no-check-certificate https://dl.ganttproject.biz/ganttproject-2.8.11/ganttproject_2.8.11-r2396-1_all.deb
 	dpkg -i ganttproject* ; apt install -fy
 	
 	writelog "---mBlock"
@@ -286,20 +246,12 @@ if [ "$version" = "bionic" ] || [ "$version" = "focal" ] || [ "$version" = "jamm
 	writelog "---Marble (avec le moins de dépendance KDE possible)"
 	apt install --no-install-recommends marble -y
 	
-	#writelog "---OpenMeca"
-	#apt-get install libqt5help5 libqt5svg5 libqt5opengl5 libqt5widgets5 libqt5gui5 libqt5xml5 libqt5core5a libboost-all-dev libqwt-qt5-6 libqglviewer2-qt5 qttools5-dev libqwt-qt5-dev
-	#wget -nc "$wgetparams" --no-check-certificate https://openmeca.site/site/dl/openmeca_2.x_amd64.deb
-	#sudo dpkg -i openmeca_2.x_amd64.deb
-	#apt install --fix-broken -y
-	
 	writelog "---ScienceEngineering"
 	apt-get install -y science-engineering
 	
 	writelog "---BlueGriffon"
 	installfilename=bluegriffon-3.1.Ubuntu18.04-x86_64.deb
-	if [ ! -e ./$installfilename ]; then
-		wget -nc "$wgetparams" --no-check-certificate http://bluegriffon.org/freshmeat/3.1/$installfilename && dpkg -i bluegriffon*.deb ; apt install -fy
-	fi
+	wget -nc "$wgetparams" --no-check-certificate http://bluegriffon.org/freshmeat/3.1/$installfilename && dpkg -i bluegriffon*.deb ; apt install -fy
 	
 	writelog "---SCRIPTS SUPPLEMENTAIRES"
 	if [ -e $second_dir/installGeogebra6.sh ]; then
@@ -392,7 +344,7 @@ if [ "$version" = "trusty" ]; then
 	apt install -y libdvdread4 && bash /usr/share/doc/libdvdread4/install-css.sh 2>> $logfile
 fi
 
-if [ "$version" = "xenial" ] || [ "$version" = "bionic" ] || [ "$version" = "focal" ]; then #lecture dvd pour 16.04 ou 18.04
+if [ "$version" = "xenial" ] || [ "$version" = "bionic" ] || [ "$version" = "focal" ] || [ "$version" = "jammy" ]; then #lecture dvd pour 16.04 ou 18.04
 	apt install -y libdvd-pkg
 	dpkg-reconfigure libdvd-pkg
 fi
