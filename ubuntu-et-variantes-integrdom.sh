@@ -289,20 +289,23 @@ sudoers: ldap [NOTFOUND=return] files
 }
 
 paramoldldap(){
+writelog "Installation de auth-client-config"
+wget -nc http://archive.ubuntu.com/ubuntu/pool/universe/a/auth-client-config/auth-client-config_0.9ubuntu1_all.deb
+dpkg -i auth-client-config_0.9ubuntu1_all.deb
+rm -f auth-client-config_0.9ubuntu1_all.deb
 echo "[open_ldap]
 nss_passwd=passwd:  files ldap
 nss_group=group: files ldap
 nss_shadow=shadow: files ldap
 nss_netgroup=netgroup: nis" > /etc/auth-client-config/profile.d/open_ldap 2>> $logfile
+auth-client-config -t nss -p open_ldap 2>> $logfile
 }
 
-#if [ "$version" != "focal" ] && [ "$version" != "jammy" ] ; then 
+if [ "$version" != "focal" ] && [ "$version" != "jammy" ] ; then 
 	paramoldldap
-#else
-#	paramnewldap
-#fi
-
-auth-client-config -t nss -p open_ldap 2>> $logfile
+else
+	paramnewldap
+fi
 
 ########################################################################
 #modules PAM mkhomdir pour pam-auth-update
