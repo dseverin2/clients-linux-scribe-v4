@@ -200,10 +200,10 @@ elif [ -e /usr/bin/chromium ]; then
 	sudo ln -s /usr/bin/chromium /usr/bin/chromium-browser
 fi
 
-writelog "7/42-Installation de auth-client-config"
-wget -nc http://archive.ubuntu.com/ubuntu/pool/universe/a/auth-client-config/auth-client-config_0.9ubuntu1_all.deb
-dpkg -i auth-client-config_0.9ubuntu1_all.deb
-rm -f auth-client-config_0.9ubuntu1_all.deb
+#writelog "7/42-Installation de auth-client-config"
+#wget -nc http://archive.ubuntu.com/ubuntu/pool/universe/a/auth-client-config/auth-client-config_0.9ubuntu1_all.deb
+#dpkg -i auth-client-config_0.9ubuntu1_all.deb
+#rm -f auth-client-config_0.9ubuntu1_all.deb
 
 ########################################################################
 #Mettre la station à l'heure à partir du serveur Scribe
@@ -272,7 +272,7 @@ Auth:
 #auth ldap
 ########################################################################
 writelog "13/42-Définition de auth ldap"
-apt install auth-client-config -y 2>> $logfile
+#apt install auth-client-config -y 2>> $logfile
 
 paramnsswitchfile(){
 echo " pre_auth-client-config # passwd:         compat systemd
