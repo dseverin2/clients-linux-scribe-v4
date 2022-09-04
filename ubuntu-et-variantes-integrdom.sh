@@ -524,15 +524,16 @@ writelog "28/42-Suppression de paquet inutile sous Ubuntu/Unity"
 apt purge -y aisleriot gnome-mahjongg pidgin transmission-gtk gnome-mines gnome-sudoku blueman abiword gnumeric thunderbird 2>> $logfile;
 
 if grep "LinuxMint" /etc/lsb-release > /dev/null; then
-	writelog "29a/42-Suppression d'applications par défaut (sous Mint)"
+	writelog "29/42-Suppression d'applications par défaut"
+	writelog "     --- 1/4"
 	apt purge -y mintwelcome hexchat hexchat-common libespeak1 libsonic0 libspeechd2 python3-speechd speech-dispatcher speech-dispatcher-audio-plugins 
-	writelog "29b/42-Suppression d'applications par défaut (sous Mint)"
+	writelog "     --- 2/4"
 	apt purge -y gnome-orca adobe-flash-properties-gtk mate-screensaver mate-screensaver-common 
-	writelog "29c/42-Suppression d'applications par défaut (sous Mint)"
+	writelog "     --- 3/4"
 	apt purge -y brltty mono-runtime-common avahi-daemon xscreensaver-data-extra xscreensaver-data xscreensaver-gl-extra xscreensaver-gl 
-	writelog "29d/42-Suppression d'applications par défaut (sous Mint)"
+	writelog "     --- 4/4"
 	apt purge -y icedtea-netx-common pix pix-data onboard warpinator timeshift celluloid caja-sendto 2>> $logfile;
-	writelog "29e/42-Fin"
+	writelog "     --- FIN"
 elif grep "Zorin" /etc/lsb-release > /dev/null; then
 	writelog "29/42-Suppression d'applications par défaut (sous Zorin)"
 	apt purge -y gnome-tour gnome-shell-portal-helper 2>> $logfile;
@@ -614,7 +615,7 @@ if $postinstallbase; then
 	{
 		mv ./$second_dir/ubuntu-et-variantes-postinstall.sh .
 		chmod +x ubuntu-et-variantes-postinstall.sh
-		./ubuntu-et-variantes-postinstall.sh
+		./ubuntu-et-variantes-postinstall.sh 2>> $logfile
 		mv ubuntu-et-variantes-postinstall.sh $second_dir
 	} 2>> $logfile
 	writelog "ENDBLOC"
@@ -636,11 +637,11 @@ if $postinstalladditionnel; then
 	if [ "$versionnum" != "" ]; then 
 		writelog "INITBLOC" "40/42-PostInstallation avancée"
 		{
-			sudo -u "$SUDO_USER" wget -nc --no-check-certificate https://github.com/simbd/Ubuntu_"$versionnum"LTS_PostInstall/archive/master.zip
-			sudo -u "$SUDO_USER" unzip -o master.zip -d .
-			sudo -u "$SUDO_USER" chmod +x Ubuntu_"$versionnum"LTS_PostInstall-master/*.sh
-			sudo -u "$SUDO_USER" ./Ubuntu_"$versionnum"LTS_PostInstall-master/Postinstall_Ubuntu-"$versionnum"*.sh
-			sudo -u "$SUDO_USER" rm -fr master.zip Ubuntu_"$versionnum"LTS_PostInstall-master
+			sudo -u "$SUDO_USER" wget -nc --no-check-certificate https://github.com/simbd/Ubuntu_"$versionnum"LTS_PostInstall/archive/master.zip 2>> $logfile
+			sudo -u "$SUDO_USER" unzip -o master.zip -d . 2>> $logfile
+			sudo -u "$SUDO_USER" chmod +x Ubuntu_"$versionnum"LTS_PostInstall-master/*.sh 2>> $logfile
+			sudo -u "$SUDO_USER" ./Ubuntu_"$versionnum"LTS_PostInstall-master/Postinstall_Ubuntu-"$versionnum"*.sh 2>> $logfile
+			sudo -u "$SUDO_USER" rm -fr master.zip Ubuntu_"$versionnum"LTS_PostInstall-master 2>> $logfile
 		} 2>> $logfile
 		writelog "ENDBLOC"
 	fi
@@ -648,13 +649,13 @@ fi
 
 writelog "41/42-Nettoyage de la station avant clonage"
 {
-	apt-get -y autoremove --purge
-	apt clean -y
-	apt update --fix-missing -y
-	apt install -f -y
-	dpkg --configure -a
-	apt upgrade -y
-	apt dist-upgrade -y
+	apt-get -y autoremove --purge 2>> $logfile
+	apt clean -y 2>> $logfile
+	apt update --fix-missing -y 2>> $logfile
+	apt install -f -y 2>> $logfile
+	dpkg --configure -a 2>> $logfile
+	apt upgrade -y 2>> $logfile
+	apt dist-upgrade -y 2>> $logfile
 } 2>> $logfile
 clear
 
