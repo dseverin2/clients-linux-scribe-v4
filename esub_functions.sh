@@ -31,23 +31,17 @@ function majIntegrdom {
 	fi
 
 	if [ "$offlineVersion" -lt "$onlineVersion" ]; then
-		echo "Une nouvelle version du script est en ligne. Voulez-vous mettre à jour ? o/[N]"
-		read -r autorisationMaj
-		if [ "$autorisationMaj" == "o" ] || [ "$autorisationMaj" == "O" ]; then
-			echo "Mise à jour du script..."
-			wget -nc --no-check-certificate https://github.com/dseverin2/clients-linux-scribe-v4/archive/master.zip
-			if [ -e master.zip ]; then
-				unzip master.zip
-				cp -fr clients-linux-scribe-v4-main/* .
-				rm -fr clients-linux-scribe-v4-main/ master.zip
-			fi
-			chmod +x ./*.sh
-			clear
-			echo "Scripts mis à jour... reconfiguration"
-			source ./Configurer.sh
-		else
-			echo "Aucune modification apportée aux scripts présents"
+		echo "Mise à jour du script..."
+		wget -nc --no-check-certificate https://github.com/dseverin2/clients-linux-scribe-v4/archive/master.zip
+		if [ -e master.zip ]; then
+			unzip master.zip
+			cp -fr clients-linux-scribe-v4-main/* .
+			rm -fr clients-linux-scribe-v4-main/ master.zip
 		fi
+		chmod +x ./*.sh
+		clear
+		echo "Scripts mis à jour... reconfiguration"
+		source ./Configurer.sh
 	fi
 }
 
