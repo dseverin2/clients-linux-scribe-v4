@@ -524,8 +524,15 @@ writelog "28/42-Suppression de paquet inutile sous Ubuntu/Unity"
 apt purge -y aisleriot gnome-mahjongg pidgin transmission-gtk gnome-mines gnome-sudoku blueman abiword gnumeric thunderbird 2>> $logfile;
 
 if grep "LinuxMint" /etc/lsb-release > /dev/null; then
-	writelog "29/42-Suppression d'applications par défaut (sous Mint)"
-	apt purge -y mintwelcome hexchat hexchat-common libespeak1 libsonic0 libspeechd2 python3-speechd speech-dispatcher speech-dispatcher-audio-plugins gnome-orca adobe-flash-properties-gtk mate-screensaver mate-screensaver-common brltty mono-runtime-common avahi-daemon xscreensaver-data-extra xscreensaver-data xscreensaver-gl-extra xscreensaver-gl java-common icedtea-netx-common pix pix-data onboard warpinator timeshift celluloid caja-sendto 2>> $logfile;
+	writelog "29a/42-Suppression d'applications par défaut (sous Mint)"
+	apt purge -y mintwelcome hexchat hexchat-common libespeak1 libsonic0 libspeechd2 python3-speechd speech-dispatcher speech-dispatcher-audio-plugins 
+	writelog "29b/42-Suppression d'applications par défaut (sous Mint)"
+	apt purge -y gnome-orca adobe-flash-properties-gtk mate-screensaver mate-screensaver-common 
+	writelog "29c/42-Suppression d'applications par défaut (sous Mint)"
+	apt purge -y brltty mono-runtime-common avahi-daemon xscreensaver-data-extra xscreensaver-data xscreensaver-gl-extra xscreensaver-gl 
+	writelog "29d/42-Suppression d'applications par défaut (sous Mint)"
+	apt purge -y icedtea-netx-common pix pix-data onboard warpinator timeshift celluloid caja-sendto 2>> $logfile;
+	writelog "29e/42-Fin"
 elif grep "Zorin" /etc/lsb-release > /dev/null; then
 	writelog "29/42-Suppression d'applications par défaut (sous Zorin)"
 	apt purge -y gnome-tour gnome-shell-portal-helper 2>> $logfile;
