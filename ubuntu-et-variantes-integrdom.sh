@@ -345,7 +345,7 @@ Session:
 
 addtoend /etc/pam.d/common-auth "auth    required     pam_group.so use_first_pass" 2>> $logfile
 # MODIFS
-addtoend /etc/pam.d/common-auth "auth  optional  pam_faildelay.so  delay=5000000"
+#addtoend /etc/pam.d/common-auth "auth  optional  pam_faildelay.so  delay=5000000"
 
 
 ########################################################################
