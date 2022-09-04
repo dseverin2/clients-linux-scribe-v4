@@ -496,17 +496,13 @@ if ! grep "%professeurs ALL=(ALL) ALL" /etc/sudoers > /dev/null; then
   sed -i "/%admin ALL=(ALL) ALL/a\%DomainAdmins ALL=(ALL) ALL" /etc/sudoers 2>> $logfile
 fi
 
-writelog "28/42-Suppression de paquet inutile sous Ubuntu/Unity"
+writelog "28/42-Suppression de paquets inutiles sous Ubuntu/Unity"
+writelog "--- Lot 1"
 apt purge -y aisleriot gnome-mahjongg pidgin transmission-gtk gnome-mines gnome-sudoku blueman abiword gnumeric thunderbird 2>> $logfile;
-
-if grep "LinuxMint" /etc/lsb-release > /dev/null; then
-	writelog "29/42-Suppression d'applications par défaut"
-	apt purge -y mintwelcome ;
-writelog "     --- FIN"
-elif grep "Zorin" /etc/lsb-release > /dev/null; then
-	writelog "29/42-Suppression d'applications par défaut (sous Zorin)"
-	apt purge -y gnome-tour gnome-shell-portal-helper 2>> $logfile;
-fi
+writelog "--- Lot 2"
+apt purge -y hexchat hexchat-common libespeak1 libsonic0 libspeechd2 python3-speechd speech-dispatcher speech-dispatcher-audio-plugins gnome-orca adobe-flash-properties-gtk mate-screensaver mate-screensaver-common brltty mono-runtime-common avahi-daemon 2>> $logfile;
+writelog "--- Lot 3"
+apt purge -y gnome-tour gnome-shell-portal-helper xscreensaver-data-extra xscreensaver-data xscreensaver-gl-extra xscreensaver-gl icedtea-netx-common pix pix-data onboard warpinator timeshift celluloid caja-sendto 2>> $logfile;
 
 writelog "30/42-Suppression de l'envoi des rapport d'erreurs"
 echo "enabled=0" > /etc/default/rapport 2>> $logfile
