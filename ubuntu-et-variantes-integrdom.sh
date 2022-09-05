@@ -439,7 +439,7 @@ writelog "28/42-Suppression de paquets inutiles sous Ubuntu/Unity"
 writelog "--- Lot 1"
 apt purge -y aisleriot gnome-mahjongg pidgin transmission-gtk gnome-mines gnome-sudoku blueman abiword gnumeric thunderbird indicator-messages 2>> $logfile;
 writelog "--- Lot 2"
-apt purge -y mintwelcome hexchat hexchat-common libespeak1 libsonic0 libspeechd2 python3-speechd speech-dispatcher speech-dispatcher-audio-plugins gnome-orca adobe-flash-properties-gtk mate-screensaver mate-screensaver-common brltty mono-runtime-common avahi-daemon 2>> $logfile;
+apt purge -y hexchat hexchat-common libespeak1 libsonic0 libspeechd2 python3-speechd speech-dispatcher speech-dispatcher-audio-plugins gnome-orca adobe-flash-properties-gtk mate-screensaver mate-screensaver-common brltty mono-runtime-common avahi-daemon 2>> $logfile;
 writelog "--- Lot 3"
 apt remove --purge -y gnome-tour zorin-gnome-tour-autostart gnome-shell-portal-helper xscreensaver-data-extra xscreensaver-data xscreensaver-gl-extra xscreensaver-gl icedtea-netx-common pix pix-data onboard warpinator timeshift celluloid caja-sendto 2>> $logfile;
 
