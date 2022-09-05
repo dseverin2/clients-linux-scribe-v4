@@ -45,7 +45,7 @@ function majIntegrdom {
 	fi
 }
 
-function paramnewldapBCK {
+function paramnewldap {
 echo " pre_auth-client-config # passwd:         compat systemd
 passwd:  files ldap
 # pre_auth-client-config # group:          compat systemd
@@ -63,10 +63,6 @@ rpc:            db files
 netgroup: nis
 sudoers: ldap [NOTFOUND=return] files
 " > /etc/nsswitch.conf 2>> $logfile
-}
-
-function paramnewldap {
-	cp -f ./nsswitch.conf /etc/ 
 }
 
 function paramoldldap {
