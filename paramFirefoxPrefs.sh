@@ -28,3 +28,4 @@ echo "{
 }" >> /etc/firefox/policies/policies.json
 
 #cp /etc/firefox/policies.json /usr/lib/firefox/distribution/policies.json 
+fi
