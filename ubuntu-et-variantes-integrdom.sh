@@ -263,8 +263,7 @@ Session:
        optional                        pam_mkhomedir.so silent" > /usr/share/pam-configs/mkhomedir 2>> $logfile
 
 addtoend /etc/pam.d/common-auth "auth    required     pam_group.so use_first_pass" 2>> $logfile
-# MODIFS
-#addtoend /etc/pam.d/common-auth "auth  optional  pam_faildelay.so  delay=5000000"
+addtoend /etc/pam.d/common-auth "auth  optional  pam_faildelay.so  delay=1000000"
 
 
 ########################################################################
