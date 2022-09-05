@@ -84,30 +84,21 @@ source ./Configurer.sh
 
 ### Paramétrage Proxy
 if $installdepuisdomaine; then
-	if [ -e ./Param_proxy.sh ]; then
-		source ./Param_proxy.sh
-		writelog "3/42-Paramétrage du proxy... OK"
-	else
-		echo "Fichier Param_proxy.sh absent ! Interruption de l'installation."
-		exit
-	fi
+	source ./Param_proxy.sh
+	writelog "3/42-Paramétrage du proxy... OK"
 fi
 
 majIntegrdom
 
 while [[ -z "$versionPython" ]]; do
-    echo "-----Python non installé : installation en cours-----"
-    apt install net-tools python -y
-    if $installdepuisdomaine; then
-		if [ -e ./Param_proxy.sh ]; then
-			source ./Param_proxy.sh
-			writelog "3/42-Paramétrage du proxy... OK"
-		else
-			echo "Fichier Param_proxy.sh absent ! Interruption de l'installation."
-			exit
-		fi
-	fi
+	echo "-----Python non installé : installation en cours-----"
+	apt install net-tools python -y
 done
+
+if $installdepuisdomaine; then
+	source ./Param_proxy.sh
+	writelog "3/42-Paramétrage du proxy... OK"
+fi
 
 # Vérification que le système est bien à jour et sans défaut
 writelog "INITBLOC" "4/42-Mise à jour complète du système"
@@ -123,9 +114,6 @@ writelog "ENDBLOC"
 getversion
 writelog "5/42-Version trouvée : $version... OK"
 
-# Définition des droits sur les scripts
-chmod +x $second_dir/*.sh
-
 if $config_photocopieuse; then
 	writelog "INITBLOC" "5b-Installation photocopieuse"
 	$second_dir/setup_photocopieuse.sh 2>> $logfile
@@ -140,7 +128,7 @@ export DEBIAN_PRIORITY="critical" 2>> $logfile
 
 ########################################################################
 #suppression de l'applet switch-user pour ne pas voir les derniers connectés # Uniquement pour Ubuntu / Unity
-#paramétrage d'un laucher unity par défaut : nautilus, firefox, libreoffice, calculatrice, éditeur de texte et capture d'écran
+#paramétrage d'un launcher unity par défaut : nautilus, firefox, libreoffice, calculatrice, éditeur de texte et capture d'écran
 ########################################################################
 if [ "$(command -v unity)" = "/usr/bin/unity" ]; then  # si Ubuntu/Unity alors :
 	writelog "5c-Suppression de l'applet switch-user et paramétrage du launcher unity par défaut"
@@ -162,15 +150,10 @@ if $esubuntu; then
 		writelog "---Le répertoire esubuntu est absent. Interruption de l'installation"
 		exit
 	fi
-
-	# Déplacement/extraction de l'archive + lancement par la suite
-	writelog "---6a-Modification des droits et copie des fichiers de configuration"
-	chmod -R a+x ./esubuntu 2>> $logfile
-	writelog "---6b-Lancement du script d'installation"
 	./esubuntu/install_esubuntu.sh 2>> $logfile
 
 	# Mise en place des wallpapers pour les élèves, profs, admin 
-	writelog "---6c-Copie des wallpapers"
+	writelog "-----Copie des wallpapers"
 	cp -fr ./wallpaper/ /usr/share/ 2>> $logfile
 	writelog "ENDBLOC"
 fi
@@ -219,7 +202,6 @@ apt install -y ldap-auth-client libpam-mount cifs-utils nscd numlockx unattended
 # activation auto des mises à jour de sécurité
 ########################################################################
 writelog "10a/42-Activation automatique des mises à jour de sécurité"
-sudo apt install unattended-upgrades -y
 echo "APT::Periodic::Update-Package-Lists \"1\";
 APT::Periodic::Download-Upgradeable-Packages \"1\";
 APT::Periodic::AutocleanInterval \"7\";
@@ -236,11 +218,6 @@ echo "Unattended-Upgrade::Allowed-Origins {
 //      \"${distro_id}:${distro_codename}-proposed\";
 //      \"${distro_id}:${distro_codename}-backports\";
 };" >> /etc/apt/apt.conf.d/50unattended-upgrades 2>> $logfile
-
-# Suppression network manager au démarrage
-if grep ".set.enabled=true" /var/lib/NetworkManager/NetworkManager-intern.conf > /dev/null; then
-	sed -i "s/.set.enabled=true/.set.enabled=false/g" /var/lib/NetworkManager/NetworkManager-intern.conf 2>> $logfile
-fi
 
 ########################################################################
 # Configuration du fichier pour le LDAP /etc/ldap.conf
@@ -267,40 +244,7 @@ Auth:
 #auth ldap
 ########################################################################
 writelog "13/42-Définition de auth ldap"
-
-paramnewldap(){
-echo " pre_auth-client-config # passwd:         compat systemd
-passwd:  files ldap
-# pre_auth-client-config # group:          compat systemd
-group: files ldap
-# pre_auth-client-config # shadow:         compat
-shadow: files ldap
-gshadow:        files
-hosts:          files mdns4_minimal [NOTFOUND=return] dns myhostname
-networks:       files
-protocols:      db files
-services:       db files
-ethers:         db files
-rpc:            db files
-# pre_auth-client-config # netgroup:       nis
-netgroup: nis
-sudoers: ldap [NOTFOUND=return] files
-" > /etc/nsswitch.conf 2>> $logfile
-}
-
-paramoldldap(){
-writelog "Installation de auth-client-config"
-wget -nc http://archive.ubuntu.com/ubuntu/pool/universe/a/auth-client-config/auth-client-config_0.9ubuntu1_all.deb
-dpkg -i auth-client-config_0.9ubuntu1_all.deb
-rm -f auth-client-config_0.9ubuntu1_all.deb
-echo "[open_ldap]
-nss_passwd=passwd:  files ldap
-nss_group=group: files ldap
-nss_shadow=shadow: files ldap
-nss_netgroup=netgroup: nis" > /etc/auth-client-config/profile.d/open_ldap 2>> $logfile
-auth-client-config -t nss -p open_ldap 2>> $logfile
-}
-
+# Les fonctiosn paramoldldap et paramnewldap sont décrites dans esub_fonctions.sh
 if [ "$version" != "focal" ] && [ "$version" != "jammy" ] ; then 
 	paramoldldap
 else
