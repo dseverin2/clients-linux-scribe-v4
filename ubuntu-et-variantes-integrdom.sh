@@ -452,7 +452,6 @@ echo "enabled=0" > /etc/default/rapport 2>> $logfile
 writelog "32/42-Changement page d'accueil firefox"
 source ./paramFirefoxPrefs.sh
 
-fi
 writelog "33/42-Installation de logiciels basiques"
 apt install -y vim htop geany 2>> $logfile
 
