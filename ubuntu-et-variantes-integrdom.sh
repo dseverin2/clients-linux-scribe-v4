@@ -480,10 +480,7 @@ sed -r -i 's/Prompt=lts/Prompt=never/g' /etc/update-manager/release-upgrades 2>>
 if $postinstallbase; then
 	writelog "INITBLOC" "37/42-PostInstallation basique"
 	{
-		mv ./$second_dir/ubuntu-et-variantes-postinstall.sh .
-		chmod +x ubuntu-et-variantes-postinstall.sh
-		./ubuntu-et-variantes-postinstall.sh 2>> $logfile
-		mv ubuntu-et-variantes-postinstall.sh $second_dir
+		source ./apps/ubuntu-et-variantes-postinstall.sh 2>> $logfile
 	} 2>> $logfile
 	writelog "ENDBLOC"
 fi
