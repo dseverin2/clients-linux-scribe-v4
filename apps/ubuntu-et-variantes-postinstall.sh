@@ -75,7 +75,7 @@ if [ "$version" = "trusty" ] ; then
 
 	writelog "---Google Earth"
 	apt-get install -y libfontconfig1:i386 libx11-6:i386 libxrender1:i386 libxext6:i386 libgl1-mesa-glx:i386 libglu1-mesa:i386 libglib2.0-0:i386 libsm6:i386
-	wget -nc "$wgetparams"  https://dl.google.com/dl/earth/client/current/google-earth-stable_current_i386.deb --no-check-certificate; 
+	wget -nc -q "$wgetparams"  https://dl.google.com/dl/earth/client/current/google-earth-stable_current_i386.deb --no-check-certificate; 
 	dpkg -i google-earth-stable_current_i386.deb ; apt-get -fy install
 	writelog "ENDBLOC"
 fi
@@ -94,7 +94,7 @@ if [ "$version" = "xenial" ] ; then
 	apt-install idle-python3.5 x265 ;
 
 	writelog "---Google Earth"
-	wget -nc "$wgetparams" --no-check-certificate https://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb 
+	wget -nc -q "$wgetparams" --no-check-certificate https://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb 
 	wget -nc "$wgetparams" --no-check-certificate http://ftp.fr.debian.org/debian/pool/main/l/lsb/lsb-core_4.1+Debian13+nmu1_amd64.deb
 	wget -nc "$wgetparams" --no-check-certificate http://ftp.fr.debian.org/debian/pool/main/l/lsb/lsb-security_4.1+Debian13+nmu1_amd64.deb 
 	dpkg -i lsb*.deb ; dpkg -i google-earth*.deb ; apt install -fy
@@ -114,7 +114,7 @@ if [ "$version" = "bionic" ] ; then
 	apt-get install -y idle-python3.6 x265
 
 	writelog "---Google Earth Pro x64" 
-	wget -nc "$wgetparams" --no-check-certificate https://dl.google.com/dl/earth/client/current/google-earth-pro-stable_current_amd64.deb ; dpkg -i google-earth-pro-stable_current_amd64.deb ; apt install -fy
+	wget -nc "$wgetparams" -q --no-check-certificate https://dl.google.com/dl/earth/client/current/google-earth-pro-stable_current_amd64.deb ; dpkg -i google-earth-pro-stable_current_amd64.deb ; apt install -fy
 	rm /etc/apt/sources.list.d/google-earth* ; rm google-earth-pro* #dépot google retiré volontairement
 
 	writelog "---Celestia"
@@ -135,7 +135,7 @@ if [ "$version" = "focal" ] ; then
 	apt-get install -y idle-python3.6 x265
 
 	writelog "---Google Earth Pro x64" 
-	wget -nc "$wgetparams" --no-check-certificate https://dl.google.com/dl/earth/client/current/google-earth-pro-stable_current_amd64.deb ; dpkg -i google-earth-pro-stable_current_amd64.deb ; apt install -fy
+	wget -nc "$wgetparams" -q --no-check-certificate https://dl.google.com/dl/earth/client/current/google-earth-pro-stable_current_amd64.deb ; dpkg -i google-earth-pro-stable_current_amd64.deb ; apt install -fy
 	rm /etc/apt/sources.list.d/google-earth* ; #dépot google retiré volontairement
 
 	writelog "---Celestia"
@@ -167,9 +167,6 @@ writelog "Police d'écriture de Microsoft"
 echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | /usr/bin/debconf-set-selections | apt-get install -y ttf-mscorefonts-installer ;
 
 writelog "INITBLOC" "[ Bureautique ]"
-wget -nc "$wgetparams" --no-check-certificate https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb
-apt install -y libconf-2-4 fonts-dejavu ttf-dejavu fonts-crosextra-carlito
-dpkg -i onlyoffice-desktopeditors_amd64.deb ; apt-get -fy install
 apt-get install -y freeplane scribus gnote xournal cups-pdf okular
 writelog "ENDBLOC"
 
