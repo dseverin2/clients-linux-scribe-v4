@@ -166,9 +166,6 @@ apt-get install -y sane
 writelog "Police d'écriture de Microsoft"
 echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | /usr/bin/debconf-set-selections | apt-get install -y ttf-mscorefonts-installer ;
 
-writelog "Oracle Java 8"
-add-apt-repository -y ppa:webupd8team/java ; apt-get update ; echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections | apt-get install -y oracle-java8-installer
-
 writelog "INITBLOC" "[ Bureautique ]"
 wget -nc "$wgetparams" --no-check-certificate https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb
 dpkg -i onlyoffice-desktopeditors_amd64.deb ; apt-get -fy install
@@ -176,7 +173,7 @@ apt-get install -y freeplane scribus gnote xournal cups-pdf okular
 writelog "ENDBLOC"
 
 writelog "INITBLOC" "[ Web ]"
-apt-get install -y adobe-flashplugin ; #permet d'avoir flash en même temps pour firefox et chromium
+apt-get install -y default-jre adobe-flashplugin ; #permet d'avoir flash en même temps pour firefox et chromium
 writelog "ENDBLOC"
 
 writelog "INITBLOC" "[ Video / Audio ]"
