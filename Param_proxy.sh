@@ -43,7 +43,7 @@ port=$proxy_def_port" > /usr/share/glib-2.0/schemas/my-defaults.gschema.override
 	######################################################################
 	writelog "---Inscription du proxy dans /etc/environment"
 	sed '/[h|f|n][a-z]*_proxy*/d' /etc/environment | sudo tee /etc/environment # Nettoyage en cas de réintégration directe
-	addtoend /etc/environment "http_proxy=http://$proxy_def_ip:$proxy_def_port/" "https_proxy=http://$proxy_def_ip:$proxy_def_port/" "ftp_proxy=http://$proxy_def_ip:$proxy_def_port/" "no_proxy=\"$proxy_env_noproxy\"" 2>> $logfile
+	addtoend /etc/environment "http_proxy=http://$proxy_def_ip:$proxy_def_port/" "https_proxy=http://$proxy_def_ip:$proxy_def_port/" "ftp_proxy=ftp://$proxy_def_ip:$proxy_def_port/" "no_proxy=\"$proxy_env_noproxy\"" 2>> $logfile
 	
 	#Paramétrage du Proxy pour apt
 	######################################################################
