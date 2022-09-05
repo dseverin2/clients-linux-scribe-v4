@@ -34,6 +34,25 @@ if $WPSOffice; then
 	rm -f wps-office_$version.XA_amd64.deb wps-fr* hunspell*
 fi
 
+##############################
+#     OnlyOffice Desktop     #
+##############################
+
+apt install -y libconf-2-4 fonts-dejavu ttf-dejavu fonts-crosextra-carlito
+apt install --fix-broken -y
+mkdir -p ~/.gnupg
+chmod 700 ~/.gnupg
+gpg --no-default-keyring --keyring gnupg-ring:/tmp/onlyoffice.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys CB2DE8E5
+chmod 644 /tmp/onlyoffice.gpg
+chown root:root /tmp/onlyoffice.gpg
+mv /tmp/onlyoffice.gpg /etc/apt/trusted.gpg.d/
+echo 'deb https://download.onlyoffice.com/repo/debian squeeze main' | sudo tee -a /etc/apt/sources.list.d/onlyoffice.list
+apt update
+apt install onlyoffice-desktopeditors -y
+
+##############################
+#         LibreOffice        #
+##############################
 # Extension CMathsOOo
 CMinstallfile="CmathOOo.oxt"	
 if [ ! -e $CMinstallfile ]; then
