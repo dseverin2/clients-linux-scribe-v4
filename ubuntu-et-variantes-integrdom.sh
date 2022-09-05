@@ -440,64 +440,28 @@ fi
 
 writelog "28/42-Suppression de paquets inutiles sous Ubuntu/Unity"
 writelog "--- Lot 1"
-apt purge -y aisleriot gnome-mahjongg pidgin transmission-gtk gnome-mines gnome-sudoku blueman abiword gnumeric thunderbird 2>> $logfile;
+apt purge -y aisleriot gnome-mahjongg pidgin transmission-gtk gnome-mines gnome-sudoku blueman abiword gnumeric thunderbird indicator-messages 2>> $logfile;
 writelog "--- Lot 2"
-apt purge -y hexchat hexchat-common libespeak1 libsonic0 libspeechd2 python3-speechd speech-dispatcher speech-dispatcher-audio-plugins gnome-orca adobe-flash-properties-gtk mate-screensaver mate-screensaver-common brltty mono-runtime-common avahi-daemon 2>> $logfile;
+apt purge -y mintwelcome hexchat hexchat-common libespeak1 libsonic0 libspeechd2 python3-speechd speech-dispatcher speech-dispatcher-audio-plugins gnome-orca adobe-flash-properties-gtk mate-screensaver mate-screensaver-common brltty mono-runtime-common avahi-daemon 2>> $logfile;
 writelog "--- Lot 3"
 apt remove --purge -y gnome-tour zorin-gnome-tour-autostart gnome-shell-portal-helper xscreensaver-data-extra xscreensaver-data xscreensaver-gl-extra xscreensaver-gl icedtea-netx-common pix pix-data onboard warpinator timeshift celluloid caja-sendto 2>> $logfile;
 
 writelog "30/42-Suppression de l'envoi des rapport d'erreurs"
 echo "enabled=0" > /etc/default/rapport 2>> $logfile
 
-#writelog "suppression de l'applet network-manager"
-#mv /etc/xdg/autostart/nm-applet.desktop /etc/xdg/autostart/nm-applet.old
-
-writelog "31/42-suppression du menu messages"
-apt purge -y indicator-messages  2>> $logfile
-
-#MODIFS
 writelog "32/42-Changement page d'accueil firefox"
-addtoend /usr/lib/firefox/defaults/pref/channel-prefs.js "$pagedemarragepardefaut"  2>> $logfile
-if [ "$version" = "focal" ] || [ "$version" = "jammy" ] ; then 
-  echo "user_pref(\"browser.startup.homepage\", \"$pagedemarragepardefaut\");" >> /etc/firefox/syspref.js
-  echo "lockPref(\"browser.startup.homepage\", \"$pagedemarragepardefaut\" );" >> /etc/firefox/syspref.js
-  echo "user_pref(\"browser.startup.homepage\", \"$pagedemarragepardefaut\");" >> /usr/lib/firefox/defaults/pref/all-user.js
-  echo "lockPref(\"browser.startup.homepage\", \"$pagedemarragepardefaut\" );" >> /usr/lib/firefox/defaults/pref/all-user.js
-  sed -i 's/^browser\.startup\.homepage=.*$/browser.startup.homepage="http:\/\/lite.qwant.com"/' /usr/share/ubuntu-system-adjustments/firefox/distribution.ini 
-######################################################################################################################
-# Ci-dessus pour Mint n'ayant pas une version de firefox > 80 
-# Ubuntu emplacement choisi par les distribution pour forcer les page
-# /usr/lib/firefox/defaults/pref/vendor.js
-# /usr/lib/chromium-browser/master_preferences && sudo rm /usr/lib/firefox/ubuntumate.cfg
-# /usr/lib/firefox/defaults/pref/all-ubuntumate.js
-# CI DESSOUS utilisation de https://github.com/mozilla/policy-templates/blob/master/README.md#homepage compatible firefox V 80 +
-# écriture dans les deux emplacements possible (cf doc) mais fonctione avec /etc/firefox/policies/policies
-######################################################################################################################
-mkdir /etc/firefox/policies
-echo "{
-  \"policies\": {
-    \"Homepage\": {
-      \"URL\": \"$pagedemarragepardefaut\",
-      \"Locked\": true,
-      \"StartPage\": \"homepage\" 
-    },
-  \"OverrideFirstRunPage\": \"\"
-  }
-}" >> /etc/firefox/policies/policies.json
-
-#cp /etc/firefox/policies.json /usr/lib/firefox/distribution/policies.json 
+source ./paramFirefoxPrefs.sh
 
 fi
 writelog "33/42-Installation de logiciels basiques"
-apt install -y vim htop 2>> $logfile
+apt install -y vim htop geany 2>> $logfile
 
 # Résolution problème dans certains cas uniquement pour Trusty (exemple pour lancer gedit directement avec : sudo gedit)
 if [ "$version" = "trusty" ]; then
 	addtoend /etc/sudoers 'Defaults        env_keep += "DISPLAY XAUTHORITY"' 2>> $logfile
 fi
 
-#MODIFS
-# Spécifique base 16.04 ou 18.04 : pour le fonctionnement du dossier /etc/skel 
+# Droits sur le dossier /etc/skel
 if [ "$version" = "xenial" ] || [ "$version" = "bionic" ]  || [ "$version" = "focal" ] || [ "$version" = "jammy" ]; then
 	if [ "$version" = "xenial" ] || [ "$version" = "bionic" ]; then
 		sed -i "30i\session optional        pam_mkhomedir.so" /etc/pam.d/common-session 2>> $logfile
@@ -507,7 +471,7 @@ if [ "$version" = "xenial" ] || [ "$version" = "bionic" ]  || [ "$version" = "fo
 	fi
 	writelog "35/42-Création de raccourcis sur le bureau + dans dossier utilisateur (commun+perso+lespartages)"
 	
-	# Détermination du skel à importer
+	# Détermination et importation du skel spécifique
 	if [ ! -e /etc/skel ]; then mkdir /etc/skel; else rm -fr /etc/skel/*; fi
 	tar -xzf $skelArchive -C /etc/skel/ 2>> $logfile
 fi
