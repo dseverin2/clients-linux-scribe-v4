@@ -389,22 +389,22 @@ if ! grep "/media/Serveur_Scribe" /etc/security/pam_mount.conf.xml  >/dev/null; 
 fi
 
 homes="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"perso\" mountpoint=\"~/Documents\" />"
-if ! grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null; then
+if ! grep "mountpoint=\"~\Documents"" /etc/security/pam_mount.conf.xml  >/dev/null; then
  sed -i "/<\!-- Volume definitions -->/a\ $homes" /etc/security/pam_mount.conf.xml
 fi
 
 groupes="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"groupes\" mountpoint=\"~/Groupes\" />"
-if ! grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null; then
+if ! grep "mountpoint=\"~\Groupes"" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $groupes" /etc/security/pam_mount.conf.xml
 fi
 
 commun="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"commun\" mountpoint=\"~/Commun\" />"
-if ! grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null; then
+if ! grep "mountpoint=\"~\Commun"" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $commun" /etc/security/pam_mount.conf.xml
 fi
 
 professeurs="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"professeurs\" mountpoint=\"~/professeurs\" />"
-if ! grep "mountpoint=\"~\"" /etc/security/pam_mount.conf.xml  >/dev/null; then
+if ! grep "mountpoint=\"~\professeurs"" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $professeurs" /etc/security/pam_mount.conf.xml
 fi
 
