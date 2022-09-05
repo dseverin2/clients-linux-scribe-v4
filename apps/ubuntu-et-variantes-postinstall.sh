@@ -168,6 +168,7 @@ echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select tr
 
 writelog "INITBLOC" "[ Bureautique ]"
 wget -nc "$wgetparams" --no-check-certificate https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb
+apt install -y libconf-2-4 fonts-dejavu ttf-dejavu fonts-crosextra-carlito
 dpkg -i onlyoffice-desktopeditors_amd64.deb ; apt-get -fy install
 apt-get install -y freeplane scribus gnote xournal cups-pdf okular
 writelog "ENDBLOC"
