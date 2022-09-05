@@ -203,21 +203,12 @@ apt install -y ldap-auth-client libpam-mount cifs-utils nscd numlockx unattended
 ########################################################################
 writelog "10a/42-Activation automatique des mises à jour de sécurité"
 echo "APT::Periodic::Update-Package-Lists \"1\";
-APT::Periodic::Download-Upgradeable-Packages \"1\";
-APT::Periodic::AutocleanInterval \"7\";
 APT::Periodic::Unattended-Upgrade \"1\";" > /etc/apt/apt.conf.d/20auto-upgrades 2>> $logfile
 
 ########################################################################
 # activation auto des mises à jour des paquets
 ########################################################################
 writelog "10b/42-Activation automatique des mises à jour des paquets"
-echo "Unattended-Upgrade::Allowed-Origins {
-        \"${distro_id}:${distro_codename}\";
-        \"${distro_id}:${distro_codename}-security\";
-        \"${distro_id}:${distro_codename}-updates\";
-//      \"${distro_id}:${distro_codename}-proposed\";
-//      \"${distro_id}:${distro_codename}-backports\";
-};" >> /etc/apt/apt.conf.d/50unattended-upgrades 2>> $logfile
 
 ########################################################################
 # Configuration du fichier pour le LDAP /etc/ldap.conf
