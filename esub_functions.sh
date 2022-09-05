@@ -45,6 +45,38 @@ function majIntegrdom {
 	fi
 }
 
+function paramnewldap {
+echo " pre_auth-client-config # passwd:         compat systemd
+passwd:  files ldap
+# pre_auth-client-config # group:          compat systemd
+group: files ldap
+# pre_auth-client-config # shadow:         compat
+shadow: files ldap
+gshadow:        files
+hosts:          files mdns4_minimal [NOTFOUND=return] dns myhostname
+networks:       files
+protocols:      db files
+services:       db files
+ethers:         db files
+rpc:            db files
+# pre_auth-client-config # netgroup:       nis
+netgroup: nis
+sudoers: ldap [NOTFOUND=return] files
+" > /etc/nsswitch.conf 2>> $logfile
+}
+
+function paramoldldap {
+writelog "Installation de auth-client-config"
+wget -nc http://archive.ubuntu.com/ubuntu/pool/universe/a/auth-client-config/auth-client-config_0.9ubuntu1_all.deb
+dpkg -i auth-client-config_0.9ubuntu1_all.deb 2>> $logfile
+rm -f auth-client-config_0.9ubuntu1_all.deb
+echo "[open_ldap]
+nss_passwd=passwd:  files ldap
+nss_group=group: files ldap
+nss_shadow=shadow: files ldap
+nss_netgroup=netgroup: nis" > /etc/auth-client-config/profile.d/open_ldap 2>> $logfile
+auth-client-config -t nss -p open_ldap 2>> $logfile
+}
 
 # Initialisation du fichier de log (situé sur le bureau de l'admin local)
 function initlog {
