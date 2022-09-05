@@ -166,7 +166,7 @@ if [ -e /etc/firefox-esr ] || [ -e /usr/bin/firefox-esr ] || [ -e /usr/lib/firef
 	sudo rm -fr /etc/firefox* /usr/bin/firefox* /usr/lib/firefox*
 fi
 echo "install firefox"
-sudo apt install firefox firefox-locale-fr --install-suggests -y 
+sudo apt install firefox firefox-locale-fr --install-suggests -y  2>> $logfile
 
 echo "install chromium"
 echo '
@@ -174,9 +174,9 @@ Package: *
 Pin: release o=LP-PPA-phd-chromium-browser
 Pin-Priority: 1001
 ' | sudo tee /etc/apt/preferences.d/phd-chromium-browser
-sudo add-apt-repository ppa:phd/chromium-browser -y
-sudo apt update
-sudo apt install chromium-browser --install-suggests -y
+sudo add-apt-repository ppa:phd/chromium-browser -y 2>> $logfile
+sudo apt update 2>> $logfile
+sudo apt install chromium-browser --install-suggests -y 2>> $logfile
 if [ -e /usr/bin/chromium-browser ]; then
         sudo ln -s /usr/bin/chromium-browser /usr/bin/chromium
 elif [ -e /usr/bin/chromium ]; then
@@ -260,9 +260,9 @@ Default: yes
 Priority: 128
 Session-Type: Additional
 Session:
-       optional                        pam_mkhomedir.so silent" > /usr/share/pam-configs/mkhomedir
+       optional                        pam_mkhomedir.so silent" > /usr/share/pam-configs/mkhomedir 2>> $logfile
 
-addtoend /etc/pam.d/common-auth "auth    required     pam_group.so use_first_pass"
+addtoend /etc/pam.d/common-auth "auth    required     pam_group.so use_first_pass" 2>> $logfile
 #addtoend /etc/pam.d/common-auth "auth  optional  pam_faildelay.so  delay=1000000"
 
 
@@ -292,11 +292,11 @@ if [ "$(command -v lightdm)" = "/usr/sbin/lightdm" ]; then #Si lightDM présent
 	writelog "INITBLOC" "19/42-Paramétrage du script de démontage du netlogon pour lightdm"
 	{
 		touch /etc/lightdm/logonscript.sh
-		addtoend /etc/lightdm/logonscript.sh "if mount | grep -q \"/tmp/netlogon\" ; then umount /tmp/netlogon ;fi" "xset -dpms && xset s noblank && xset s off"
+		addtoend /etc/lightdm/logonscript.sh "if mount | grep -q \"/tmp/netlogon\" ; then umount /tmp/netlogon ;fi" "xset -dpms && xset s noblank && xset s off" 2>> $logfile
 		chmod +x /etc/lightdm/logonscript.sh
 
 		touch /etc/lightdm/logoffscript.sh
-		addtoend /etc/lightdm/logoffscript.sh "sleep 2" "umount -f /tmp/netlogon" "umount -f \$HOME"
+		addtoend /etc/lightdm/logoffscript.sh "sleep 2" "umount -f /tmp/netlogon" "umount -f \$HOME" 2>> $logfile
 		chmod +x /etc/lightdm/logoffscript.sh
 	}  2>> $logfile
 	
@@ -314,9 +314,6 @@ session-cleanup-script=/etc/lightdm/logoffscript.sh
 greeter-setup-script=/usr/bin/numlockx on" > /usr/share/lightdm/lightdm.conf.d/50-no-guest.conf 2>> $logfile
 	writelog "ENDBLOC"
 fi
-
-# echo "GVFS_DISABLE_FUSE=1" >> /etc/environment
-
 
 # Modification ancien gestionnaire de session MDM
 if [ "$(command -v mdm)" = "/usr/sbin/mdm" ]; then # si MDM est installé (ancienne version de Mint <17.2)
@@ -385,36 +382,36 @@ writelog "INITBLOC" "24/42-Paramétrage pour remplir pam_mount.conf" "---/media/
 
 eclairng="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"eclairng\" mountpoint=\"/media/Serveur_Scribe\" />"
 if ! grep "/media/Serveur_Scribe" /etc/security/pam_mount.conf.xml  >/dev/null; then
-  sed -i "/<\!-- Volume definitions -->/a\ $eclairng" /etc/security/pam_mount.conf.xml
+  sed -i "/<\!-- Volume definitions -->/a\ $eclairng" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
 homes="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"perso\" mountpoint=\"~/Documents\" />"
 if ! grep "mountpoint=\"~\Documents"" /etc/security/pam_mount.conf.xml  >/dev/null; then
- sed -i "/<\!-- Volume definitions -->/a\ $homes" /etc/security/pam_mount.conf.xml
+ sed -i "/<\!-- Volume definitions -->/a\ $homes" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
 groupes="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"groupes\" mountpoint=\"~/Groupes\" />"
 if ! grep "mountpoint=\"~\Groupes"" /etc/security/pam_mount.conf.xml  >/dev/null; then
-  sed -i "/<\!-- Volume definitions -->/a\ $groupes" /etc/security/pam_mount.conf.xml
+  sed -i "/<\!-- Volume definitions -->/a\ $groupes" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
 commun="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"commun\" mountpoint=\"~/Commun\" />"
 if ! grep "mountpoint=\"~\Commun"" /etc/security/pam_mount.conf.xml  >/dev/null; then
-  sed -i "/<\!-- Volume definitions -->/a\ $commun" /etc/security/pam_mount.conf.xml
+  sed -i "/<\!-- Volume definitions -->/a\ $commun" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
 professeurs="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"professeurs\" mountpoint=\"~/professeurs\" />"
 if ! grep "mountpoint=\"~\professeurs"" /etc/security/pam_mount.conf.xml  >/dev/null; then
-  sed -i "/<\!-- Volume definitions -->/a\ $professeurs" /etc/security/pam_mount.conf.xml
+  sed -i "/<\!-- Volume definitions -->/a\ $professeurs" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
 netlogon="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"netlogon\" mountpoint=\"/tmp/netlogon\"  sgrp=\"DomainUsers\" />"
 if ! grep "/tmp/netlogon" /etc/security/pam_mount.conf.xml  >/dev/null; then
-  sed -i "/<\!-- Volume definitions -->/a\ $netlogon" /etc/security/pam_mount.conf.xml
+  sed -i "/<\!-- Volume definitions -->/a\ $netlogon" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
 if ! grep "<cifsmount>mount -t cifs //%(SERVER)/%(VOLUME) %(MNTPT) -o \"noexec,nosetuids,mapchars,cifsacl,serverino,nobrl,iocharset=utf8,user=%(USER),uid=%(USERUID)%(before=\\",\\" OPTIONS)\"</cifsmount>" /etc/security/pam_mount.conf.xml  >/dev/null; then
-  sed -i "/<\!-- pam_mount parameters: Volume-related -->/a\ <cifsmount>mount -t cifs //%(SERVER)/%(VOLUME) %(MNTPT) -o \"noexec,nosetuids,mapchars,cifsacl,serverino,nobrl,iocharset=utf8,user=%(USER),uid=%(USERUID)%(before=\\",\\" OPTIONS),vers=1.0\"</cifsmount>" /etc/security/pam_mount.conf.xml
+  sed -i "/<\!-- pam_mount parameters: Volume-related -->/a\ <cifsmount>mount -t cifs //%(SERVER)/%(VOLUME) %(MNTPT) -o \"noexec,nosetuids,mapchars,cifsacl,serverino,nobrl,iocharset=utf8,user=%(USER),uid=%(USERUID)%(before=\\",\\" OPTIONS),vers=1.0\"</cifsmount>" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 writelog "ENDBLOC"
 ########################################################################
@@ -465,8 +462,8 @@ if [ "$version" = "xenial" ] || [ "$version" = "bionic" ]  || [ "$version" = "fo
 	if [ "$version" = "xenial" ] || [ "$version" = "bionic" ]; then
 		sed -i "30i\session optional        pam_mkhomedir.so" /etc/pam.d/common-session 2>> $logfile
 	elif [ "$version" = "focal" ] || [ "$version" = "jammy" ]; then
-		sed -i "30i\session optional        pam_umask=0022 skel=/etc/skel" /etc/pam.d/common-session 
-		sed -i "30i\session optional        pam_mkhomedir.so" /etc/pam.d/common-session
+		sed -i "30i\session optional        pam_umask=0022 skel=/etc/skel" /etc/pam.d/common-session  2>> $logfile
+		sed -i "30i\session optional        pam_mkhomedir.so" /etc/pam.d/common-session 2>> $logfile
 	fi
 	writelog "35/42-Création de raccourcis sur le bureau + dans dossier utilisateur (commun+perso+lespartages)"
 	
