@@ -62,7 +62,9 @@ if [ "$UID" -ne "0" ]; then
 	echo "Il faut etre root pour executer ce script. ==> sudo "
 	exit 
 fi 
-sudo -u "$SUDO_USER" find . -type f -name "*.sh" -exec chmod a+x {} \;
+
+sudo apt install -y dos2unix
+sudo -u "$SUDO_USER" find . -type f -name "*.sh" -exec chmod a+x {} \; -exec dos2unix {} \;
 
 # Verification de la présence des fichiers contenant les fonctions et variables communes
 if [ -e ./esub_functions.sh ]; then
