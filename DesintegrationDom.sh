@@ -36,6 +36,7 @@ echo "" > /etc/crontab #remplacement du contenu d'esubuntu par du contenu vide
 
 echo "" > /etc/apt/apt.conf.d/20proxy
 sed '/proxy/d' /etc/environment | sudo tee /etc/environment
+sed '/proxy/d' /etc/wgetrc | sudo tee /etc/wgetrc
 
 echo "Désintégration terminé"
 read -p "Il est fortement recommandé de redémarrer, voulez-vous le faire immédiatement ? [O/n] " rep_reboot
