@@ -190,7 +190,7 @@ apt-get install -y gparted vim pyrenamer rar unrar htop diodon p7zip-full gdebi
 writelog "ENDBLOC"
 
 writelog "Wireshark"
-debconf-set-selections <<< "wireshark-common/install-setuid: true"
+debconf-set-selections <<< 'wireshark-common/install-setuid boolean true'
 apt-get install -y wireshark 
 sed -i -e "s/,dialout/,dialout,wireshark/g" /etc/security/group.conf
 
