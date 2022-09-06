@@ -1,12 +1,26 @@
 // Fichier configuration firefox
-pref("network.proxy.type", 2);
-pref("network.proxy.autoconfig_url", "file:///tmp/netlogon/icones/SALLEESU/proxy_etab.pac");
+
+// Si vous utilisez un fichier de configuration de proxy, décommentez ci-dessous (+renommer fichier en quesiton) :
+//pref("network.proxy.autoconfig_url", "file:///tmp/netlogon/icones/posteslinux/proxy_etab.pac");
+
+// IMPORTANT : Si votre proxy (Amon) n'est pas en 172.18.248.1:3129,  
+//merci de changer les infos juste ci-dessous :
+pref("network.proxy.ftp", "172.18.248.1");
+pref("network.proxy.ftp_port", 3129);
+pref("network.proxy.http", "172.18.248.1");
+pref("network.proxy.http_port", 3129);
+pref("network.proxy.share_proxy_settings", true);
+pref("network.proxy.socks", "172.18.248.1");
+pref("network.proxy.socks_port", 3129);
+pref("network.proxy.ssl", "172.18.248.1");
+pref("network.proxy.ssl_port", 3129);
+pref("network.proxy.type", 1);
 
 //pref("network.proxy.share_proxy_settings", true);
-pref("network.proxy.no_proxies_on", "127.0.0.1, localhost , ubuntu.com , RNE_ETAB, IP_SCRIBE, IP_PRONOTE, PORTAIL");
+pref("network.proxy.no_proxies_on", "127.0.0.1, localhost");
 
-// Définition de la page d'accueil
-pref("browser.startup.homepage", "https://www.qwant.com/ | https://metice.ac-reunion.fr");
+// Page de démarrage
+//pref("browser.startup.homepage", "https://lite.qwant.com");
 
 // disable default browser check
 pref("browser.shell.checkDefaultBrowser", false);
