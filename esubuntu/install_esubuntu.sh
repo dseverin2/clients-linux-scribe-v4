@@ -34,7 +34,6 @@ updatedb
 
 chemin=$(dirname $(realpath $0)) 
 writelog "------Répertoire d'exec : $chemin"
-chmod -R a+x $chemin
 gm_esu=$salle
 writelog "------Groupe : $gm_esu"
 
