@@ -222,9 +222,15 @@ echo "Unattended-Upgrade::Allowed-Origins {
 };" >> /etc/apt/apt.conf.d/50unattended-upgrades 2>> $logfile
 
 ########################################################################
+# Supprimer le démarrage automatique du connectivityCheck
+########################################################################
+addtoend /var/lib/NetworkManager/NetworkManager-intern.conf "[connectivity] 
+.set.enabled=false"
+
+########################################################################
 # Configuration du fichier pour le LDAP /etc/ldap.conf
 ########################################################################
-writelog "11/42-Configuration du fichier pour le LDAP /etc/ldap.conf"
+writelog "12/42-Configuration du fichier pour le LDAP /etc/ldap.conf"
 echo "
 # /etc/ldap.conf
 host $scribe_def_ip
@@ -234,7 +240,7 @@ nss_override_attribute_value shadowMax 9999" > /etc/ldap.conf 2>>$logfile
 ########################################################################
 # activation des groupes des users du ldap
 ########################################################################
-writelog "12/42-activation des groupes des users du ldap"
+writelog "13/42-activation des groupes des users du ldap"
 echo "Name: activate /etc/security/group.conf
 Default: yes
 Priority: 900
@@ -245,7 +251,7 @@ Auth:
 ########################################################################
 #auth ldap
 ########################################################################
-writelog "13/42-Définition de auth ldap"
+writelog "14/42-Définition de auth ldap"
 # Les fonctiosn paramoldldap et paramnewldap sont décrites dans esub_fonctions.sh
 if [ "$version" != "focal" ] && [ "$version" != "jammy" ] ; then 
 	paramoldldap
