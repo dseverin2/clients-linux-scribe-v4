@@ -9,7 +9,7 @@ tar xvf eBeam-Interactive_3.6_ubuntu.tar.gz
 rm -fr eBeam-Interactive_3.6_ubuntu.tar.gz README.txt
 
 echo "EBEAM : installation du paquet eBeam-Interact_3"
-dpkg -i eBeam-Interact_3.6.0.deb
-rm -fr eBeam-Interact_3.6.0.deb
+dpkg -i eBeam*.deb
+rm -fr eBeam*.deb
 
 echo "EBEAM : Fin de l'installation"
