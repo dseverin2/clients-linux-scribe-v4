@@ -87,8 +87,8 @@ sed -i -e "s/RNE_ETAB/$rne_etab/g" -e "s/IP_SCRIBE/$scribe_def_ip/g" -e "s/IP_PR
 
 sed -i -e "s/GSETPROXY/$gset_proxy/g" -e "s/SUBNET/$subnet/g" "$chemin"/icones/gm_esu/linux/gset/gset.sh
 
-if grep "INTERFACEETH" "$chemin"/icones/"$gm_esu"/conky/conky.cfg > /dev/null; then
-	sed -i "s/INTERFACEETH/$interfaceeth/g" "$chemin"/icones/"$gm_esu"/conky/conky.cfg >> $logfile
+if grep "INTERFACEETH" "$chemin"/icones/gm_esu/conky/conky.cfg > /dev/null; then
+	sed -i "s/INTERFACEETH/$interfaceeth/g" "$chemin"/icones/gm_esu/conky/conky.cfg >> $logfile
 fi
 
 ##############################################################################
