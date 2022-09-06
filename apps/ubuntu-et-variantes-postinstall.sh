@@ -54,11 +54,11 @@ apt remove mintwelcome -y >>2 $appslogfile
 writelog "Installation des logiciels de TBI"
 if $activinspire; then
 	writelog "---ActivInspire"
-	source $baseapps"/TBI/installActivInspire.sh" >>2 $appslogfile
+	./TBI/installActivInspire.sh >>2 $appslogfile
 fi
 if $ebeam; then
 	writelog "---Ebeam"
-	source $baseapps"/TBI/installEbeam.sh" >>2 $appslogfile
+	./TBI/installEbeam.sh >>2 $appslogfile
 fi
 
 #########################################
@@ -228,7 +228,7 @@ if [ "$version" = "bionic" ] || [ "$version" = "focal" ] || [ "$version" = "jamm
 	dpkg -i ganttproject*  >>2 $appslogfile; apt install -fy
 	
 	writelog "---mBlock"
-	source $baseapps"/installmBlock.sh" >>2 $appslogfile
+	./installmBlock.sh >>2 $appslogfile
 	
 	writelog "---Xia (alias ImageActive)"
 	wget -nc "$wgetparams" --no-check-certificate https://xia.funraiders.org/download/xia-3-inkscape.deb >>2 $appslogfile
@@ -256,19 +256,19 @@ if [ "$version" = "bionic" ] || [ "$version" = "focal" ] || [ "$version" = "jamm
 	fi
 	if [ "$scriptpath" != "" ]; then
 		writelog "------Geogebra Classic"
-		source "$scriptpath"installGeogebra6.sh >>2 $appslogfile
+		./installGeogebra6.sh >>2 $appslogfile
 		
 		# Suites bureautiques
-		source "$scriptpath"installOffice.sh >>2 $appslogfile
+		./installOffice.sh >>2 $appslogfile
 		
 		
 		if $Veyon; then
 			writelog "------Veyon"
-			source "$scriptpath"installVeyon.sh >>2 $appslogfile
+			./installVeyon.sh >>2 $appslogfile
 		fi
 		
 		writelog "------Openboard"
-		source "$scriptpath"installOpenBoard.sh >>2 $appslogfile
+		source ./installOpenBoard.sh >>2 $appslogfile
 	fi
 	writelog "ENDBLOC"
 
