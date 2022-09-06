@@ -116,6 +116,8 @@ else
 fi
 writelog "ENDBLOC"
 
+mv ../dans_icones/groupe_esu "../dans_icones/$salle"
+
 ## 3 dernières lignes non activés car ce script est appelé par l'autre (intgrdom) et il ne faut pas interrompre pendant l'install
 #echo "C'est fini ! bienvenue dans le groupe $salle..."
 #echo "Pour compléter le système installer un serveur apt-cacher et un poste pour gérer les impressions des autres"
