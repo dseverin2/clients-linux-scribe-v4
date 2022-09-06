@@ -494,7 +494,7 @@ if $postinstallbase; then
 fi
 
 writelog "38/42-Installation du gestionnaire de raccourcis"
-apt-get install xbindkeys xbindkeys-config -y 2>> $logfile
+apt-get install xbindkeys xbindkeys-config neofetch -y 2>> $logfile
 
 writelog "39/42-Gestion des partitions exfat"
 apt-get install -y exfat-utils exfat-fuse 2>> $logfile
