@@ -499,6 +499,13 @@ apt-get install xbindkeys xbindkeys-config neofetch -y 2>> $logfile
 writelog "39/42-Gestion des partitions exfat"
 apt-get install -y exfat-utils exfat-fuse 2>> $logfile
 
+writelog "40/42-Mise en veille et hybernation"
+echo "#!/bin/sh
+# Empêcher l'hibernation
+. \"$PM_FUNCTIONS\"
+[ \"$1\" = "hibernate" ] && inhibit || true" > /etc/pm/sleep.d/000_no-hibernation
+systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+
 if $postinstalladditionnel; then 
 	versionnum=""
 	if [ "$version" = "bionic" ] || [ "$version" = "focal" ]; then
