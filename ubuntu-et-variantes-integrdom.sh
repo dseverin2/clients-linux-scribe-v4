@@ -247,7 +247,7 @@ Auth:
 ########################################################################
 writelog "13/42-Définition de auth ldap"
 # Les fonctiosn paramoldldap et paramnewldap sont décrites dans esub_fonctions.sh
-if [ "$version" != "focal" ] || [ "$version" != "jammy" ] ; then 
+if [ "$version" != "focal" ] && [ "$version" != "jammy" ] ; then 
 	paramoldldap
 else
 	paramnewldap
