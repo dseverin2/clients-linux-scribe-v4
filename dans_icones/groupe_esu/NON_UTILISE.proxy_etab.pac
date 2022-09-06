@@ -11,17 +11,17 @@ function FindProxyForURL(url, host) {
 
 
 	if (shExpMatch(host, "hubole.ac-reunion.fr")) 
-	return "PROXY 172.18.40.1:3128";
+	return "PROXY GSETPROXY:GSETPROXYPORT";
 	else if (shExpMatch(host, "sso.ac-reunion.fr"))
-	return "PROXY 172.18.40.1:3128";
+	return "PROXY GSETPROXY:GSETPROXYPORT";
 	else if (shExpMatch(host, "seshat.ac-reunion.fr"))
-	return "PROXY 172.18.40.1:3128";
-	else if (shExpMatch(host, "10.210.9.10"))
+	return "PROXY GSETPROXY:GSETPROXYPORT";
+	else if (shExpMatch(host, "IP_PRONOTE"))
 	return "DIRECT";
 	else if (shExpMatch(host, "easidoc.fr"))
-	return "PROXY 172.18.40.1:3128";
+	return "PROXY GSETPROXY:GSETPROXYPORT";
 	else if (shExpMatch(host, "poppy-project.org"))
-	return "PROXY 172.18.40.1:3128";
+	return "PROXY GSETPROXY:GSETPROXYPORT";
 	
 	
 
@@ -31,6 +31,6 @@ function FindProxyForURL(url, host) {
 	// Vers le proxy par défaut pour les autres destinations
 	// -----
 	else
-	return "PROXY 127.0.0.1:3128"
+	return "PROXY 127.0.0.1:GSETPROXYPORT"
 }
 
