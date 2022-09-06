@@ -36,41 +36,37 @@ sleep 2
 if [ "$UID" = "10000" ]; then
 	variable=Admin
 	rm -f $HOME/Desktop/*.desktop
-	cp /tmp/netlogon/icones/$gm_esu/_Machine/Bureau/*.desktop  $HOME/Desktop/
-	cp /tmp/netlogon/icones/$gm_esu/DomainAdmins/Bureau/*.desktop  $HOME/Desktop/
+	cp -fr /tmp/netlogon/icones/$gm_esu/_Machine/Bureau/*  $HOME/Desktop/
+	cp -fr /tmp/netlogon/icones/$gm_esu/DomainAdmins/Bureau/  $HOME/Desktop/
 
 	# Récupération des icones des autres types d'utilisateurs
 	rm -fr $HOME/Desktop/Bureaux\ Autres\ Utilisateurs/
 	mkdir -p $HOME/Desktop/Bureaux\ Autres\ Utilisateurs/Profs
-	cp /tmp/netlogon/icones/$gm_esu/_Machine/Bureau/*.desktop  $HOME/Desktop/Bureaux\ Autres\ Utilisateurs/Profs/
-	cp /tmp/netlogon/icones/$gm_esu/professeurs/Bureau/*.desktop  $HOME/Desktop/Bureaux\ Autres\ Utilisateurs/Profs/
+	cp -fr /tmp/netlogon/icones/$gm_esu/_Machine/Bureau/  $HOME/Desktop/Bureaux\ Autres\ Utilisateurs/Profs/
+	cp -fr /tmp/netlogon/icones/$gm_esu/professeurs/Bureau/  $HOME/Desktop/Bureaux\ Autres\ Utilisateurs/Profs/
 
 	mkdir -p $HOME/Desktop/Bureaux\ Autres\ Utilisateurs/Eleves
-	cp /tmp/netlogon/icones/$gm_esu/_Machine/Bureau/*.desktop  $HOME/Desktop/Bureaux\ Autres\ Utilisateurs/Eleves/
-	cp /tmp/netlogon/icones/$gm_esu/eleves/Bureau/*.desktop  $HOME/Desktop/Bureaux\ Autres\ Utilisateurs/Eleves/	
-	#chmod +x $HOME/Desktop/*.desktop $HOME/Desktop/Bureaux\ Autres\ Utilisateurs/Profs/*.desktop $HOME/Desktop/Bureaux\ Autres\ Utilisateurs/Eleves/*.desktop
+	cp -fr /tmp/netlogon/icones/$gm_esu/_Machine/Bureau/  $HOME/Desktop/Bureaux\ Autres\ Utilisateurs/Eleves/
+	cp -fr /tmp/netlogon/icones/$gm_esu/eleves/Bureau/  $HOME/Desktop/Bureaux\ Autres\ Utilisateurs/Eleves/	
 else
 	case $groupe in
 	10001)
 		variable=Prof
 		rm -f $HOME/Desktop/*.desktop
-		cp /tmp/netlogon/icones/$gm_esu/_Machine/Bureau/*.desktop  $HOME/Desktop/
-		cp /tmp/netlogon/icones/$gm_esu/professeurs/Bureau/*.desktop  $HOME/Desktop/
-		#chmod +x $HOME/Desktop/*.desktop
+		cp -fr /tmp/netlogon/icones/$gm_esu/_Machine/Bureau/  $HOME/Desktop/
+		cp -fr /tmp/netlogon/icones/$gm_esu/professeurs/Bureau/  $HOME/Desktop/
 		;;
 	10002)
 		variable=Eleve
 		rm -f $HOME/Desktop/*.desktop
-		cp /tmp/netlogon/icones/$gm_esu/_Machine/Bureau/*.desktop  $HOME/Desktop/
-		cp /tmp/netlogon/icones/$gm_esu/eleves/Bureau/*.desktop  $HOME/Desktop/
-		#chmod +x $HOME/Desktop/*.desktop
+		cp -fr /tmp/netlogon/icones/$gm_esu/_Machine/Bureau/  $HOME/Desktop/
+		cp -fr /tmp/netlogon/icones/$gm_esu/eleves/Bureau/  $HOME/Desktop/
 		;;
 	10004)
 		variable=Administratif
 		rm -f $HOME/Desktop/*.desktop
-		cp /tmp/netlogon/icones/$gm_esu/_Machine/Bureau/*.desktop  $HOME/Desktop/
-		cp /tmp/netlogon/icones/$gm_esu/professeurs/Bureau/*.desktop  $HOME/Desktop/
-		#chmod +x $HOME/Desktop/*.desktop
+		cp -fr /tmp/netlogon/icones/$gm_esu/_Machine/Bureau/  $HOME/Desktop/
+		cp -fr /tmp/netlogon/icones/$gm_esu/professeurs/Bureau/  $HOME/Desktop/
 		;;
 	*)
 		variable=undefined

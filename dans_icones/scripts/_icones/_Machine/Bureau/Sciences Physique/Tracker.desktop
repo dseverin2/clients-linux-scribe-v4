@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Terminal=false
+Exec=firefox %u "https://tracker.physlets.org/trackerJS/"
+Name=Tracker
+Comment=Tracker video analysis and modeling tool
+Icon=/media/Serveur_Scribe/commun/logiciels/tracker/tracker_icon48.png
+Categories=Education;
+MimeType=application/x-osptracker
+Name[fr_FR]=Tracker
