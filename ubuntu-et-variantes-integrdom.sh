@@ -358,7 +358,7 @@ system-db:gdm
 file-db:/usr/share/gdm/greeter-dconf-defaults" > /etc/dconf/profile/gdm 2>> $logfile
 
 	writelog "---23a-Suppression de la liste des utilisateurs au login"
-	if [ ! -e /etc/dconf/db/gdm.d ]; then mkdir /etc/dconf/db/gdm.d 2>> $logfile; fi
+	if [ ! -d /etc/dconf/db/gdm.d ]; then mkdir /etc/dconf/db/gdm.d 2>> $logfile; fi
 	echo "[org/gnome/login-screen]
 # Do not show the user list
 disable-user-list=true" > /etc/dconf/db/gdm.d/00-login-screen
