@@ -161,7 +161,7 @@ if $esubuntu; then
 fi
 
 ########################################################################
-# Installation de firefox et chromium
+# Installation de firefox
 ########################################################################
 if [ -e /etc/firefox-esr ] || [ -e /usr/bin/firefox-esr ] || [ -e /usr/lib/firefox-esr ]; then
 	sudo apt remove firefox* --purge -y
@@ -169,21 +169,6 @@ if [ -e /etc/firefox-esr ] || [ -e /usr/bin/firefox-esr ] || [ -e /usr/lib/firef
 fi
 echo "install firefox"
 sudo apt install firefox firefox-locale-fr --install-suggests -y  2>> $logfile
-
-echo "install chromium"
-echo '
-Package: *
-Pin: release o=LP-PPA-phd-chromium-browser
-Pin-Priority: 1001
-' | sudo tee /etc/apt/preferences.d/phd-chromium-browser
-sudo add-apt-repository ppa:phd/chromium-browser -y 2>> $logfile
-sudo apt update 2>> $logfile
-sudo apt install chromium-browser --install-suggests -y 2>> $logfile
-if [ -e /usr/bin/chromium-browser ]; then
-        sudo ln -s /usr/bin/chromium-browser /usr/bin/chromium
-elif [ -e /usr/bin/chromium ]; then
-	sudo ln -s /usr/bin/chromium /usr/bin/chromium-browser
-fi
 
 ########################################################################
 #Mettre la station à l'heure à partir du serveur Scribe
@@ -524,6 +509,24 @@ if $postinstalladditionnel; then
 		} 2>> $logfile
 		writelog "ENDBLOC"
 	fi
+fi
+
+########################################################################
+# installation de chromium
+########################################################################
+echo "install chromium"
+echo '
+Package: *
+Pin: release o=LP-PPA-phd-chromium-browser
+Pin-Priority: 1001
+' | sudo tee /etc/apt/preferences.d/phd-chromium-browser
+sudo add-apt-repository ppa:phd/chromium-browser -y 2>> $logfile
+sudo apt update 2>> $logfile
+sudo apt install chromium-browser --install-suggests -y 2>> $logfile
+if [ -e /usr/bin/chromium-browser ]; then
+        sudo ln -s /usr/bin/chromium-browser /usr/bin/chromium
+elif [ -e /usr/bin/chromium ]; then
+	sudo ln -s /usr/bin/chromium /usr/bin/chromium-browser
 fi
 
 writelog "41/42-Nettoyage de la station avant clonage"
