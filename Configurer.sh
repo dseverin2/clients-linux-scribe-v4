@@ -1,4 +1,8 @@
 #!/bin/bash
+
+if $(dpkg-query -Wf'${Status}' yad 2>/dev/null | grep -q "install ok installed"); then
+ sudo apt remove -y yad
+fi
 sudo apt install yad -y
 thisrep=$(cd $( dirname ${BASH_SOURCE[0]}) && pwd )
 conf="$thisrep/config.cfg"
