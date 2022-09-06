@@ -8,8 +8,7 @@
 #############################################
 # Run using sudo, of course.
 #############################################
-if [ "$UID" -ne "0" ]
-then
+if [ "$UID" -ne "0" ]; then
   echo "Il faut etre root pour executer ce script. ==> sudo "
   exit 
 fi 
@@ -38,7 +37,7 @@ echo "" > /etc/apt/apt.conf.d/20proxy
 sed '/proxy/d' /etc/environment | sudo tee /etc/environment
 sed '/proxy/d' /etc/wgetrc | sudo tee /etc/wgetrc
 snap set system proxy.http=""
-snap set system proxy.https="
+snap set system proxy.https=""
 
 echo "Désintégration terminé"
 read -p "Il est fortement recommandé de redémarrer, voulez-vous le faire immédiatement ? [O/n] " rep_reboot
