@@ -79,7 +79,7 @@ retour=$(yad --title="Paramétrage Applications 3/3" --form\
  --field="Heure d'extinction auto":CBE\
  --field="Installer logiciels recommandés":CHK\
  --field="Installer logiciels avancés":CHK\
- --field="Configurer pĥotocopieur":CHK\
+ --field="Configurer photocopieur":CHK\
  --field="Installer eBeam":CHK\
  --field="Installer activInspire":CHK\
  --field="Installer WPS Office":CHK\
