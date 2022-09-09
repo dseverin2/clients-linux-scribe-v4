@@ -327,5 +327,4 @@ writelog "Nettoyage de la station"
 apt-get update ; apt-get -fy install  2>> $logfile; apt-get -y autoremove --purge  2>> $logfile; apt-get -y clean  2>> $logfile;
 clear
 
-logfile=$templog
 writelog "Le script de postinstall a terminé son travail"
