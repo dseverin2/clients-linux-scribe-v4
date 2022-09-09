@@ -520,7 +520,9 @@ Package: *
 Pin: release o=LP-PPA-phd-chromium-browser
 Pin-Priority: 1001
 ' | sudo tee /etc/apt/preferences.d/phd-chromium-browser
-sudo add-apt-repository ppa:phd/chromium-browser -y 2>> $logfile
+if ! grep ppa.launchpad.net/chromium-browser/ubuntu /etc/apt/sources.list >/dev/null; then
+	sudo add-apt-repository ppa:phd/chromium-browser -y 2>> $logfile
+fi
 sudo apt update 2>> $logfile
 sudo apt install chromium-browser --install-suggests -y 2>> $logfile
 if [ -e /usr/bin/chromium-browser ]; then
