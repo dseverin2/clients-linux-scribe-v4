@@ -495,17 +495,19 @@ if $postinstalladditionnel; then
 	versionnum=""
 	if [ "$version" = "bionic" ] || [ "$version" = "focal" ]; then
 		versionnum="20.04"
+		addvers="_old"
 	elif [ "$version" = "jammy" ]; then
 		versionnum="22.04"
+		addvers=""
 	fi
 	if [ "$versionnum" != "" ]; then 
 		writelog "INITBLOC" "40/42-PostInstallation avancée"
 		{
 			sudo -u "$SUDO_USER" wget -nc --no-check-certificate https://github.com/simbd/Ubuntu_"$versionnum"LTS_PostInstall/archive/master.zip 2>> $logfile
 			sudo -u "$SUDO_USER" unzip -o master.zip -d . 2>> $logfile
-			sudo -u "$SUDO_USER" chmod +x Ubuntu_"$versionnum"LTS_PostInstall-master/*.sh 2>> $logfile
-			sudo -u "$SUDO_USER" ./Ubuntu_"$versionnum"LTS_PostInstall-master/Postinstall_Ubuntu-"$versionnum"*.sh 2>> $logfile
-			sudo -u "$SUDO_USER" rm -fr master.zip Ubuntu_"$versionnum"LTS_PostInstall-master 2>> $logfile
+			sudo -u "$SUDO_USER" chmod +x Ubuntu_"$versionnum"LTS_PostInstall$addvers-master/*.sh 2>> $logfile
+			sudo -u "$SUDO_USER" ./Ubuntu_"$versionnum"LTS_PostInstall$addvers-master/Postinstall_Ubuntu-"$versionnum"*.sh 2>> $logfile
+			sudo -u "$SUDO_USER" rm -fr master.zip Ubuntu_"$versionnum"LTS_PostInstall$addvers-master 2>> $logfile
 		} 2>> $logfile
 		writelog "ENDBLOC"
 	fi
