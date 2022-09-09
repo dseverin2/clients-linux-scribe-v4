@@ -14,7 +14,7 @@ fi
 # Verification de la présence des fichiers contenant les fonctions et variables communes
 if [ -e ./esub_functions.sh ]; then
 	source ./esub_functions.sh
-	appsdir="."
+	appsdir="./apps"
 elif [ -e ../esub_functions.sh ]; then
 	source ../esub_functions.sh
 	appsdir="../apps"
@@ -248,30 +248,20 @@ if [ "$version" = "bionic" ] || [ "$version" = "focal" ] || [ "$version" = "jamm
 	wget -nc "$wgetparams" --no-check-certificate http://bluegriffon.org/freshmeat/3.1/$installfilename  2>> $appslogfile && dpkg -i bluegriffon*.deb  2>> $appslogfile; apt install -fy 2>> $appslogfile
 	
 	writelog "---SCRIPTS SUPPLEMENTAIRES"
-	if [ -e $second_dir/installGeogebra6.sh ]; then
-		scriptpath=$second_dir/
-	elif [ -e ./installGeogebra6.sh ]; then
-		scriptpath=./
-	else
-		scriptpath=""
-		writelog "------ SCRIPTS ABSENTS"
+	writelog "------Geogebra Classic"
+	$appsdir/installGeogebra6.sh 2>> $appslogfile
+
+	# Suites bureautiques
+	$appsdir/installOffice.sh 2>> $appslogfile
+
+
+	if $Veyon; then
+		writelog "------Veyon"
+		$appsdir/installVeyon.sh 2>> $appslogfile
 	fi
-	if [ "$scriptpath" != "" ]; then
-		writelog "------Geogebra Classic"
-		./installGeogebra6.sh 2>> $appslogfile
-		
-		# Suites bureautiques
-		./installOffice.sh 2>> $appslogfile
-		
-		
-		if $Veyon; then
-			writelog "------Veyon"
-			./installVeyon.sh 2>> $appslogfile
-		fi
-		
-		writelog "------Openboard"
-		source ./installOpenBoard.sh 2>> $appslogfile
-	fi
+
+	writelog "------Openboard"
+	source $appsdir/installOpenBoard.sh 2>> $appslogfile
 	writelog "ENDBLOC"
 
 	apt install --fix-broken -y  2>> $appslogfile
