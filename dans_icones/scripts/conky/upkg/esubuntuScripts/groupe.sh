@@ -12,9 +12,9 @@
 #eleve = 10002
 groupe=$GROUPS
 netlogonIcons="/tmp/netlogon/icones"
-logfile="/tmp/esubupkg.log"
+conkylogfile="/tmp/esubupkg.log"
 
-echo `date` > $logfile
+echo `date` > $conkylogfile
 case $groupe in
 10000)
 	usergrp="administratif"
@@ -29,14 +29,14 @@ case $groupe in
 	usergrp="undefined"
 	;;
 esac
-echo "Groupe trouvé : $usergrp" >> $logfile
+echo "Groupe trouvé : $usergrp" >> $conkylogfile
 
 
 if [ groupe=10000 ] || [ groupe=10001 ] || [ groupe=10002 ]; then
 	#controle de la présence du fichier liste_pc.csv dans icones qui sert de référence 
 	echo "controle presence liste_pc_esu.csv dans icones";
  	if [ -f $netlogonIcons/scripts/liste_pc_esu.csv ]; then 
-		echo "La liste des pc existe" >> $logfile
+		echo "La liste des pc existe" >> $conkylogfile
 		#recherche nom du pc et son groupe dans le fichier
 
 		adresseMAC=$(cat /sys/class/net/$(ip route show default | awk '/default/ {print $5}')/address)
@@ -44,7 +44,7 @@ if [ groupe=10000 ] || [ groupe=10001 ] || [ groupe=10002 ]; then
 		salle=$(grep $adresseMAC $netlogonIcons/scripts/liste_pc_esu.csv | awk -F',' ' {gsub("\r","",$1); printf $3 } ' )
 	
 		if [ -z "$salle" ]; then
-			echo "le pc n'existe pas dans la liste" >> $logfile
+			echo "le pc n'existe pas dans la liste" >> $conkylogfile
 			salle=grp_eole
 		else
 			salle=$salle
@@ -56,7 +56,7 @@ if [ groupe=10000 ] || [ groupe=10001 ] || [ groupe=10002 ]; then
 			echo "hostname est correctement renseigné"
 		else
 			echo "mise à jour de hostname"
-			echo -e $nom | tee /etc/hostname >> $logfile
+			echo -e $nom | tee /etc/hostname >> $conkylogfile
 		fi	
 	
 		gm_esu=$(cat /etc/GM_ESU)
@@ -73,16 +73,16 @@ lockPref("autoadmin.global_config_url", "file://$netlogonIcons/'$gm_esu'/linux/f
 		else
 			echo meme groupe on ne fait rien
 		fi
-		echo "MAC "$adresseMAC" / host "$nom" / salle "$salle >> $logfile
+		echo "MAC "$adresseMAC" / host "$nom" / salle "$salle >> $conkylogfile
 	else 
 		echo "La liste des pc n'existe pas"
 		#on ne tient pas compte des groupes esu par rapport au fichier
 	fi
 	#execution de upkg
-	sudo sh /etc/esubuntu/upkg_client.sh >> $logfile
+	sudo sh /etc/esubuntu/upkg_client.sh >> $conkylogfile
 else 
 	echo  "Groupe de l'utilisateur incorrect"
-	echo  "Groupe de l'utilisateur incorrect" >> $logfile
+	echo  "Groupe de l'utilisateur incorrect" >> $conkylogfile
 	exit 0
 fi
 

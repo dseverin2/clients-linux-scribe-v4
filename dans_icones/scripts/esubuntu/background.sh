@@ -9,9 +9,9 @@
 # - CALPETARD Olivier
 # - SEVERIN Didier 
 
-logfile="/tmp/esubbackground.log"
+esublogfile="/tmp/esubbackground.log"
 
-echo `date` > $logfile
+echo `date` > $esublogfile
 groupe=$GROUPS
 
 #les fichiers se trouvent dans icones$ 
@@ -23,7 +23,7 @@ if [ -f "/etc/GM_ESU" ];then
 	gm_esu=$(cat /etc/GM_ESU)
 fi
 
-echo "Le PC est dans le groupe esu $gm_esu" >> $logfile
+echo "Le PC est dans le groupe esu $gm_esu" >> $esublogfile
 
 sleep 2
 
@@ -69,7 +69,7 @@ else
 		;;
 	*)
 		variable=undefined
-		echo "Groupe trouvé : $variable" >> $logfile
+		echo "Groupe trouvé : $variable" >> $esublogfile
 		gsettings set org.gnome.desktop.background picture-uri "file:///home/$USER/Images/images.jpg"
 		exit 0
 		;;
@@ -84,10 +84,10 @@ find ~/Bureau -type f -name "*.desktop" -exec gio set "{}" "metadata::trusted" y
 if [ -e /usr/local/bin/sketchup.sh ]; then
     bash -c "sudo /usr/local/bin/sketchup.sh $(whoami) > ~/.sketchup.log 2>&1"
 fi
-echo "Groupe trouvé : $variable" >> $logfile
+echo "Groupe trouvé : $variable" >> $esublogfile
 
 wallpaper=$(cat /tmp/netlogon/icones/$gm_esu/$variable.txt)
-echo "Wallpaper : $wallpaper" >> $logfile
+echo "Wallpaper : $wallpaper" >> $esublogfile
 
 #pour ubuntu mate
 if [ "$XDG_CURRENT_DESKTOP" = "MATE" ] ; then
@@ -101,21 +101,21 @@ fi
 ######################################################################
 #                            PARAM CONKY                             #
 ######################################################################
-echo "Lancement de conky avec lecture du fichier de conf :" >> $logfile
-cat /tmp/netlogon/icones/$gm_esu/conky/conky.cfg >> $logfile
+echo "Lancement de conky avec lecture du fichier de conf :" >> $esublogfile
+cat /tmp/netlogon/icones/$gm_esu/conky/conky.cfg >> $esublogfile
 cp /tmp/netlogon/icones/$gm_esu/conky/conky.cfg ~/.conky.cfg -fr
 
 # Récupération de l'interface ethernet active
 interfaceeth=$(ifconfig | grep UP,BROADCAST,RUNNING,MULTICAST | awk '{print $1}' | sed '/://g')
 if grep "Adresse IP : \${addr ens5}" ~/.conky.cfg > /dev/null; then
-	sed -i "s/Adresse IP : \${addr ens5}/Adresse IP : \${addr $interfaceeth}/g" ~/.conky.cfg >> $logfile
+	sed -i "s/Adresse IP : \${addr ens5}/Adresse IP : \${addr $interfaceeth}/g" ~/.conky.cfg >> $esublogfile
 fi
 conky -c ~/.conky.cfg
 
-echo "Lancement du gpo lecture fichier gset du groupe esu :" >> $logfile
+echo "Lancement du gpo lecture fichier gset du groupe esu :" >> $esublogfile
 cp /tmp/netlogon/icones/$gm_esu/linux/gset/gset.sh /tmp
 chmod +x /tmp/gset.sh
 /tmp/gset.sh
 rm /tmp/gset.sh
-echo "Fin" >> $logfile
+echo "Fin" >> $esublogfile
 exit 0
