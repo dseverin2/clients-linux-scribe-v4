@@ -113,3 +113,4 @@ sed -i -e "s/TRUE/true/g" "$conf"
 sed -i -e "s/FALSE/false/g" "$conf"
 sudo -u "$SUDO_USER" ./getDesktopName.sh
 source "$conf"
+if [ ! -e /var/lib/man-db/auto-update ]; then touch /var/lib/man-db/auto-update; fi
