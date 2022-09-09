@@ -13,4 +13,4 @@ sudo apt-add-repository http://apt.linus-h.de/edular
 sudo apt update
 
 # Install the metapackage
-sudo apt install meta-activsoftware
+sudo apt install meta-activsoftware -y
