@@ -555,6 +555,8 @@ if [ "$extinction" != "" ]; then
 fi
 
 writelog "FIN de l'integration"
+sudo -u $SUDO_USER zenity --notification --text="S'il n'existe pas encore copier le dossier _dans_icone/$salle dans icones" 
+sudo -u $SUDO_USER zenity --info --text="S'il n'existe pas encore copier le dossier _dans_icone/$salle dans icones" 
 if $reboot; then
 	reboot
 else
