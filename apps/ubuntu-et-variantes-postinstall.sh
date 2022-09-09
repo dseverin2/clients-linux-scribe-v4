@@ -14,8 +14,10 @@ fi
 # Verification de la présence des fichiers contenant les fonctions et variables communes
 if [ -e ./esub_functions.sh ]; then
 	source ./esub_functions.sh
+	appsdir="."
 elif [ -e ../esub_functions.sh ]; then
 	source ../esub_functions.sh
+	appsdir="../apps"
 else
 	echo "Fichier esub_functions.sh absent ! Interruption de l'installation."
 	exit
@@ -54,11 +56,11 @@ apt remove mintwelcome -y 2>> $appslogfile
 writelog "Installation des logiciels de TBI"
 if $activinspire; then
 	writelog "---ActivInspire"
-	./TBI/installActivInspire.sh 2>> $appslogfile
+	$appsdir/TBI/installActivInspire.sh 2>> $appslogfile
 fi
 if $ebeam; then
 	writelog "---Ebeam"
-	./TBI/installEbeam.sh 2>> $appslogfile
+	$appsdir/TBI/installEbeam.sh 2>> $appslogfile
 fi
 
 #########################################
@@ -111,7 +113,7 @@ fi
 #########################################
 if [ "$version" = "bionic" ] ; then
 	writelog "INITBLOC" "Bionic 18.04" "---idle, x265"
-	apt-get install -y idle-python3.6 x265
+	apt-get install -y idle3 x265
 
 	writelog "---Google Earth Pro x64" 
 	wget -nc "$wgetparams" -q --no-check-certificate https://dl.google.com/dl/earth/client/current/google-earth-pro-stable_current_amd64.deb ; dpkg -i google-earth-pro-stable_current_amd64.deb ; apt install -fy
@@ -130,9 +132,9 @@ fi
 #########################################
 # Paquet uniquement pour Focal (20.04)
 #########################################
-if [ "$version" = "focal" ] ; then
+if [ "$version" = "focal" ] || [ "$version" = "jammy"] ; then
 	writelog "INITBLOC" "Focal 20.04" "---idle, x265"
-	apt-get install -y idle-python3.6 x265 2>> $appslogfile
+	apt-get install -y idle3 x265 2>> $appslogfile
 
 	writelog "---Google Earth Pro x64" 
 	wget -nc "$wgetparams" -q --no-check-certificate https://dl.google.com/dl/earth/client/current/google-earth-pro-stable_current_amd64.deb  2>> $appslogfile; dpkg -i google-earth-pro-stable_current_amd64.deb  2>> $appslogfile; apt install -fy 2>> $appslogfile
