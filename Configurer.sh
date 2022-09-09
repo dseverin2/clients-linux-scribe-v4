@@ -91,7 +91,7 @@ echo "$retour"
 accueil=$(echo $retour | awk 'BEGIN {FS="|" } { print $1 }' | sed 's/\//\\\//g')
 if [ "$accueil" != "" ]; then sed -i -e "s/^pagedemarragepardefaut=.*/pagedemarragepardefaut=\"$accueil\"/g" "$conf"; fi
 shutd=$(echo $retour | awk 'BEGIN {FS="|" } { print $2 }')
-if [ "$shutd" != "" ]; then sed -i -e "s/^extinction=.*/extinction=\"$shutd\"/g" "$conf"; fi
+sed -i -e "s/^extinction=.*/extinction=\"$shutd\"/g" "$conf"
 base=$(echo $retour | awk 'BEGIN {FS="|" } { print $3 }')
 if [ "$base" != "" ]; then sed -i -e "s/^postinstallbase=.*/postinstallbase=$base/g" "$conf"; fi
 add=$(echo $retour | awk 'BEGIN {FS="|" } { print $4 }')
