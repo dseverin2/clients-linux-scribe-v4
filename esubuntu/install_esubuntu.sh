@@ -17,7 +17,7 @@ then
 fi 
 
 # Verification de la présence des fichiers contenant les fonctions et variables communes
-basedir=$ (builtin cd ..; pwd )
+basedir = $( builtin cd ..; pwd )
 if [ -e $basedir/esub_functions.sh ]; then
   source ./esub_functions.sh
   baserep=$basedir
