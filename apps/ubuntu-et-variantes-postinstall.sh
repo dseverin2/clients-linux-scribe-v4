@@ -183,7 +183,7 @@ writelog "ENDBLOC"
 writelog "Wireshark"
 debconf-set-selections <<< 'wireshark-common/install-setuid boolean true'
 apt-get install -y wireshark  2>> $logfile
-sed -i -e "s/,dialout/,dialout,wireshark/g" /etc/security/group.conf
+sed -i -e 's/,dialout/,dialout,wireshark/g' /etc/security/group.conf
 
 writelog "INITBLOC" "[ Mathématiques ]"
 apt-get install -y algobox carmetal scilab geophar 2>> $logfile
@@ -194,7 +194,7 @@ apt-get install -y stellarium avogadro python-mecavideo gnuplot -y 2>> $logfile
 writelog "ENDBLOC"
 
 writelog "INITBLOC" "[ Programmation ]"
-apt-get install -y ghex geany imagemagick gcolor2 2>> $logfile
+apt-get install -y ghex geany imagemagick 2>> $logfile
 apt-get install -y python3-pil.imagetk python3-pil traceroute python3-tk #python3-sympy 2>> $logfile
 flatpak install flathub edu.mit.Scratch -y 2>> $logfile
 writelog "ENDBLOC"
@@ -217,15 +217,15 @@ if [ "$version" = "bionic" ] || [ "$version" = "focal" ] || [ "$version" = "jamm
 	apt-get install -y openshot-qt gshutdown xcas planner ooohg winff winff-qt optgeo ghostscript  2>> $logfile
 	
 	writelog "---GanttProject"
-	apt-get install -y openjdk-8-jre oenjdk-11-jre java-11-amazon-corretto-jdk bellsoft-java11-runtime 2>> $logfile
-	wget -nc "$wgetparams" --no-check-certificate https://dl.ganttproject.biz/ganttproject-2.8.11/ganttproject_2.8.11-r2396-1_all.deb 2>> $logfile
+	apt-get install -y openjdk-8-jre 2>> $logfile
+	wget -nc -q "$wgetparams" --no-check-certificate https://dl.ganttproject.biz/ganttproject-2.8.11/ganttproject_2.8.11-r2396-1_all.deb 2>> $logfile
 	dpkg -i ganttproject*  2>> $logfile; apt install -fy
 	
 	writelog "---mBlock"
-	./installmBlock.sh 2>> $logfile
+	$baserep/apsp/installmBlock.sh 2>> $logfile
 	
 	writelog "---Xia (alias ImageActive)"
-	wget -nc "$wgetparams" --no-check-certificate https://xia.funraiders.org/download/xia-3-inkscape.deb 2>> $logfile
+	wget -nc -q "$wgetparams" --no-check-certificate https://xia.funraiders.org/download/xia-3-inkscape.deb 2>> $logfile
 	sudo dpkg -i xia-3-inkscape.deb 2>> $logfile
 	apt install --fix-broken -y 2>> $logfile
 	
@@ -237,7 +237,7 @@ if [ "$version" = "bionic" ] || [ "$version" = "focal" ] || [ "$version" = "jamm
 	
 	writelog "---BlueGriffon"
 	installfilename=bluegriffon-3.1.Ubuntu18.04-x86_64.deb
-	wget -nc "$wgetparams" --no-check-certificate http://bluegriffon.org/freshmeat/3.1/$installfilename  2>> $logfile && dpkg -i bluegriffon*.deb  2>> $logfile; apt install -fy 2>> $logfile
+	wget -nc -q "$wgetparams" --no-check-certificate http://bluegriffon.org/freshmeat/3.1/$installfilename  2>> $logfile && dpkg -i bluegriffon*.deb  2>> $logfile; apt install -fy 2>> $logfile
 	
 	writelog "---SCRIPTS SUPPLEMENTAIRES"
 	writelog "------Geogebra Classic"
