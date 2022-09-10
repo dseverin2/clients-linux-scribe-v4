@@ -17,10 +17,8 @@ then
 fi 
 
 # Verification de la présence des fichiers contenant les fonctions et variables communes
-basedir = $( builtin cd ..; pwd )
-if [ -e $basedir/esub_functions.sh ]; then
+if [ -e $baserep/esub_functions.sh ]; then
   source ./esub_functions.sh
-  baserep=$basedir
 else
   echo "Fichier esub_functions.sh absent ! Interruption de l'installation."
   exit
