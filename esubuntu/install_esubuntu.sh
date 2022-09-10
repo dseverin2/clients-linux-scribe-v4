@@ -17,10 +17,10 @@ then
 fi 
 
 # Verification de la présence des fichiers contenant les fonctions et variables communes
-if [ -e ./esub_functions.sh ]; then
+basedir=$ (builtin cd ..; pwd )
+if [ -e $basedir/esub_functions.sh ]; then
   source ./esub_functions.sh
-elif [ -e ../esub_functions.sh ]; then
-  source ../esub_functions.sh
+  baserep=$basedir
 else
   echo "Fichier esub_functions.sh absent ! Interruption de l'installation."
   exit
@@ -80,10 +80,10 @@ writelog "ENDBLOC"
 ##############################################################################
 ### Auto paramétrage de gset, firefox et conky
 ##############################################################################
-sudo -u "$SUDO_USER" find ./dans_icones/ -type f -exec sed -i -e "s/RNE_ETAB/"$rne_etab"/g" -e "s/IP_SCRIBE/"$scribe_def_ip"/g" -e "s/IP_PRONOTE/"$pronote"/g" -e "s/PORTAIL/"$portail"/g" -e "s/SALLEESU/"$salle"/g" {} \ ; 2>> $logfile
-sudo -u "$SUDO_USER" find ./dans_icones/ -type f -exec sed -i -e "s/PROXY_IP/"$proxy_def_ip"/g" -e "s/PROXY_PORT/"$proxy_def_port"/g" -e "s/GSETPROXYPORT/"$gset_proxy_port"/g" -e "s/GSETPROXY/"$gset_proxy"/g" -e "s/SUBNET/"$subnet"/g" {} \;  2>> $logfile
+sudo -u "$SUDO_USER" find $baserep/dans_icones/ -type f -exec sed -i -e "s/RNE_ETAB/"$rne_etab"/g" -e "s/IP_SCRIBE/"$scribe_def_ip"/g" -e "s/IP_PRONOTE/"$pronote"/g" -e "s/PORTAIL/"$portail"/g" -e "s/SALLEESU/"$salle"/g" {} \ ; 2>> $logfile
+sudo -u "$SUDO_USER" find $baserep/dans_icones/ -type f -exec sed -i -e "s/PROXY_IP/"$proxy_def_ip"/g" -e "s/PROXY_PORT/"$proxy_def_port"/g" -e "s/GSETPROXYPORT/"$gset_proxy_port"/g" -e "s/GSETPROXY/"$gset_proxy"/g" -e "s/SUBNET/"$subnet"/g" {} \;  2>> $logfile
 interfaceeth=`ip -br link | grep 'UP' | grep -v 'OWN' | awk '{ print $1 }'`
-sudo -u "$SUDO_USER" find ./dans_icones/ -type f -exec sed -i -e "s/INTERFACEETH/"$interfaceeth"/g" {} \; 2>> $logfile
+sudo -u "$SUDO_USER" find $baserep/dans_icones/ -type f -exec sed -i -e "s/INTERFACEETH/"$interfaceeth"/g" {} \; 2>> $logfile
 
 # Ancien script :
 if false; then
@@ -116,7 +116,7 @@ else
 fi
 writelog "ENDBLOC"
 
-mv ../dans_icones/groupe_esu "../dans_icones/$salle" 2>> $logfile
+mv $baserep/dans_icones/groupe_esu "$baserep/dans_icones/$salle" 2>> $logfile
 
 ## 3 dernières lignes non activés car ce script est appelé par l'autre (intgrdom) et il ne faut pas interrompre pendant l'install
 #echo "C'est fini ! bienvenue dans le groupe $salle..."
