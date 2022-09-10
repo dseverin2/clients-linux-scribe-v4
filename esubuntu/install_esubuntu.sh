@@ -18,7 +18,7 @@ fi
 
 # Verification de la présence des fichiers contenant les fonctions et variables communes
 if [ -e $baserep/esub_functions.sh ]; then
-  source ./esub_functions.sh
+  source $baserep/esub_functions.sh
 else
   echo "Fichier esub_functions.sh absent ! Interruption de l'installation."
   exit
