@@ -4,7 +4,6 @@ if $(dpkg-query -Wf'${Status}' yad 2>/dev/null | grep -q "install ok installed")
  sudo apt remove -y yad
 fi
 sudo apt install yad -y
-baserep=$(cd $( dirname ${BASH_SOURCE[0]}) && pwd )
 conf="$baserep/config.cfg"
 source "$conf"
 
