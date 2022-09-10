@@ -4,8 +4,8 @@ if $(dpkg-query -Wf'${Status}' yad 2>/dev/null | grep -q "install ok installed")
  sudo apt remove -y yad
 fi
 sudo apt install yad -y
-thisrep=$(cd $( dirname ${BASH_SOURCE[0]}) && pwd )
-conf="$thisrep/config.cfg"
+baserep=$(cd $( dirname ${BASH_SOURCE[0]}) && pwd )
+conf="$baserep/config.cfg"
 source "$conf"
 
 retour=$(yad --title="Paramétrage Domaine 1/3" --form\
