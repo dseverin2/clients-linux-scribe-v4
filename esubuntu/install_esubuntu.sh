@@ -79,7 +79,7 @@ writelog "ENDBLOC"
 ### Auto paramétrage de gset, firefox et conky
 ##############################################################################
 interfaceeth=`ip -br link | grep 'UP' | grep -v 'OWN' | awk '{ print $1 }'`
-sudo -u "$SUDO_USER" autoparam($baserep) 2>> $logfile
+sudo -u "$SUDO_USER" autoparam $baserep 2>> $logfile
 writelog "3/3-Autoparamétrage... OK"
 ##############################################################################
 ### Utilisation d'un proxy authentifiant
