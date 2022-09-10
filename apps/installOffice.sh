@@ -24,14 +24,14 @@ if $WPSOffice; then
 	mkdir /opt/kingsoft/wps-office/office6/dicts/spellcheck/fr_FR/
 	printf "[Dictionary]\nDisplayName=Français\nDisplayName[zh_CN]=Français\nDisplayName[en_US]=Français" | tee /opt/kingsoft/wps-office/office6/dicts/spellcheck/fr_FR/dict.conf
 	printf "DisplayName[zh_TW]=Français\nDisplayName[zh_HK]=Français\nDisplayName[zh_MO]=Français\nDisplayName[zh_Hant_CN]=Français\n" | tee -a /opt/kingsoft/wps-office/office6/dicts/spellcheck/fr_FR/dict.conf
-	mv -fr ./hunspell/*toutesvariantes.aff /opt/kingsoft/wps-office/office6/dicts/spellcheck/fr_FR/main.aff
+	mv -f ./hunspell/*toutesvariantes.aff /opt/kingsoft/wps-office/office6/dicts/spellcheck/fr_FR/main.aff
 	# Interface FR
 	wget -nc -q --no-check-certificate https://www.linuxtricks.fr/upload/wps-fr.tar.xz
 	tar xvf wps-fr.tar.xz
 	tar xvf wps-fr.tar -C /opt/kingsoft/wps-office/office6/mui/
 	cp -fr /opt/kingsoft/wps-office/office6/mui/fr_FR/* /opt/kingsoft/wps-office/office6/mui/ug_CN/
 	cp -fr /opt/kingsoft/wps-office/office6/mui/fr_FR/* /opt/kingsoft/wps-office/office6/mui/en_US/
-	rm -f wps-office_$version.XA_amd64.deb wps-fr* hunspell*
+	rm -fr wps-office_$version.XA_amd64.deb wps-fr* hunspell*
 fi
 
 ##############################
@@ -45,7 +45,7 @@ chmod 700 ~/.gnupg
 gpg --no-default-keyring --keyring gnupg-ring:/tmp/onlyoffice.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys CB2DE8E5
 chmod 644 /tmp/onlyoffice.gpg
 chown root:root /tmp/onlyoffice.gpg
-mv /tmp/onlyoffice.gpg /etc/apt/trusted.gpg.d/
+mv -f /tmp/onlyoffice.gpg /etc/apt/trusted.gpg.d/
 echo 'deb https://download.onlyoffice.com/repo/debian squeeze main' | sudo tee -a /etc/apt/sources.list.d/onlyoffice.list
 apt update
 apt install onlyoffice-desktopeditors -y
@@ -59,7 +59,7 @@ if [ ! -e $CMinstallfile ]; then
 	wget -nc -q --no-check-certificate http://cdeval.free.fr/CmathOOoUpdate/$CMinstallfile -P ./tmp_dl/
 	mv ./tmp_dl/$CMinstallfile ./tmp_dl/CmathOOo.zip
 	unzip ./tmp_dl/CmathOOo.zip -d ./tmp_dl/CmathOOo/
-	rm -f ./tmp_dl/CmathOOo.zip
+	rm -rf ./tmp_dl/CmathOOo.zip
 	description_original="./tmp_dl/CmathOOo/description.xml"
 	description_compile="./tmp_dl/description.xml"
 	echo "Retrait de la confirmation d'installation de CmathOOO.oxt"
