@@ -67,7 +67,7 @@ sudo apt install -y dos2unix
 sudo -u "$SUDO_USER" find . -type f -name "*.sh" -exec chmod a+x {} \; -exec dos2unix {} \;
 
 baserep=$(cd $( dirname ${BASH_SOURCE[0]}) && pwd )
-
+export baserep
 # Verification de la présence des fichiers contenant les fonctions et variables communes
 if [ -e ./esub_functions.sh ]; then
 	source ./esub_functions.sh
