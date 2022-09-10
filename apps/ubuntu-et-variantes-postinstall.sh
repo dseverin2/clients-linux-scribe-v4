@@ -241,19 +241,19 @@ if [ "$version" = "bionic" ] || [ "$version" = "focal" ] || [ "$version" = "jamm
 	
 	writelog "---SCRIPTS SUPPLEMENTAIRES"
 	writelog "------Geogebra Classic"
-	$appsdir/installGeogebra6.sh 2>> $logfile
+	source $appsdir/installGeogebra6.sh 2>> $logfile
 
 	# Suites bureautiques
-	$appsdir/installOffice.sh 2>> $logfile
+	source $appsdir/installOffice.sh 2>> $logfile
 
 
 	if $Veyon; then
 		writelog "------Veyon"
-		$appsdir/installVeyon.sh 2>> $logfile
+		source $appsdir/installVeyon.sh 2>> $logfile
 	fi
 
 	writelog "------Openboard"
-	source $appsdir/installOpenBoard.sh 2>> $logfile
+	source source $appsdir/installOpenBoard.sh 2>> $logfile
 	writelog "ENDBLOC"
 
 	apt install --fix-broken -y  2>> $logfile
