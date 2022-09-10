@@ -82,20 +82,6 @@ sudo -u "$SUDO_USER" find $baserep/dans_icones/ -type f -exec sed -i -e "s/RNE_E
 sudo -u "$SUDO_USER" find $baserep/dans_icones/ -type f -exec sed -i -e "s/PROXY_IP/"$proxy_def_ip"/g" -e "s/PROXY_PORT/"$proxy_def_port"/g" -e "s/GSETPROXYPORT/"$gset_proxy_port"/g" -e "s/GSETPROXY/"$gset_proxy"/g" -e "s/SUBNET/"$subnet"/g" {} \;  2>> $logfile
 interfaceeth=`ip -br link | grep 'UP' | grep -v 'OWN' | awk '{ print $1 }'`
 sudo -u "$SUDO_USER" find $baserep/dans_icones/ -type f -exec sed -i -e "s/INTERFACEETH/"$interfaceeth"/g" {} \; 2>> $logfile
-
-# Ancien script :
-if false; then
-	if grep "posteslinux" "$chemin"/icones/gm_esu/linux/firefox.js > /dev/null; then
-		sed -i "s/posteslinux/$gm_esu/g" "$chemin"/icones/gm_esu/linux/firefox.js 2>> $logfile
-	fi
-	sed -i -e "s/RNE_ETAB/$rne_etab/g" -e "s/IP_SCRIBE/$scribe_def_ip/g" -e "s/IP_PRONOTE/$pronote/g" -e "s/PORTAIL/$portail/g" -e "s/SALLEESU/$salle/g" "$chemin"/icones/gm_esu/linux/firefox.js 2>> $logfile
-
-	sed -i -e "s/GSETPROXY/$gset_proxy/g" -e "s/SUBNET/$subnet/g" "$chemin"/icones/gm_esu/linux/gset/gset.sh 2>> $logfile
-
-	if grep "INTERFACEETH" "$chemin"/icones/gm_esu/conky/conky.cfg > /dev/null; then
-		sed -i "s/INTERFACEETH/$interfaceeth/g" "$chemin"/icones/gm_esu/conky/conky.cfg 2>> $logfile
-	fi
-fi
 writelog "3/3-Autoparamétrage... OK"
 ##############################################################################
 ### Utilisation d'un proxy authentifiant
