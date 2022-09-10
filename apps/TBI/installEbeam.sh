@@ -4,7 +4,7 @@ echo "EBEAM : installation des dépendances"
 apt-get install libusb-dev yasm libvpx. Libx264. kazam onboard libboost-all-dev libboost-thread-dev -y
 
 echo "EBEAM : téléchargement et extraction de l\'archive"
-wget -nc https://speechi-support.speechi.net/EBEAM/eBeam-Interactive_3.6_ubuntu.tar.gz
+wget -nc -q https://speechi-support.speechi.net/EBEAM/eBeam-Interactive_3.6_ubuntu.tar.gz
 tar xvf eBeam-Interactive_3.6_ubuntu.tar.gz
 rm -fr eBeam-Interactive_3.6_ubuntu.tar.gz README.txt
 
