@@ -49,9 +49,9 @@ port=$proxy_def_port" > /usr/share/glib-2.0/schemas/my-defaults.gschema.override
 	######################################################################
 	writelog "---Inscription du proxy pour apt"
 	echo "APT::Get::AllowUnauthenticated 1;
-Acquire::http::proxy \"http://$scribeuserapt:$scribepass@$proxy_def_ip:$proxy_alt_port/\";
-Acquire::ftp::proxy \"ftp://$scribeuserapt:$scribepass@$proxy_def_ip:$proxy_alt_port/\";
-Acquire::https::proxy \"http://$scribeuserapt:$scribepass@$proxy_def_ip:$proxy_alt_port/\";" > /etc/apt/apt.conf.d/20proxy 2>>$logfile
+Acquire::http::proxy \"http://$scribeuserapt:$scribepass@$proxy_def_ip:$proxy_def_port/\";
+Acquire::ftp::proxy \"ftp://$scribeuserapt:$scribepass@$proxy_def_ip:$proxy_def_port/\";
+Acquire::https::proxy \"http://$scribeuserapt:$scribepass@$proxy_def_ip:$proxy_def_port/\";" > /etc/apt/apt.conf.d/20proxy 2>>$logfile
 
 	#Permettre d'utiliser la commande add-apt-repository derrière un Proxy
 	######################################################################
