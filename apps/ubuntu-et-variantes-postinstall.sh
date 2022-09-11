@@ -12,12 +12,9 @@ if [ "$UID" -ne "0" ]; then
 fi 
 
 # Verification de la présence des fichiers contenant les fonctions et variables communes
-if [ -e ./esub_functions.sh ]; then
-	source ./esub_functions.sh
-	appsdir="./apps"
-elif [ -e ../esub_functions.sh ]; then
-	source ../esub_functions.sh
-	appsdir="../apps"
+if [ -e $baserep/esub_functions.sh ]; then
+	source $baserep/esub_functions.sh
+	appsdir="$baserep/apps"
 else
 	echo "Fichier esub_functions.sh absent ! Interruption de l'installation."
 	exit
@@ -25,8 +22,6 @@ fi
 	
 # Récupération de la version d'ubuntu
 getversion 2>> $logfile
-
-baseapps=$(dirname $(realpath $0))
 
 # désactiver mode intéractif pour automatiser l'installation de wireshark
 export DEBIAN_FRONTEND="noninteractive"
@@ -222,7 +217,7 @@ if [ "$version" = "bionic" ] || [ "$version" = "focal" ] || [ "$version" = "jamm
 	dpkg -i ganttproject*  2>> $logfile; apt install -fy
 	
 	writelog "---mBlock"
-	$baserep/apsp/installmBlock.sh 2>> $logfile
+	source $appsdir/installmBlock.sh 2>> $logfile
 	
 	writelog "---Xia (alias ImageActive)"
 	wget -nc -q "$wgetparams" --no-check-certificate https://xia.funraiders.org/download/xia-3-inkscape.deb 2>> $logfile
