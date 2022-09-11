@@ -115,8 +115,8 @@ interfaceeth=$(ifconfig | grep UP,BROADCAST,RUNNING,MULTICAST | awk '{print $1}'
 if grep "Adresse IP : \${addr interfaceeth}" ~/.conky.cfg > /dev/null; then
 	sed -i "s/Adresse IP : \${addr interfaceeth}/Adresse IP : \${addr $interfaceeth}/g" ~/.conky.cfg >> $esublogfile
 fi
-if grep "posteslinux" ~/.conky.cfg > /dev/null; then
-	sed -i "s/posteslinux/$gm_esu/g" ~/.conky.cfg >> $esublogfile
+if grep "SALLEESU" ~/.conky.cfg > /dev/null; then
+	sed -i "s/SALLEESU/$gm_esu/g" ~/.conky.cfg >> $esublogfile
 fi
 conky -c ~/.conky.cfg
 

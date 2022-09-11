@@ -1,7 +1,7 @@
 
 // Fichier configuration firefox
 pref("network.proxy.type", 2);
-//pref("network.proxy.autoconfig_url", "file:///tmp/netlogon/icones/posteslinux/proxy_etab.pac");
+//pref("network.proxy.autoconfig_url", "file:///tmp/netlogon/icones/SALLEESU/proxy_etab.pac");
 
 //pref("network.proxy.share_proxy_settings", true);
 pref("network.proxy.no_proxies_on", "127.0.0.1, localhost , ubuntu.com , RNE_ETAB, IP_SCRIBE, IP_PRONOTE, PORTAIL");

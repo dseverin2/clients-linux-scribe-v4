@@ -12,7 +12,7 @@ Exec=firefox %u "https://www.qwant.com/?l=fr"
 Terminal=false
 X-MultipleArgs=false
 Type=Application
-Icon=/tmp/netlogon/icones/posteslinux/icones/firefox/firefox1.png
+Icon=/tmp/netlogon/icones/SALLEESU/icones/firefox/firefox1.png
 Categories=GNOME;GTK;Network;WebBrowser;
 MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/webm;application/x-xpinstall;
 StartupNotify=true

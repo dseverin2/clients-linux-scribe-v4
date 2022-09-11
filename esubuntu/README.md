@@ -24,7 +24,7 @@ _**RAPPEL : validé/testé pour Ubuntu/Unity en 14.04 et 16.04 ainsi que Ubuntu 
 1. Créer un nouveau groupe ESU (via la console ESU) pour vos clients Linux, par exemple "s207"
 2. Télécharger le contenu de l'archive et le décompresser 
 Lien ici : https://github.com/dane-lyon/Esubuntu/archive/master.zip
-3. Copier le dossier "posteslinux" dans R:/icones; contient la configuration de conky et proxy_etab.pac a personnaliser
+3. Copier le dossier "SALLEESU" dans R:/icones; contient la configuration de conky et proxy_etab.pac a personnaliser
 4. Copier le dossier "linux" dans le dossier du groupe ESU que vous avez créé précédement; il contient la configuration firefox, upkg, gset, message a personnaliser.
 5. Copier les fichiers Admin.txt Eleve.txt et Prof.txt dans le dossier du groups ESU créé précédement; contient le chemin du fond d'écran
 NB : Le plus rapide est de récupérer directement l'archive ici : https://github.com/dane-lyon/clients-linux-scribe/raw/master/ds_votre_groupe_esu.zip
@@ -85,14 +85,14 @@ A noté que depuis votre client linux, vous pouvez directement accéder/modifier
 
 ### Paramétrages complémentaires
 
-* Il est possible de personnaliser le panel conky en allant dans son icones/posteslinux puis "conky" et enfin fichier "conky.cfg"
+* Il est possible de personnaliser le panel conky en allant dans son icones/SALLEESU puis "conky" et enfin fichier "conky.cfg"
 
 Par exemple, si l'adresse IP du poste ne s'affichage pas dans conky, c'est probablement parceque l'interface réseau de vos postes n'a pas le mme nom que celle indiqué dans conky dans ce cas il vous suffit de regarder (via la commande "ifconfig") le nom de votre interface réseau et de remplacer dans le fichier conky.cfg "${addr eth0}" par "${addr VotreInterface}"
 
 * La config de Firefox est déporté aussi dans le groupe_esu. Il est ainsi possible de modifier la page d’accueil et le proxy de tous les postes du groupe esu d'un seul coup, pour cela il faut modifier le fichier "firefox.js" dans le dossier "linux" du groupe esu.
 _Attention : le proxy est géré aussi par ce fichier, par défaut il est paramétré sur 172.16.0.252, si l'on a autre chose, bien penser à modifier la valeur._ 
 
-spécificité pour proxy authantifiant ac-reunion vers metice : modifier les valeurs du proxy dans posteslinux/proxy_etab.pac
+spécificité pour proxy authantifiant ac-reunion vers metice : modifier les valeurs du proxy dans SALLEESU/proxy_etab.pac
 
 * Personnalisation de l'interface utilisateur:
 Dans le dossier linux/gset se trouve un fichiers gset.sh qui est executé a chaque ouverture de session
