@@ -30,7 +30,7 @@ chmod 777 /opt/makeblock/mBlock/resources/web/tmp/project.sb2
 
 #Installation des librairies pour arduino
 wget -q https://github.com/Makeblock-official/Makeblock-Libraries/archive/master.zip -O /usr/share/arduino/lib/master.zip
-unzip /usr/share/arduino/lib/master.zip
+unzip /usr/share/arduino/lib/master.zip -d /usr/share/arduino/lib/
 
 
 
