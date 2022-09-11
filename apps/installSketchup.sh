@@ -8,7 +8,7 @@ sudo apt-key add winehq.key
 sudo apt update
 sudo apt-add-repository 'https://dl.winehq.org/wine-builds/ubuntu/' -y
 sudo apt-get update
-sudo apt-get install --install-recommends wine-staging winehq-staging
+sudo apt-get install --install-recommends wine-staging winehq-staging -y
 echo "Mettre windows version 7 & dans bibliothèque riched20"
 echo "Rajouter /DisableRubyAPI à la fin de la commande de lancement de sketchup"
 winecfg
