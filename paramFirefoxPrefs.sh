@@ -15,7 +15,8 @@ if [ "$version" = "focal" ] || [ "$version" = "jammy" ] ; then
 # CI DESSOUS utilisation de https://github.com/mozilla/policy-templates/blob/master/README.md#homepage compatible firefox V 80 +
 # écriture dans les deux emplacements possible (cf doc) mais fonctione avec /etc/firefox/policies/policies
 ######################################################################################################################
-mkdir /etc/firefox/policies
+if [ ! -d /etc/firefox/policies ]; then mkdir /etc/firefox/policies; fi
+
 echo "{
   \"policies\": {
     \"Homepage\": {
