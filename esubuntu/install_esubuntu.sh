@@ -57,7 +57,7 @@ apt-get install -y zenity conky conky-all
 
 writelog "---Copie des fichiers esubuntu de $chemin"/esubuntu/" vers /etc/esubuntu"
 for i in background conky_scribe groupe message upkg_client; do
-	cp "$chemin"/esubuntu/$i /etc/esubuntu/ -f
+	cp "$chemin"/esubuntu/$i.sh /etc/esubuntu/ -f
 	chmod a+x /etc/esubuntu/*.sh
 done
 cp "$chemin"/xdg_autostart/message* /etc/xdg/autostart/ -f
