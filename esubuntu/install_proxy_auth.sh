@@ -29,7 +29,8 @@ fi
 updatedb
 
 #creation des parametres etablissement
-sudo -u $SUDO_USER sed -i -e "s/NOMETAB/$nom_etab/g" -e "s/DOMAINNAME/$nom_domaine/g" -e "s/PROXYIP/$proxy/g" -e "s/NO_PROXY/$proxy_env_noproxy/g" -e "s/PORTCNTLM/$port_cntlm/g" -e "s/TYPE_AUTH/$type_cntlm/g" -e "s/AIDE/$sos_info/g" $baserep/esubuntu/param_etab.conf
+sudo -u $SUDO_USER sed -i -e "s/NOMETAB/$nom_etab/g" -e "s/DOMAINNAME/$nom_domaine/g" -e "s/PROXYIP/$proxy/g" -e "s/NO_PROXY/$proxy_env_noproxy/g" -e $baserep/esubuntu/param_etab.conf 2>> $logfile
+sudo -u $SUDO_USER sed -i -e "s/PORTCNTLM/$port_cntlm/g" -e "s/TYPE_AUTH/$type_cntlm/g" -e "s/AIDE/$sos_info/g" $baserep/esubuntu/param_etab.conf 2>> $logfile
 #installation de cntlm 
 sudo apt-get install cntlm 
 
