@@ -112,8 +112,8 @@ cp /tmp/netlogon/icones/$gm_esu/conky/conky.cfg ~/.conky.cfg -fr
 
 # Récupération de l'interface ethernet active
 interfaceeth=$(ifconfig | grep UP,BROADCAST,RUNNING,MULTICAST | awk '{print $1}' | sed 's/://g')
-if grep "Adresse IP : \${addr interfaceeth}" ~/.conky.cfg > /dev/null; then
-	sed -i "s/Adresse IP : \${addr interfaceeth}/Adresse IP : \${addr $interfaceeth}/g" ~/.conky.cfg >> $esublogfile
+if grep "Adresse IP : \${addr INTERFACEETH}" ~/.conky.cfg > /dev/null; then
+	sed -i "s/Adresse IP : \${addr INTERFACEETH}/Adresse IP : \${addr $interfaceeth}/g" ~/.conky.cfg >> $esublogfile
 fi
 if grep "SALLEESU" ~/.conky.cfg > /dev/null; then
 	sed -i "s/SALLEESU/$gm_esu/g" ~/.conky.cfg >> $esublogfile
