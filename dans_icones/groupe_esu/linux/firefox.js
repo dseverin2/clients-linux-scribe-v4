@@ -1,19 +1,17 @@
 // Fichier configuration firefox
 
 // Si vous utilisez un fichier de configuration de proxy, décommentez ci-dessous (+renommer fichier en quesiton) :
-//pref("network.proxy.autoconfig_url", "file:///tmp/netlogon/icones/posteslinux/proxy_etab.pac");
+//pref("network.proxy.autoconfig_url", "file:///tmp/netlogon/icones/SALLEESU/proxy_etab.pac");
 
-// IMPORTANT : Si votre proxy (Amon) n'est pas en 172.18.248.1:3129,  
-//merci de changer les infos juste ci-dessous :
-pref("network.proxy.ftp", "172.18.248.1");
-pref("network.proxy.ftp_port", 3129);
-pref("network.proxy.http", "172.18.248.1");
-pref("network.proxy.http_port", 3129);
+pref("network.proxy.ftp", "PROXY_IP");
+pref("network.proxy.ftp_port", PROXY_PORT);
+pref("network.proxy.http", "PROXY_IP");
+pref("network.proxy.http_port", PROXY_PORT);
 pref("network.proxy.share_proxy_settings", true);
-pref("network.proxy.socks", "172.18.248.1");
-pref("network.proxy.socks_port", 3129);
-pref("network.proxy.ssl", "172.18.248.1");
-pref("network.proxy.ssl_port", 3129);
+pref("network.proxy.socks", "PROXY_IP");
+pref("network.proxy.socks_port", PROXY_PORT);
+pref("network.proxy.ssl", "PROXY_IP");
+pref("network.proxy.ssl_port", PROXY_PORT);
 pref("network.proxy.type", 1);
 
 //pref("network.proxy.share_proxy_settings", true);
