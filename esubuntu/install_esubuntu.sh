@@ -88,10 +88,6 @@ writelog "INITBLOC" "Téléchargement + Mise en place du proxy authentifiant"
 
 if [ "$proxauth" = "true" ] ; then 
 	"$chemin"/install_proxy_auth.sh
-	cp "$chemin"/xdg_autostart/cntlm.desktop /etc/xdg/autostart/
-	writelog "---Attribution des droits sur les fichiers /etc/xdg/autostart"
-	cp "$chemin"/esubuntu/*cntlm* /etc/esubuntu/ -f
-	cp "$chemin"/esubuntu/param_etab.conf /etc/esubuntu/ -f
 fi
 chmod +x /etc/xdg/autostart/*.desktop
 chmod 755 /etc/esubuntu/param_etab.conf

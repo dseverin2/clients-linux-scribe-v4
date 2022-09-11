@@ -18,39 +18,28 @@ then
 fi 
 
 # Verification de la présence des fichiers contenant les fonctions et variables communes
-if [ -e ./esub_functions.sh ]; then
-  my_dir="$(dirname "$0")"
-  source $my_dir/esub_functions.sh
-elif [ -e ../esub_functions.sh ]; then
-  source ../esub_functions.sh
+if [ -e $baserep/esub_functions.sh ]; then
+  source $baserep/esub_functions.sh
 else
-  echo "Fichier esub_functions.sh absent ! Interruption de l'installation."
+  echo "Fichier $baserep/esub_functions.sh absent ! Interruption de l'installation."
   exit
 fi
 
 #determiner le repertoire de lancement
 updatedb
-chemin=$(dirname $(realpath $0)) 
 
 #creation des parametres etablissement
-echo "NOM_ETAB=\"$nom_etab\"" > "$chemin"/esubuntu/param_etab.conf
-echo "DOMAINENAME=\"$nom_domaine\"" >> "$chemin"/esubuntu/param_etab.conf
-echo "PROXY=\"$proxy\"" >> "$chemin"/esubuntu/param_etab.conf
-echo "NOPROXY=\"$proxy_env_noproxy\"" >> "$chemin"/esubuntu/param_etab.conf
-echo "PORTCNTLM=\"$port_cntlm\"" >> "$chemin"/esubuntu/param_etab.conf
-echo "TYPE_AUTH=\"$type_cntlm\"" >> "$chemin"/esubuntu/param_etab.conf
-echo "AIDE=\"$sos_info\"">> "$chemin"/esubuntu/param_etab.conf
-
+sudo -u $SUDO_USER sed -i -e "s/NOMETAB/$nom_etab/g" -e "s/DOMAINNAME/$nom_domaine/g" -e "s/PROXYIP/$proxy/g" -e "s/NO_PROXY/$proxy_env_noproxy/g" -e "s/PORTCNTLM/$port_cntlm/g" -e "s/TYPE_AUTH/$type_cntlm/g" -e "s/AIDE/$sos_info/g" $baserep/esubuntu/param_etab.conf
 #installation de cntlm 
 sudo apt-get install cntlm 
 
 # copie des fichiers
-sudo cp "$chemin"/esubuntu/cntlm.sh /etc/esubuntu/
-sudo cp "$chemin"/esubuntu/reconf_cntlm.sh /etc/esubuntu/
+cp "$baserep"/esubuntu/xdg_autostart/cntlm.desktop /etc/xdg/autostart/
+writelog "---Attribution des droits sur les fichiers /etc/xdg/autostart"
+cp "$baserep"/esubuntu/esubuntu/*cntlm* /etc/esubuntu/ -f
+cp "$baserep"/esubuntu/esubuntu/param_etab.conf /etc/esubuntu/ -f
 sudo chmod +x /etc/esubuntu/*.sh
-sudo cp "$chemin"xdg_autostart/cntlm.desktop /etc/xdg/autostart/
-sudo chmod +x /etc/xdg/autostart/cntlm.desktop
-sudo cp "$chemin"/esubuntu/param_etab.conf /etc/esubuntu/
+sudo chmod a+x /etc/xdg/autostart/*.desktop
 sudo chmod 755 /etc/esubuntu/param_etab.conf
 
 #configuration de cntlm système pour ne pas faire d'interférence avec celui de lutilisateur

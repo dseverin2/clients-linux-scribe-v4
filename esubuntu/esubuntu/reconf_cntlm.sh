@@ -28,7 +28,7 @@ user=$LOGNAME
 pass=$(cut -d \| -f1 <<< "$cfgpass")
 
 echo "Username	$LOGNAME
-Domain		$DOMAINENAME
+Domain		$nom_domaine
 Auth		$TYPE_AUTH
 Proxy		$PROXY
 NoProxy		$NOPROXY
@@ -36,7 +36,7 @@ Listen		$PORTCNTLM" > /$HOME/Documents/cntlm.conf
     
 
 echo $user
-echo $pass | cntlm -H -d $DOMAINENAME -u $LOGNAME >> /$HOME/Documents/cntlm.conf
+echo $pass | cntlm -H -d $nom_domaine -u $LOGNAME >> /$HOME/Documents/cntlm.conf
 
 sed -i "s/Password://g" /$HOME/Documents/cntlm.conf
  ;;
