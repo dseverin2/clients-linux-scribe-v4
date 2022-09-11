@@ -55,15 +55,13 @@ if [ "$version" = "trusty" ] || [ "$version" = "xenial" ] ; then
 fi
 apt-get install -y zenity conky conky-all
 
-writelog "---Copie des fichiers esubuntu de $chemin"/esubuntu/" vers /etc/esubuntu" "---Et de "$chemin"/xdg_autostart vers /etc/xdg/autostart"
-sudo cp "$chemin"/esubuntu/* /etc/esubuntu/
-sudo chmod +x /etc/esubuntu/*.sh
-sudo cp "$chemin"/xdg_autostart/* /etc/xdg/autostart/
-writelog "---Attribution des droits sur les fichiers /etc/xdg/autostart"
-sudo chmod +x /etc/xdg/autostart/cntlm.desktop
-sudo chmod +x /etc/xdg/autostart/message_scribe.desktop
-sudo chmod +x /etc/xdg/autostart/scribe_background.desktop
-sudo chmod 755 /etc/esubuntu/param_etab.conf
+writelog "---Copie des fichiers esubuntu de $chemin"/esubuntu/" vers /etc/esubuntu"
+for i in background conky_scribe groupe message upkg_client; do
+	cp "$chemin"/esubuntu/$i /etc/esubuntu/ -f
+	chmod a+x /etc/esubuntu/*.sh
+done
+cp "$chemin"/xdg_autostart/message* /etc/xdg/autostart/ -f
+cp "$chemin"/xdg_autostart/scribe* /etc/xdg/autostart/ -f
 
 writelog "INITBLOC" "---Gestion du groupe" "------Configuration de la salle"
 echo "$salle" > /etc/GM_ESU
@@ -88,14 +86,14 @@ writelog "3/3-Autoparamétrage... OK"
 writelog "INITBLOC" "Téléchargement + Mise en place du proxy authentifiant"
 
 if [ "$proxauth" = "yes" ] ; then 
-  sudo "$chemin"/install_proxy_auth.sh
-else
-  # supression du cntlm 
-  rm -f /etc/xdg/autostart/cntlm*
-  rm -f /etc/esubuntu/cntlm.sh
-  rm -f /etc/esubuntu/reconf_cntlm.sh
-  rm -f /etc/esubuntu/param_etab.conf
+	"$chemin"/install_proxy_auth.sh
+	cp "$chemin"/xdg_autostart/cntlm.desktop /etc/xdg/autostart/
+	writelog "---Attribution des droits sur les fichiers /etc/xdg/autostart"
+	cp "$chemin"/esubuntu/*cntlm* /etc/esubuntu/ -f
+	cp "$chemin"/esubuntu/param_etab.conf /etc/esubuntu/ -f
 fi
+chmod +x /etc/xdg/autostart/*.desktop
+chmod 755 /etc/esubuntu/param_etab.conf
 writelog "ENDBLOC"
 
 mv $baserep/dans_icones/groupe_esu "$baserep/dans_icones/$salle" 2>> $logfile
