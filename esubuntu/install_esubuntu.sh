@@ -86,7 +86,7 @@ writelog "3/3-Autoparamétrage... OK"
 
 writelog "INITBLOC" "Téléchargement + Mise en place du proxy authentifiant"
 
-if [ "$proxauth" = "yes" ] ; then 
+if [ "$proxauth" = "true" ] ; then 
 	"$chemin"/install_proxy_auth.sh
 	cp "$chemin"/xdg_autostart/cntlm.desktop /etc/xdg/autostart/
 	writelog "---Attribution des droits sur les fichiers /etc/xdg/autostart"
