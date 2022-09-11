@@ -104,7 +104,7 @@ if [ "$version" = "bionic" ] ; then
 
 	writelog "---Google Earth Pro x64" 
 	wget -nc "$wgetparams" -q --no-check-certificate https://dl.google.com/dl/earth/client/current/google-earth-pro-stable_current_amd64.deb ; dpkg -i google-earth-pro-stable_current_amd64.deb ; apt install -fy
-	rm /etc/apt/sources.list.d/google-earth* ; rm google-earth-pro* #dépot google retiré volontairement
+	rm google-earth-pro* #dépot google retiré volontairement
 
 	writelog "---Celestia"
 	wget -nc "$wgetparams" --no-check-certificate https://gitlab.com/simbd/Scripts_Ubuntu/-/blob/7925144bf30ed4c353b9676521d591dc35c97dde/Celestia_pour_Bionic.sh
@@ -125,8 +125,7 @@ if [ "$version" = "focal" ] || [ "$version" = "jammy"] ; then
 
 	writelog "---Google Earth Pro x64" 
 	wget -nc "$wgetparams" -q --no-check-certificate https://dl.google.com/dl/earth/client/current/google-earth-pro-stable_current_amd64.deb  2>> $logfile; dpkg -i google-earth-pro-stable_current_amd64.deb  2>> $logfile; apt install -fy 2>> $logfile
-	rm /etc/apt/sources.list.d/google-earth* ; #dépot google retiré volontairement
-
+	
 	writelog "---Celestia"
 	cp $second_dir/Celestia_pour_focal.sh . 2>> $logfile
 	chmod +x Celestia_pour_focal.sh ; ./Celestia_pour_focal.sh  2>> $logfile; rm Celestia*
