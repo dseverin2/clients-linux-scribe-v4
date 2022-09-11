@@ -247,7 +247,7 @@ if [ "$version" = "bionic" ] || [ "$version" = "focal" ] || [ "$version" = "jamm
 	fi
 
 	writelog "------Openboard"
-	source source $appsdir/installOpenBoard.sh 2>> $logfile
+	source $appsdir/installOpenBoard.sh 2>> $logfile
 	writelog "ENDBLOC"
 
 	apt install --fix-broken -y  2>> $logfile
