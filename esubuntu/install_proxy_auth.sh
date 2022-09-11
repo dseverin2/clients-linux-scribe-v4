@@ -62,8 +62,7 @@ Proxy		$proxy
 NoProxy		$proxy_env_noproxy
 Listen		3129" > /etc/cntlm.conf
 
-#sudo -u "$SUDO_USER"  sed -i -e "s/RNE_ETAB/$rne_etab/g" -e "s/IP_SCRIBE/$scribe_def_ip/g" -e "s/IP_PRONOTE/$pronote/g" -e "s/PORTAIL/$portail/g" -e "s/SALLEESU/$salle/g" -e "s/PROXY_IP/$proxy_def_ip/g" -e "s/PROXY_PORT/$proxy_def_port/g" -e "s/GSETPROXYPORT/$gset_proxy_port/g" -e "s/GSETPROXY/$gset_proxy/g" -e "s/SUBNET/$subnet/g" -e "s/INTERFACEETH/$interfaceeth/g" {} \; 2>> $logfile $baserep/esubuntu/icones/gm_esu/linux -type f -exec 
+sudo -u "$SUDO_USER"  sed -i -e "s/$proxy_def_port/$port_cntlm/g" -e "s/$proxy_def_ip/127.0.0.1/g" $baserep/esubuntu/icones/gm_esu/linux/firefox.js 2>> $logfile 
+sudo -u "$SUDO_USER"  sed -i -e "s/$proxy_def_port/$port_cntlm/g" -e "s/$proxy_def_ip/127.0.0.1/g" $baserep/esubuntu/icones/gm_esu/linux/gset/gset.sh 2>> $logfile 
 
-echo "penser a modifier les paramétre proxy dans firefox.js et dans gset par 127.0.0.1:$port_cntlm"
-writelog "penser a modifier les paramétre proxy dans firefox.js et dans gset par 127.0.0.1:$port_cntlm"
 exit
