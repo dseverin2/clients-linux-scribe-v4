@@ -29,7 +29,6 @@ unzip $baserep/apps/mBlock.zip -d /opt/makeblock/mBlock
 chmod 777 /opt/makeblock/mBlock/resources/web/tmp/project.sb2
 
 #Installation des librairies pour arduino
-cd /usr/share/arduino/lib || exit
 wget -q https://github.com/Makeblock-official/Makeblock-Libraries/archive/master.zip -O /usr/share/arduino/lib/master.zip
 unzip /usr/share/arduino/lib/master.zip
 
