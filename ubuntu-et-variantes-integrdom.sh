@@ -62,8 +62,8 @@ if [ "$UID" -ne "0" ]; then
 	echo "Il faut etre root pour executer ce script. ==> sudo "
 	exit 
 fi 
-
-sudo apt install -y dos2unix
+dpkg --configure -a
+apt install -y dos2unix
 sudo -u "$SUDO_USER" find . -type f -name "*.sh" -exec chmod a+x {} \; -exec dos2unix {} \;
 
 baserep=$(cd $( dirname ${BASH_SOURCE[0]}) && pwd )
