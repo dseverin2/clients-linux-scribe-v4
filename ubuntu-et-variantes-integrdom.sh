@@ -9,7 +9,7 @@
 # - 10/10/2020 (Lecture DVD dans le fichier config)
 # - 27/06/2022 (Prise en charge wallpaper XFCE)
 # - 08/07/2022 (Prise en charge de Jammy Jellyfish 22.04)
-# TEST : Chercher MODIFS (pam delay 10sw)
+# TEST : Voir ligne 411 (nolinux, vers=3.1.1)
 
 
 # Testé & validé pour les distributions suivantes :
@@ -379,7 +379,7 @@ writelog "INITBLOC" "24/42-Paramétrage pour remplir pam_mount.conf" "---/media/
 
 # Obsolète car n'affiche pas le contenu de manière récursive ?!
 eclairng="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"eclairng\" mountpoint=\"/media/Serveur_Scribe\" />"
-if ! grep "/media/Serveur_Scribe" /etc/security/pam_mount.conf.xml  >/dev/null; then
+if ! grep "mountpoint=\"/media/Serveur_Scribe\" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $eclairng" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
@@ -408,6 +408,7 @@ if ! grep "/tmp/netlogon" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $netlogon" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
+# Tester sans le nolinux et eventuellement en vers=3.1.1
 if ! grep "<cifsmount>mount -t cifs //%(SERVER)/%(VOLUME) %(MNTPT) -o \"nolinux,noexec,nosetuids,mapchars,cifsacl,serverino,nobrl,iocharset=utf8,user=%(USER),uid=%(USERUID)%(before=\\",\\" OPTIONS),vers=3.0\"</cifsmount>" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- pam_mount parameters: Volume-related -->/a\<cifsmount>mount -t cifs //%(SERVER)/%(VOLUME) %(MNTPT) -o \"nolinux,noexec,nosetuids,mapchars,cifsacl,serverino,nobrl,iocharset=utf8,user=%(USER),uid=%(USERUID)%(before=\\",\\" OPTIONS),vers=3.0\"</cifsmount>" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
