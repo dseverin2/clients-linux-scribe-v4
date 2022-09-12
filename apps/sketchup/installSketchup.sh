@@ -18,4 +18,5 @@ winecfg
 # Not sur the above works, seems better when launching winetricks, default config then in settings selecting win7.
 # Download from https://www.sketchup.com/fr/sketchup/2017/en/sketchupmake-2017-2-2555-90782-en-x64-exe
 sudo -u $SUDO_USER wget http://www.rossum.fr/technocollege/telechargements/logiciels/SketchupMake2017frx64.exe
+zenity --info text="Dans le fenetre verifier que windows7 est selectionné et dans bibliothèque rajouter riched20"
 sudo -u $SUDO_USER wine *ketchup*.exe
