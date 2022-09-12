@@ -9,7 +9,7 @@
 # - 10/10/2020 (Lecture DVD dans le fichier config)
 # - 27/06/2022 (Prise en charge wallpaper XFCE)
 # - 08/07/2022 (Prise en charge de Jammy Jellyfish 22.04)
-# TEST : Chercher MODIFS (pam delay 10sw)
+# TEST : Voir ligne 411 (nolinux, vers=3.1.1)
 
 
 # Testé & validé pour les distributions suivantes :
@@ -384,22 +384,22 @@ if ! grep "/media/Serveur_Scribe" /etc/security/pam_mount.conf.xml  >/dev/null; 
 fi
 
 homes="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"perso\" mountpoint=\"~/Documents\" />"
-if ! grep "mountpoint=\"~/Documents\"" /etc/security/pam_mount.conf.xml  >/dev/null; then
+if ! grep "~/Documents" /etc/security/pam_mount.conf.xml  >/dev/null; then
  sed -i "/<\!-- Volume definitions -->/a\ $homes" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
 groupes="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"groupes\" mountpoint=\"~/Groupes\" />"
-if ! grep "mountpoint=\"~/Groupes\"" /etc/security/pam_mount.conf.xml  >/dev/null; then
+if ! grep "~/Groupes" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $groupes" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
 commun="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"commun\" mountpoint=\"~/Commun\" />"
-if ! grep "mountpoint=\"~/Commun\"" /etc/security/pam_mount.conf.xml  >/dev/null; then
+if ! grep "~/Commun" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $commun" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
 professeurs="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"professeurs\" mountpoint=\"~/professeurs\" />"
-if ! grep "mountpoint=\"~/professeurs\"" /etc/security/pam_mount.conf.xml  >/dev/null; then
+if ! grep "~/professeurs" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $professeurs" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
@@ -408,6 +408,7 @@ if ! grep "/tmp/netlogon" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $netlogon" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
+# Tester sans le nolinux et eventuellement en vers=3.1.1
 if ! grep "<cifsmount>mount -t cifs //%(SERVER)/%(VOLUME) %(MNTPT) -o \"nolinux,noexec,nosetuids,mapchars,cifsacl,serverino,nobrl,iocharset=utf8,user=%(USER),uid=%(USERUID)%(before=\\",\\" OPTIONS),vers=3.0\"</cifsmount>" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- pam_mount parameters: Volume-related -->/a\<cifsmount>mount -t cifs //%(SERVER)/%(VOLUME) %(MNTPT) -o \"nolinux,noexec,nosetuids,mapchars,cifsacl,serverino,nobrl,iocharset=utf8,user=%(USER),uid=%(USERUID)%(before=\\",\\" OPTIONS),vers=3.0\"</cifsmount>" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
