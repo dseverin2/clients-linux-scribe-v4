@@ -29,7 +29,20 @@ fi
 updatedb
 
 echo "---creation des parametres etablissement" >> $logfile
-sed -i -e "s/NOMETAB/$nom_etab/g" -e "s/DOMAINNAME/$nom_domaine/g" -e "s/PROXYIP/$proxy/g" -e "s/NO_PROXY/$proxy_env_noproxy/g" -e "s/PORTCNTLM/$port_cntlm/g" -e "s/TYPE_AUTH/$type_cntlm/g" -e "s/AIDE/$sos_info/g" $baserep/esubuntu/esubuntu/param_etab.conf 2>> $logfile
+sed -i -e "s/NOMETAB/$nom_etab/g" $baserep/esubuntu/esubuntu/param_etab.conf 2>> $logfile
+echo "---1" >> $logfile
+sed -i -e "s/DOMAINNAME/$nom_domaine/g" $baserep/esubuntu/esubuntu/param_etab.conf 2>> $logfile
+echo "---2" >> $logfile
+sed -i -e "s/PROXYIP/$proxy/g" $baserep/esubuntu/esubuntu/param_etab.conf 2>> $logfile
+echo "---3" >> $logfile
+sed -i -e "s/NO_PROXY/$proxy_env_noproxy/g" $baserep/esubuntu/esubuntu/param_etab.conf 2>> $logfile
+echo "---4" >> $logfile
+sed -i -e "s/PORTCNTLM/$port_cntlm/g" $baserep/esubuntu/esubuntu/param_etab.conf 2>> $logfile
+echo "---5" >> $logfile
+sed -i -e "s/TYPE_AUTH/$type_cntlm/g" $baserep/esubuntu/esubuntu/param_etab.conf 2>> $logfile
+echo "---6" >> $logfile
+sed -i -e "s/AIDE/$sos_info/g" $baserep/esubuntu/esubuntu/param_etab.conf 2>> $logfile
+echo "---7" >> $logfile
 echo "---installation de cntlm" >> $logfile 
 sudo apt-get install cntlm 
 
