@@ -521,16 +521,7 @@ fi
 # installation de chromium
 ########################################################################
 echo "install chromium"
-echo '
-Package: *
-Pin: release o=LP-PPA-phd-chromium-browser
-Pin-Priority: 1001
-' | sudo tee /etc/apt/preferences.d/phd-chromium-browser
-if ! grep ppa.launchpad.net/chromium-browser/ubuntu /etc/apt/sources.list >/dev/null; then
-	sudo add-apt-repository ppa:phd/chromium-browser -y 2>> $logfile
-fi
-sudo apt update 2>> $logfile
-sudo apt install chromium-browser --install-suggests -y 2>> $logfile
+snap install chromium
 if [ -e /usr/bin/chromium-browser ]; then
         sudo ln -s /usr/bin/chromium-browser /usr/bin/chromium
 elif [ -e /usr/bin/chromium ]; then
