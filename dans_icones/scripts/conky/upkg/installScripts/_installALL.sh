@@ -14,9 +14,6 @@ sudo apt autoremove -y
 echo "--- Installation des logiciels"
 # Update Libreoffice 7.2
 if [ ! -e /usr/share/libreoffice7.2 ]; then
-	#export http_proxy=http://esubuntuapt:Zaf1r4poRSrt4dkkfs2d12z5@172.18.248.1:3129
-	#export https_proxy=https://esubuntuapt:Zaf1r4poRSrt4dkkfs2d12z5@172.18.248.1:3129
-	#sudo -E add-apt-repository ppa:libreoffice/ppa
 	sudo apt remove libreoffice -y
 	sudo dpkg -i /media/Serveur_Scribe/commun/logiciels/apt/LibreOffice/LibreOffice_7.2.0_Linux_x86-64_deb/*.deb
 	sudo touch /usr/share/libreoffice7.2
