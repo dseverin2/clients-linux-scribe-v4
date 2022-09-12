@@ -29,7 +29,7 @@ fi
 updatedb
 
 echo "---creation des parametres etablissement" >> $logfile
-sudo -u $SUDO_USER sed -i -e "s/NOMETAB/$nom_etab/g" -e "s/DOMAINNAME/$nom_domaine/g" -e "s/PROXYIP/$proxy/g" -e "s/NO_PROXY/$proxy_env_noproxy/g" -e "s/PORTCNTLM/$port_cntlm/g" -e "s/TYPE_AUTH/$type_cntlm/g" -e "s/AIDE/$sos_info/g" $baserep/esubuntu/esubuntu/param_etab.conf 2>> $logfile
+sed -i -e "s/NOMETAB/$nom_etab/g" -e "s/DOMAINNAME/$nom_domaine/g" -e "s/PROXYIP/$proxy/g" -e "s/NO_PROXY/$proxy_env_noproxy/g" -e "s/PORTCNTLM/$port_cntlm/g" -e "s/TYPE_AUTH/$type_cntlm/g" -e "s/AIDE/$sos_info/g" $baserep/esubuntu/esubuntu/param_etab.conf 2>> $logfile
 echo "---installation de cntlm" >> $logfile 
 sudo apt-get install cntlm 
 
@@ -52,7 +52,7 @@ NoProxy		$proxy_env_noproxy
 Listen		3129" > /etc/cntlm.conf
 
 echo "---changement proxy dans firefox.js et gset.sh" >> $logfile
-sudo -u "$SUDO_USER"  sed -i -e "s/$proxy_def_port/$port_cntlm/g" -e "s/$proxy_def_ip/127.0.0.1/g" $baserep/esubuntu/icones/gm_esu/linux/firefox.js 2>> $logfile 
-sudo -u "$SUDO_USER"  sed -i -e "s/$proxy_def_port/$port_cntlm/g" -e "s/$proxy_def_ip/127.0.0.1/g" $baserep/esubuntu/icones/gm_esu/linux/gset/gset.sh 2>> $logfile 
+sed -i -e "s/$proxy_def_port/$port_cntlm/g" -e "s/$proxy_def_ip/127.0.0.1/g" $baserep/esubuntu/icones/gm_esu/linux/firefox.js 2>> $logfile 
+sed -i -e "s/$proxy_def_port/$port_cntlm/g" -e "s/$proxy_def_ip/127.0.0.1/g" $baserep/esubuntu/icones/gm_esu/linux/gset/gset.sh 2>> $logfile 
 
 exit
