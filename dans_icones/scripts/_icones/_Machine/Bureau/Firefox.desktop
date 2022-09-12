@@ -8,7 +8,7 @@ GenericName=Web Browser
 GenericName[fr]=Navigateur Web
 Keywords=Internet;WWW;Browser;Web;Explorer
 Keywords[fr]=Internet;WWW;Browser;Web;Explorateur
-Exec=firefox %u "https://www.qwant.com/?l=fr"
+Exec=firefox %u "BROWSERSTARTPAGE"
 Terminal=false
 X-MultipleArgs=false
 Type=Application

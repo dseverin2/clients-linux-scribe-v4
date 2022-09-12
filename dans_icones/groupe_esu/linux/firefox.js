@@ -18,7 +18,8 @@ pref("network.proxy.type", 1);
 pref("network.proxy.no_proxies_on", "127.0.0.1, localhost");
 
 // Page de démarrage
-//pref("browser.startup.homepage", "https://lite.qwant.com");
+pref("browser.startup.homepage", "BROWSERSTARTPAGE | http://hubole.ac-reunion.fr | https://PORTAIL");
+pref("network.proxy.no_proxies_on", "127.0.0.1, localhost , ubuntu.com , RNE_ETAB, IP_SCRIBE, IP_PRONOTE, PORTAIL");
 
 // disable default browser check
 pref("browser.shell.checkDefaultBrowser", false);

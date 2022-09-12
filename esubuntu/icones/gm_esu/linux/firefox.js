@@ -7,7 +7,7 @@ pref("network.proxy.type", 2);
 pref("network.proxy.no_proxies_on", "127.0.0.1, localhost , ubuntu.com , RNE_ETAB, IP_SCRIBE, IP_PRONOTE, PORTAIL");
 
 // Définition de la page d'accueil
-pref("browser.startup.homepage", "https://www.qwant.com/ | http://hubole.ac-reunion.fr | https://PORTAIL");
+pref("browser.startup.homepage", "BROWSERSTARTPAGE | http://hubole.ac-reunion.fr | https://PORTAIL");
 
 // disable default browser check
 pref("browser.shell.checkDefaultBrowser", false);
