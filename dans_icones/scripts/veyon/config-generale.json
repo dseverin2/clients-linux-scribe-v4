@@ -15,8 +15,8 @@
         "KeyAuthenticationEnabled": "true",
         "LogonAuthenticationEnabled": "false",
         "Method": "0",
-        "PrivateKeyBaseDir": "/media/Serveur_Scribe/commun/logiciels/Veyon/Keys/private",
-        "PublicKeyBaseDir": "/media/Serveur_Scribe/commun/logiciels/Veyon/Keys/public"
+        "PrivateKeyBaseDir": "~/commun/logiciels/Veyon/Keys/private",
+        "PublicKeyBaseDir": "~/commun/logiciels/Veyon/Keys/public"
     },
     "BuiltinDirectory": {
         "NetworkObjects": {
@@ -530,8 +530,8 @@
         "MemoryLimit": "320"
     },
     "Directories": {
-        "Screenshots": "/media/Serveur_Scribe/commun/logiciels/Veyon/INFO/Screenshots",
-        "UserConfiguration": "/media/Serveur_Scribe/commun/logiciels/Veyon/INFO/Config"
+        "Screenshots": "~/commun/logiciels/Veyon/INFO/Screenshots",
+        "UserConfiguration": "~/commun/logiciels/Veyon/INFO/Config"
     },
     "ExternalVncServer": {
         "Password": "6c5132f5ce049198d457f15ded8abd0f4b041296ff0681ce1e11d57e025b88a4ae7102f2ccb44a2d446d354351dede2fbf80c98e2132b70ad9f7a96f1204a3d46ad25f8da9e1db248498a05ebaf4889c4e65d8c52de078db3884cb39ef3646a039f0ddac66b36c4a20e874b4c89f05b79769e43cdc98add5086a940dc2125ef7853f7bfea9713d9eac7bfffe62367776e2510d8cb243bc5e759bb64835af98b3d253582ebc7ac595da9396a290c7b7c25dd2660f85941225de72347ebf7221c6d330043489c9db24bebf808019cec1f668fdba4297f91a9ce716f7aa0ed7ce808edcd4ad8a0c33ec861c490c0ef4691a9432615ad46c7bd9c8c596367881513de6e7dac56b21d875a6b36544ace2202e5abc40850c974f6a3f3cc7af7b9d086aacb99bcd2c7dd585cb769439f91294e5a48f1aebe97057c5f719a2d3ec738fceca21dbce7b60403dad5899695fb85f89266632e719093ac26fafd971e47bf0ad0c7ad434faf2819530ca1a4613b04fbcaa2cdd9b559b6bf9a3b7ad810067b00a41c1683a71aa9cfdac500ce19664b6aa2f28eecbdab5be454d9e65a3994f22b99f300a77dd1b157fade01a458454d83d566e96ad3d0a25b30167583f78f2be6dadb80062b90da4d85e7a1b4907c67efa7d0bdf85b18cb7e979dc947f7a1c9bef9b665349a664868ed1f73511c2902b2f1e0144ff79d8f6934a6ce3297423f43e",
@@ -560,7 +560,7 @@
         }
     },
     "Logging": {
-        "LogFileDirectory": "/media/Serveur_Scribe/commun/logiciels/Veyon/INFO/Temp",
+        "LogFileDirectory": "~/commun/logiciels/Veyon/INFO/Temp",
         "LogFileRotationCount": "10",
         "LogFileRotationEnabled": "false",
         "LogFileSizeLimit": "100",

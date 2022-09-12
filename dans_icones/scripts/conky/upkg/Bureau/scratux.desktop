@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=scratux
-Exec=/opt/scratux/scratux %U
-Terminal=false
-Type=Application
-Icon=scratux
-StartupWMClass=scratux
-Comment=A free programming language where you can create your own interactive stories, games, and animations
-Categories=Education;

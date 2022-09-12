@@ -21,13 +21,13 @@ source /tmp/netlogon/icones/linux-grp_eole/firefox/prof_firefox.sh
 if [ "$config" = "1" ]; then
 	if [ ! -e /usr/bin/veyon-cli ]; then
 		sudo apt install -y g++ libc6-dev make cmake qtbase5-dev qtbase5-private-dev qtbase5-dev-tools qttools5-dev qttools5-dev-tools qtdeclarative5-dev qtquickcontrols2-5-dev libfakekey-dev xorg-dev libxtst-dev libjpeg-dev zlib1g-dev libssl-dev libpam0g-dev libprocps-dev liblzo2-dev libqca-qt5-2-dev libldap2-dev libsasl2-dev
-		sudo dpkg -i /media/Serveur_Scribe/commun/logiciels/LINUX/libprocps8_3.3.16-1ubuntu2_amd64.deb
-		sudo dpkg -i /media/Serveur_Scribe/commun/logiciels/LINUX/veyon_4.5.4-0-ubuntu-focal_amd64.deb
+		sudo dpkg -i ~/commun/logiciels/LINUX/libprocps8_3.3.16-1ubuntu2_amd64.deb
+		sudo dpkg -i ~/commun/logiciels/LINUX/veyon_4.5.4-0-ubuntu-focal_amd64.deb
 	fi
 	echo Importation de la configuration;
-	sudo /usr/bin/veyon-cli authkeys import professeurs/private /media/Serveur_Scribe/commun/logiciels/Veyon/Keys/private/professeurs/key
-	sudo /usr/bin/veyon-cli authkeys import professeurs/public /media/Serveur_Scribe/commun/logiciels/Veyon/Keys/public/professeurs/key
-	sudo /usr/bin/veyon-cli config import /media/Serveur_Scribe/commun/logiciels/Veyon/config.json;
+	sudo /usr/bin/veyon-cli authkeys import professeurs/private ~/commun/logiciels/Veyon/Keys/private/professeurs/key
+	sudo /usr/bin/veyon-cli authkeys import professeurs/public ~/communn/logiciels/Veyon/Keys/public/professeurs/key
+	sudo /usr/bin/veyon-cli config import ~/commun/logiciels/Veyon/config.json;
 else
 	echo Pas de salle trouvée pour $str1;
 fi

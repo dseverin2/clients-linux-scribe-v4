@@ -8,6 +8,6 @@ do
 	if [[ $str1 =~ $a* ]]; then
 		salle=$a;
 		echo Importation de la configuration;
-		sudo /usr/bin/veyon-cli config import /media/Serveur_Scribe/commun/logiciels/Veyon/$salle/config-generale.json;
+		sudo /usr/bin/veyon-cli config import ~/commun/logiciels/Veyon/$salle/config-generale.json;
 	fi
 done
