@@ -1,18 +1,26 @@
 echo "install chromium"
-echo "deb http://deb.debian.org/debian/ stable main
-deb http://deb.debian.org/debian/ stable-updates main
-deb http://deb.debian.org/debian-security stable/updates main" > /etc/apt/sources.list.d/debian-for-nosnaps.list
+apt remove chromium-browser chromium-browser-l10n chromium-codecs-ffmpeg-extra
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/debian-buster.gpg] http://deb.debian.org/debian buster main
+deb [arch=amd64 signed-by=/usr/share/keyrings/debian-buster-updates.gpg] http://deb.debian.org/debian buster-updates main
+deb [arch=amd64 signed-by=/usr/share/keyrings/debian-security-buster.gpg] http://deb.debian.org/debian-security buster/updates main" > /etc/apt/sources.list.d/debian-for-nosnaps.list
 apt install debian-archive-keyring
 apt-key add /usr/share/keyrings/debian-archive-keyring.gpg
 
 #Bloquer tous les paquets de Debian sauf Chromium
-echo "Package: *
-Pin: origin "deb.debian.org"
-Pin-Priority: -1
+echo "# Note: 2 blank lines are required between entries
+Package: *
+Pin: release a=eoan
+Pin-Priority: 500
 
-Package: chromium* libicu63 libjpeg62-turbo libvpx5 libevent-2.1-6
+Package: *
 Pin: origin "deb.debian.org"
-Pin-Priority: 99" > /etc/apt/preferences.d/debian-for-nosnaps
+Pin-Priority: 300
+
+# Pattern includes 'chromium', 'chromium-browser' and similarly
+# named dependencies:
+Package: chromium*
+Pin: origin "deb.debian.org"
+Pin-Priority: 700" > /etc/apt/preferences.d/debian-for-nosnaps
 
 apt update
 apt install chromium chromium-l10n
