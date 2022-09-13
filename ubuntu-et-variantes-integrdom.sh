@@ -524,13 +524,7 @@ fi
 ########################################################################
 # installation de chromium
 ########################################################################
-echo "install chromium"
-snap install chromium
-if [ -e /usr/bin/chromium-browser ]; then
-        sudo ln -s /usr/bin/chromium-browser /usr/bin/chromium
-elif [ -e /usr/bin/chromium ]; then
-	sudo ln -s /usr/bin/chromium /usr/bin/chromium-browser
-fi
+source $baserep/apps/installChromium.sh
 
 writelog "41/42-Nettoyage de la station avant clonage"
 {
