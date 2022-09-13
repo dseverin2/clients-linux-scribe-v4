@@ -159,6 +159,8 @@ if $esubuntu; then
 	# Mise en place des wallpapers pour les élèves, profs, admin 
 	writelog "-----Copie des wallpapers"
 	cp -fr ./wallpaper/ /usr/share/ 2>> $logfile
+	chmod a+x /usr/share/wallpaper
+	chmod a+r /usr/share/wallpaper/*
 	writelog "ENDBLOC"
 fi
 
