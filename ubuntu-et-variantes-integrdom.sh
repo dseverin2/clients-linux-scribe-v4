@@ -542,8 +542,6 @@ writelog "41/42-Nettoyage de la station avant clonage"
 	apt upgrade -y 2>> $logfile
 	apt dist-upgrade -y 2>> $logfile
 } 2>> $logfile
-clear
-
 
 ###################################################
 # cron d'extinction automatique à lancer ?
