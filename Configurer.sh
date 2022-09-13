@@ -15,10 +15,9 @@ retour=$(yad --title="Paramétrage Domaine 1/3" --form\
  --field="Proxy Authentifiant":CHK\
  --field="IP Proxy":CBE\
  --field="Port Proxy (défaut)":CBE\
- --field="Port Proxy (alt)":CBE\
  --field="No Proxy Gnome":CBE\
  --field="No Proxy Env":CBE\
- -- "$installdepuisdomaine" "$scribe_def_ip" "$scribeuserapt" "$scribepass" "$proxauth" "$proxy_def_ip" "$proxy_def_port" "$proxy_alt_port" "$proxy_gnome_noproxy" "$proxy_env_noproxy")
+ -- "$installdepuisdomaine" "$scribe_def_ip" "$scribeuserapt" "$scribepass" "$proxauth" "$proxy_def_ip" "$proxy_def_port" "$proxy_gnome_noproxy" "$proxy_env_noproxy")
 echo "$retour"
 
 dom=$(echo $retour | awk 'BEGIN {FS="|" } { print $1 }')
@@ -35,11 +34,9 @@ ipprox=$(echo $retour | awk 'BEGIN {FS="|" } { print $6 }')
 if [ "$ipprox" != "" ]; then sed -i -e "s/^proxy_def_ip=.*/proxy_def_ip=\"$ipprox\"/g" "$conf"; fi
 portprox=$(echo $retour | awk 'BEGIN {FS="|" } { print $7 }')
 if [ "$portprox" != "" ]; then sed -i -e "s/^proxy_def_port=.*/proxy_def_port=\"$portprox\"/g" "$conf"; fi
-portprox2=$(echo $retour | awk 'BEGIN {FS="|" } { print $8 }')
-if [ "$portprox2" != "" ]; then sed -i -e "s/^proxy_alt_port=.*/proxy_alt_port=\"$portprox2\"/g" "$conf"; fi
-noproxgn=$(echo $retour | awk 'BEGIN {FS="|" } { print $9 }'| sed 's/\//\\\//g')
+noproxgn=$(echo $retour | awk 'BEGIN {FS="|" } { print $8 }'| sed 's/\//\\\//g')
 if [ "$noproxgn" != "" ]; then sed -i -e "s/^proxy_gnome_noproxy=.*/proxy_gnome_noproxy=\"$noproxgn\"/g" "$conf"; fi
-noproxen=$(echo $retour | awk 'BEGIN {FS="|" } { print $10 }' | sed 's/\//\\\//g')
+noproxen=$(echo $retour | awk 'BEGIN {FS="|" } { print $9 }' | sed 's/\//\\\//g')
 if [ "$noproxen" != "" ]; then sed -i -e "s/^proxy_env_noproxy=.*/proxy_env_noproxy=\"$noproxen\"/g" "$conf"; fi
 
 retour=$(yad --title="Paramétrage Esubuntu 2/3" --form\
