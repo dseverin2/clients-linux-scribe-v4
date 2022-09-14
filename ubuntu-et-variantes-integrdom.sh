@@ -9,7 +9,7 @@
 # - 10/10/2020 (Lecture DVD dans le fichier config)
 # - 27/06/2022 (Prise en charge wallpaper XFCE)
 # - 08/07/2022 (Prise en charge de Jammy Jellyfish 22.04)
-# TEST : Voir ligne 411 (nolinux, vers=3.1.1)
+# TEST : Voir ligne 408 et 419 (icones pour admin et vers=3.1.1)
 
 
 # Testé & validé pour les distributions suivantes :
@@ -405,6 +405,7 @@ if ! grep "~/professeurs" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $professeurs" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
+#Ajout "test" d'un lien vers icones dans ~
 adminicones="<volume user=admin fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"netlogon/icones\" mountpoint=\"~/icones\" />"
 if ! grep "~/icones" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $adminicones" /etc/security/pam_mount.conf.xml 2>> $logfile
