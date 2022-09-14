@@ -30,3 +30,8 @@ if [ -e /usr/bin/chromium-browser ]; then
 elif [ -e /usr/bin/chromium ]; then
 	sudo ln -s /usr/bin/chromium /usr/bin/chromium-browser
 fi
+
+#AUTREOPTION
+#sudo add-apt-repository ppa:system76/pop
+#sudo apt install chromium
+#
