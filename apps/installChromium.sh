@@ -1,30 +1,41 @@
 echo "install chromium"
-apt remove chromium-browser chromium-browser-l10n chromium-codecs-ffmpeg-extra
-#echo "deb [arch=amd64 signed-by=/usr/share/keyrings/debian-buster.gpg] http://deb.debian.org/debian buster main
-#deb [arch=amd64 signed-by=/usr/share/keyrings/debian-buster-updates.gpg] http://deb.debian.org/debian buster-updates main
-#deb [arch=amd64 signed-by=/usr/share/keyrings/debian-security-buster.gpg] http://deb.debian.org/debian-security buster/updates main" > /etc/apt/sources.list.d/debian-for-nosnaps.list
-apt install debian-archive-keyring
-apt-key add /usr/share/keyrings/debian-archive-keyring.gpg
-
-#Bloquer tous les paquets de Debian sauf Chromium
-echo "# Note: 2 blank lines are required between entries
+#!/bin/sh
+sudo apt -y remove chromium-browser chromium-browser-l10n chromium-codecs-ffmpeg-extra
+cat <<EOF >/etc/apt/sources.list.d/debian.list
+deb http://ftp.debian.org/debian unstable main contrib non-free
+EOF
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0E98404D386FA1D9
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
+cat <<EOF >/etc/apt/preferences.d/chromium.pref
 Package: *
-Pin: release a=focal
+Pin: release o=Ubuntu
 Pin-Priority: 500
 
 Package: *
-Pin: origin "deb.debian.org"
+Pin: release o=Debian
 Pin-Priority: 300
 
-# Pattern includes 'chromium', 'chromium-browser' and similarly
-# named dependencies:
-Package: chromium*
-Pin: origin "deb.debian.org"
-Pin-Priority: 700" > /etc/apt/preferences.d/debian-for-nosnaps
+# Pattern includes 'chromium', 'chromium-browser' and similarly named
+# dependencies, and the Debian ffmpeg packages that conflict with the Ubuntu
+# versions.
+Package: chromium* src:ffmpeg*
+Pin: release o=Debian
+Pin-Priority: 700
+EOF
 
-apt update
-apt install chromium 
-apt install chromium-l10n
+sudo apt -y update
+sudo apt -y -t unstable install chromium chromium-sandbox chromium-l10n chromium-shell chromium-driver
+
+# Add --no-sandbox option to .desktop file for Termux, sandbox does not work
+# with proot.
+if [ -n "$ANDROID_ROOT" ]; then
+	mkdir -p ~/.local/share/applications
+	sed -e 's,^Exec=/usr/bin/chromium ,& --no-sandbox ,' /usr/share/applications/chromium.desktop \
+		> ~/.local/share/applications/chromium.desktop
+
+	update-desktop-database >/dev/null 2>&1
+fi
+
 if [ -e /usr/bin/chromium-browser ]; then
         sudo ln -s /usr/bin/chromium-browser /usr/bin/chromium
 elif [ -e /usr/bin/chromium ]; then
