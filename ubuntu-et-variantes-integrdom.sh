@@ -466,12 +466,10 @@ fi
 
 # Droits sur le dossier /etc/skel
 if [ "$version" = "xenial" ] || [ "$version" = "bionic" ]  || [ "$version" = "focal" ] || [ "$version" = "jammy" ]; then
-	if [ "$version" = "xenial" ] || [ "$version" = "bionic" ]; then
-		sed -i "30i\session optional        pam_mkhomedir.so" /etc/pam.d/common-session 2>> $logfile
-	elif [ "$version" = "focal" ] || [ "$version" = "jammy" ]; then
+	if [ "$version" = "focal" ] || [ "$version" = "jammy" ]; then
 		sed -i "30i\session optional        pam_umask=0022 skel=/etc/skel" /etc/pam.d/common-session  2>> $logfile
-		sed -i "30i\session optional        pam_mkhomedir.so" /etc/pam.d/common-session 2>> $logfile
 	fi
+	sed -i "30i\session optional        pam_mkhomedir.so" /etc/pam.d/common-session 2>> $logfile
 	writelog "35/42-Création de raccourcis sur le bureau + dans dossier utilisateur (commun+perso+lespartages)"
 	
 	# Détermination et importation du skel spécifique
