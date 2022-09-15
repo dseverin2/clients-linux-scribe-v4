@@ -406,7 +406,7 @@ if ! grep "~/professeurs" /etc/security/pam_mount.conf.xml  >/dev/null; then
 fi
 
 #Ajout "test" d'un lien vers icones dans ~
-adminicones="<volume user=admin fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"netlogon/icones\" mountpoint=\"~/icones\" />"
+adminicones="<volume user="admin" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"netlogon/icones\" mountpoint=\"~/icones\" />"
 if ! grep "~/icones" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $adminicones" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
