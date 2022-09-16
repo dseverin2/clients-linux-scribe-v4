@@ -19,13 +19,9 @@ g_esu=$(cat $HOME/gr_scribe.txt)
 g_classe=$(cat $HOME/gr_classe.txt)
 
 
-if [ "$g_esu" = "eleves" ]
-then
+if [ "$g_esu" = "eleves" ]; then
 sed 's/domainUsers//g' $HOME/gr_classe.txt
-echo -e "Bureau : $g_esu"
-echo -e "\t Groupe : $gm_esu"
-else
-echo -e "Bureau : $g_esu"
-echo -e "\t Groupe : $gm_esu"
 fi
+echo -e "Bureau : $g_esu"
+echo -e "\t Groupe : $gm_esu"
 exit 0
