@@ -5,7 +5,11 @@ sudo add-apt-repository ppa:saiarcot895/chromium-beta -y
 apt install chromium-browser --install-suggests -y
 
 if [ -e /usr/bin/chromium-browser ]; then
-        sudo ln -s /usr/bin/chromium-browser /usr/bin/chromium
+	sudo ln -s /usr/bin/chromium-browser /usr/bin/chromium
+	sudo ln -s /etc/chromium-browser /etc/chromium
 elif [ -e /usr/bin/chromium ]; then
 	sudo ln -s /usr/bin/chromium /usr/bin/chromium-browser
+	sudo ln -s /etc/chromium /etc/chromium-browser
 fi
+
+cp -f $baserep/dans_icones/scripts/chromium/master_preferences /etc/chromium-browser/master_preferences
