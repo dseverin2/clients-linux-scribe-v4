@@ -32,3 +32,5 @@ grep "/usr/bin/recup_pin/" /etc/profile > /dev/null
 if [ $? -ne 0 ]; then
 	echo "/usr/bin/recup_pin/recup_pin.sh" >> /etc/profile
 fi
+
+chmod a+rw $driverfile
