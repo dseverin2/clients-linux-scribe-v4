@@ -47,7 +47,7 @@ pass=$(cut -d \| -f1 <<< "$cfgpass")
 
 echo "On génère le fichier conf pour cntlm avec l'identifiant scribe :" >> $esublogfile
 echo "Username	$LOGNAME
-Domain		$nom_domaine
+Domain		$domaine_local
 Auth		$TYPE_AUTH
 Proxy		$PROXY
 NoProxy		$NOPROXY
@@ -55,7 +55,7 @@ Listen		$PORTCNTLM" > /$HOME/Documents/cntlm.conf
 cat /$HOME/Documents/cntlm.conf >> $esublogfile
     
 echo "Génération du mot de passe en hasch pour fichier conf du cntlm" >> $esublogfile
-echo $pass | cntlm -H -d $nom_domaine -u $LOGNAME >> /$HOME/Documents/cntlm.conf
+echo $pass | cntlm -H -d $domaine_local -u $LOGNAME >> /$HOME/Documents/cntlm.conf
 
 sed -i "s/Password://g" /$HOME/Documents/cntlm.conf
  ;;

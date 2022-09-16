@@ -1,4 +1,5 @@
 #!/bin/bash
+# Version 16.09.2022
 
 if $(dpkg-query -Wf'${Status}' yad 2>/dev/null | grep -q "install ok installed"); then
  sudo apt remove -y yad
@@ -7,7 +8,7 @@ sudo apt install yad -y
 conf="$baserep/config.cfg"
 source "$conf"
 
-retour=$(yad --title="Paramétrage Domaine 1/3" --form\
+retour=$(yad --title="Paramétrage Accès Web 1/3" --form\
  --field="Installation Depuis Domaine":CHK\
  --field="IP Scribe":CBE\
  --field="APT Username":CBE\
@@ -15,9 +16,8 @@ retour=$(yad --title="Paramétrage Domaine 1/3" --form\
  --field="Proxy Authentifiant":CHK\
  --field="IP Proxy":CBE\
  --field="Port Proxy (défaut)":CBE\
- --field="No Proxy Gnome":CBE\
- --field="No Proxy Env":CBE\
- -- "$installdepuisdomaine" "$scribe_def_ip" "$scribeuserapt" "$scribepass" "$proxauth" "$proxy_def_ip" "$proxy_def_port" "$proxy_gnome_noproxy" "$proxy_env_noproxy")
+ --field="Domaine académique":CBE\
+ -- "$installdepuisdomaine" "$scribe_def_ip" "$scribeuserapt" "$scribepass" "$proxauth" "$proxy_def_ip" "$proxy_def_port" "$domaine_acad")
 echo "$retour"
 
 dom=$(echo $retour | awk 'BEGIN {FS="|" } { print $1 }')
@@ -34,21 +34,19 @@ ipprox=$(echo $retour | awk 'BEGIN {FS="|" } { print $6 }')
 if [ "$ipprox" != "" ]; then sed -i -e "s/^proxy_def_ip=.*/proxy_def_ip=\"$ipprox\"/g" "$conf"; fi
 portprox=$(echo $retour | awk 'BEGIN {FS="|" } { print $7 }')
 if [ "$portprox" != "" ]; then sed -i -e "s/^proxy_def_port=.*/proxy_def_port=\"$portprox\"/g" "$conf"; fi
-noproxgn=$(echo $retour | awk 'BEGIN {FS="|" } { print $8 }'| sed 's/\//\\\//g')
-if [ "$noproxgn" != "" ]; then sed -i -e "s/^proxy_gnome_noproxy=.*/proxy_gnome_noproxy=\"$noproxgn\"/g" "$conf"; fi
-noproxen=$(echo $retour | awk 'BEGIN {FS="|" } { print $9 }' | sed 's/\//\\\//g')
-if [ "$noproxen" != "" ]; then sed -i -e "s/^proxy_env_noproxy=.*/proxy_env_noproxy=\"$noproxen\"/g" "$conf"; fi
+domacad=$(echo $retour | awk 'BEGIN {FS="|" } { print $8 }')
+if [ "$domacad" != "" ]; then sed -i -e "s/^domaine_acad=.*/domaine_acad=\"$domacad\"/g" "$conf"; fi
 
-retour=$(yad --title="Paramétrage Esubuntu 2/3" --form\
+retour=$(yad --title="Paramétrage Domaine & Esu 2/3" --form\
  --field="Esubuntu":CHK\
  --field="Nom Etablissement":CBE\
  --field="Port CNTLM":CBE\
  --field="Type CNTLM":CBE\
- --field="Nom Domaine":CBE\
+ --field="Nom Domaine Local":CBE\
  --field="SOS Problème info":CBE\
  --field="Salle":CBE\
  --field="RNE":CBE\
- -- "$esubuntu" "$nom_etab" "$port_cntlm" "$type_cntlm" "$nom_domaine" "$sos_info" "$salle" "$rne_etab")
+ -- "$esubuntu" "$nom_etab" "$port_cntlm" "$type_cntlm" "$domaine_local" "$sos_info" "$salle" "$rne_etab")
 echo "$retour"
 
 
@@ -61,7 +59,7 @@ if [ "$pcntlm" != "" ]; then sed -i -e "s/^port_cntlm=.*/port_cntlm=\"$pcntlm\"/
 tcntlm=$(echo $retour | awk 'BEGIN {FS="|" } { print $4 }')
 if [ "$tcntlm" != "" ]; then sed -i -e "s/^type_cntlm=.*/type_cntlm=\"$tcntlm\"/g" "$conf"; fi
 ndom=$(echo $retour | awk 'BEGIN {FS="|" } { print $5 }' | sed 's/\//\\\//g')
-if [ "$ndom" != "" ]; then sed -i -e "s/^nom_domaine=.*/nom_domaine=\"$ndom\"/g" "$conf"; fi
+if [ "$ndom" != "" ]; then sed -i -e "s/^domaine_local=.*/domaine_local=\"$ndom\"/g" "$conf"; fi
 sos=$(echo $retour | awk 'BEGIN {FS="|" } { print $6 }' | sed 's/\//\\\//g')
 if [ "$sos" != "" ]; then sed -i -e "s/^sos_info=.*/sos_info=\"$sos\"/g" "$conf"; fi
 lieu=$(echo $retour | awk 'BEGIN {FS="|" } { print $7 }')
