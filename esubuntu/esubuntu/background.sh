@@ -98,6 +98,11 @@ if [ "$XDG_CURRENT_DESKTOP" = "MATE" ] ; then
 	gsettings set org.mate.background picture-filename "$wallpaper"
 elif [ "$XDG_CURRENT_DESKTOP" = "XFCE" ]; then
 	xsetbg -onroot -fullscreen "$wallpaper"
+	for a in 0 1; do
+		for b in 0 1 2 3 4 5; do
+			xfconf-query -c xfce4-desktop -p /backdrop/screen$a/monitorVirtual$b/workspace0/last-image -s "$wallpaper"
+		done
+	done
 else
 	gsettings set org.gnome.desktop.background picture-uri "file:///"$wallpaper""
 fi
