@@ -339,10 +339,8 @@ if [ "$(command -v pcmanfm)" = "/usr/bin/pcmanfm" ]; then
 	apt purge -y abiword gnumeric pidgin transmission-gtk sylpheed audacious guvcview 2>> $logfile
 fi
 
-# Si XFCE install du gestionnaire de wallpaper
-if [ "$XDG_CURRENT_DESKTOP" = "XFCE" ]; then
-	sudo apt-get install xloadimage
-fi
+# gestionnaire de wallpaper
+apt-get install xloadimage
 
 ########################################################################
 # Spécifique Gnome Shell
