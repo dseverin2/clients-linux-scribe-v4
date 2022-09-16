@@ -6,7 +6,7 @@
 # - 01 Avril 2015
 # - CALPETARD Olivier
 
-gm_esu=grp_eole
+gm_esu=linux-grp_eole
 #les fichiers se trouvent dans icones$ 
 #lecture du groupe ESU
 if [ -f "/etc/GM_ESU" ];then

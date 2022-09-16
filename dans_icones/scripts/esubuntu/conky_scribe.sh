@@ -8,7 +8,7 @@
 # - le fichiers conf de conky se trouve dans icone/$gm_esu/conky/conky.cfg
 
 #groupe machine
-gm_esu=grp_eole
+gm_esu=linux-grp_eole
 if [ -f "/etc/GM_ESU" ];then
 
 gm_esu=$(cat /etc/GM_ESU)

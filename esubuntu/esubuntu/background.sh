@@ -16,7 +16,7 @@ groupe=$GROUPS
 
 #les fichiers se trouvent dans icones$ 
 #lecture du groupe ESU
-gm_esu=grp_eole
+gm_esu=linux-grp_eole
 
 if [ -f "/etc/GM_ESU" ];then
 	echo "Le PC est dans le groupe esu"

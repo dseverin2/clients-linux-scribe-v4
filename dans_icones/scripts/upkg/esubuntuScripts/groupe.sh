@@ -45,7 +45,7 @@ if [ groupe=10000 ] || [ groupe=10001 ] || [ groupe=10002 ]; then
 	
 		if [ -z "$salle" ]; then
 			echo "le pc n'existe pas dans la liste" >> $conkylogfile
-			salle=grp_eole
+			salle=linux-grp_eole
 		else
 			salle=$salle
 			nom=$nom

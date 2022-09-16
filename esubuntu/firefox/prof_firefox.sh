@@ -13,7 +13,7 @@ echo  "installation profil firefox eole scribe"
 
 #les fichiers se trouvent dans icones$ 
 #lecture du groupe ESU
-gm_esu=grp_eole
+gm_esu=linux-grp_eole
 
 if [ -f "/etc/GM_ESU" ];then
 

@@ -9,7 +9,7 @@
 
 #les fichier se trouve dans icones$
 #lancement de upkg client seulement si le compte utilisateur utilise une session scribe
-gm_esu=grp_eole
+gm_esu=linux-grp_eole
 #lecture du groupe ESU
 if [ -f "/etc/GM_ESU" ];then
 echo "Le PC est dans le groupe esu"
