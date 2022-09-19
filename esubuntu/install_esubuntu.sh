@@ -75,7 +75,7 @@ writelog "ENDBLOC"
 ##############################################################################
 ### Auto paramétrage de gset, firefox et conky
 ##############################################################################
-if [ "$salle" != "linux-grp_eole"]; then
+if [ "$salle" != "linux-grp_eole" ]; then
 	cp -fr $baserep/dans_icones/groupe_esu $baserep/dans_icones/linux-grp_eole
 fi
 
@@ -84,7 +84,7 @@ fi
 ##############################################################################
 sudo -u "$SUDO_USER" find $baserep/dans_icones/groupe_esu/ -type f -exec sed -i -e "s/RNE_ETAB/$rne_etab/g" -e "s/IP_SCRIBE/$scribe_def_ip/g" -e "s/IP_PRONOTE/$pronote/g" -e "s/PORTAIL/$portail/g" -e "s/SALLEESU/$salle/g" -e "s/PROXY_IP/$proxy_def_ip/g" -e "s/PROXY_PORT/$proxy_def_port/g" -e "s/GSETPROXYPORT/$gset_proxy_port/g" -e "s/GSETPROXY/$gset_proxy/g" -e "s/SUBNET/$subnet/g" {} \; 2>> $logfile
 sudo -u "$SUDO_USER" find $baserep/esubuntu/icones/gm_esu/ -type f -exec sed -i -e "s/RNE_ETAB/$rne_etab/g" -e "s/IP_SCRIBE/$scribe_def_ip/g" -e "s/IP_PRONOTE/$pronote/g" -e "s/PORTAIL/$portail/g" -e "s/SALLEESU/$salle/g" -e "s/PROXY_IP/$proxy_def_ip/g" -e "s/PROXY_PORT/$proxy_def_port/g" -e "s/GSETPROXYPORT/$gset_proxy_port/g" -e "s/GSETPROXY/$gset_proxy/g" -e "s/SUBNET/$subnet/g" {} \; 2>> $logfile
-if [ "$salle" != "linux-grp_eole"]; then
+if [ "$salle" != "linux-grp_eole" ]; then
 	sudo -u "$SUDO_USER" find $baserep/dans_icones/linux-grp_eole/ -type f -exec sed -i -e "s/RNE_ETAB/$rne_etab/g" -e "s/IP_SCRIBE/$scribe_def_ip/g" -e "s/IP_PRONOTE/$pronote/g" -e "s/PORTAIL/$portail/g" -e "s/SALLEESU/linux-grp_eole/g" -e "s/PROXY_IP/$proxy_def_ip/g" -e "s/PROXY_PORT/$proxy_def_port/g" -e "s/GSETPROXYPORT/$gset_proxy_port/g" -e "s/GSETPROXY/$gset_proxy/g" -e "s/SUBNET/$subnet/g" {} \; 2>> $logfile
 fi
 sudo -u "$SUDO_USER" find $baserep/esubuntu/ -type f -exec sed -i -e "s/BROWSERSTARTPAGE/$pagedemarragepardefaut/g" -e "s/PORTAIL/$portail/g" {} \; 2>> $logfile
