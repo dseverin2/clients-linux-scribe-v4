@@ -210,11 +210,6 @@ echo "Unattended-Upgrade::Allowed-Origins {
 //      \"${distro_id}:${distro_codename}-backports\";
 };" >> /etc/apt/apt.conf.d/50unattended-upgrades 2>> $logfile
 
-########################################################################
-# Supprimer le démarrage automatique du connectivityCheck
-########################################################################
-addtoend /var/lib/NetworkManager/NetworkManager-intern.conf "[connectivity] 
-.set.enabled=false"
 
 ########################################################################
 # Configuration du fichier pour le LDAP /etc/ldap.conf
@@ -377,10 +372,9 @@ fi
 ########################################################################
 writelog "INITBLOC" "24/42-Paramétrage pour remplir pam_mount.conf" "---/media/Serveur_Scribe"
 
-# Obsolète car n'affiche pas le contenu de manière récursive ?!
-eclairng="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"eclairng\" mountpoint=\"/media/Serveur_Scribe/\" />"
-if ! grep "/media/Serveur_Scribe/" /etc/security/pam_mount.conf.xml  >/dev/null; then
-  sed -i "/<\!-- Volume definitions -->/a\ $eclairng" /etc/security/pam_mount.conf.xml 2>> $logfile
+eclairNG="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"eclairng\" mountpoint=\"/media/Scribe\" />"
+if ! grep "/media/Scribe" /etc/security/pam_mount.conf.xml  >/dev/null; then
+ sed -i "/<\!-- Volume definitions -->/a\ $eclairNG" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
 homes="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"perso\" mountpoint=\"~/Documents\" />"
@@ -527,6 +521,12 @@ fi
 # installation de chromium
 ########################################################################
 source $baserep/apps/installChromium.sh
+
+########################################################################
+# Supprimer le démarrage automatique du connectivityCheck
+########################################################################
+echo "[connectivity] 
+.set.enabled=false" > /var/lib/NetworkManager/NetworkManager-intern.conf 2>>$logfile
 
 writelog "41/42-Nettoyage de la station avant clonage"
 {
