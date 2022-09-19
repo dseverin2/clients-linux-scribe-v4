@@ -150,8 +150,8 @@ fi
 ####################################################
 if $esubuntu; then 
 	writelog "INITBLOC" "6/42-Installation d'ESUBUNTU"
-	if [ ! -e ./esubuntu ]; then
-		writelog "---Le répertoire esubuntu est absent. Interruption de l'installation"
+	if [ ! -d $baserep/esubuntu ]; then
+		writelog "-----Repertoire esubuntu absent. Interruption de l'installation"
 		exit
 	fi
 	./esubuntu/install_esubuntu.sh 2>> $logfile
