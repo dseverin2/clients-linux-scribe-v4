@@ -160,6 +160,8 @@ writelog "ENDBLOC"
 
 writelog "INITBLOC" "[ Web ]"
 apt-get install -y default-jre adobe-flashplugin ; #permet d'avoir flash en même temps pour firefox et chromium 2>> $logfile
+wget -nc -q "$wgetparams" --no-check-certificate http://packages.linuxmint.com/pool/main/w/webapp-manager/webapp-manager_1.1.1_all.deb
+gdebi webapp-manager_1.1.1_all.deb -y
 writelog "ENDBLOC"
 
 writelog "INITBLOC" "[ Video / Audio ]"
@@ -184,7 +186,7 @@ apt-get install -y algobox carmetal scilab geophar 2>> $logfile
 writelog "ENDBLOC"
 
 writelog "INITBLOC" "[ Sciences ]"
-apt-get install -y stellarium avogadro python-mecavideo gnuplot -y 2>> $logfile
+apt-get install -y stellarium avogadro python-mecavideo gnuplot sweethome3d -y 2>> $logfile
 writelog "ENDBLOC"
 
 writelog "INITBLOC" "[ Programmation ]"
