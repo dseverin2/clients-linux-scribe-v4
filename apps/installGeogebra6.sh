@@ -9,4 +9,4 @@
 # On récupère directement le fichier deb
 sudo apt remove --purge geogebra
 wget -q "$wgetparams" --no-check-certificate -np -l 1 -r -A amd64.deb https://www.geogebra.net/linux/pool/main/g/geogebra-classic/
-sudo dpkg -i www.geogebra.net/linux/pool/main/g/geogebra-classic*amd64.deb || sudo apt-get --fix-broken install
+sudo dpkg -i www.geogebra.net/linux/pool/main/g/geogebra-classic/geogebra-classic*amd64.deb || sudo apt-get --fix-broken install
