@@ -133,6 +133,6 @@ echo "Lancement du gpo lecture fichier gset du groupe esu :" >> $esublogfile
 cp /tmp/netlogon/icones/$gm_esu/linux/gset/gset.sh /tmp
 chmod +x /tmp/gset.sh
 /tmp/gset.sh
-rm /tmp/gset.sh
+rm -f /tmp/gset.sh
 echo "Fin" >> $esublogfile
 exit 0
