@@ -2,6 +2,10 @@
 echo "install chromium"
 sudo apt remove chromium-beta -y
 sudo snap remove chromium
+export HTTP_PROXY=http://$scribeuserapt:$scribepass@$proxy_def_ip:$proxy_def_port
+export HTTPS_PROXY=http://$scribeuserapt:$scribepass@$proxy_def_ip:$proxy_def_port
+export http_proxy=http://$scribeuserapt:$scribepass@$proxy_def_ip:$proxy_def_port
+export https_proxy=http://$scribeuserapt:$scribepass@$proxy_def_ip:$proxy_def_port
 
 sudo -E add-apt-repository ppa:saiarcot895/chromium-beta -y
 sudo apt install chromium-browser --install-suggests -y
