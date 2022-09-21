@@ -520,7 +520,7 @@ fi
 ########################################################################
 # installation de chromium
 ########################################################################
-source $baserep/apps/installChromium.sh
+sudo -u $SUDO_USER $baserep/apps/installChromium.sh
 
 ########################################################################
 # Supprimer le démarrage automatique du connectivityCheck
