@@ -49,7 +49,7 @@ sudo mkdir /etc/esubuntu/
 writelog "---Installation de cntlm zenity et conky"
 if [ "$version" = "trusty" ] || [ "$version" = "xenial" ] ; then
 	writelog "------Ajout du ppa uniquement pour trusty et xenial"
-    add-apt-repository -y ppa:vincent-c/conky #conky est backporté pour avoir une version récente quelque soit la distrib
+    sudo add-apt-repository -E -y ppa:vincent-c/conky #conky est backporté pour avoir une version récente quelque soit la distrib
     apt-get update
 fi
 apt-get install -y zenity conky conky-all
