@@ -1,6 +1,7 @@
 #!/bin/sh
 echo "install chromium"
-sudo apt remove chromium-beta -y
+source $baserep/config.cfg
+sudo apt remove chromium-browser -y
 sudo snap remove chromium
 
 sudo -E add-apt-repository ppa:saiarcot895/chromium-beta -y
