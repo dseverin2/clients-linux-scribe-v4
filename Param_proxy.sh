@@ -56,7 +56,7 @@ Acquire::https::proxy \"http://$scribeuserapt:$scribepass@$proxy_def_ip:$proxy_d
 	#Permettre d'utiliser la commande add-apt-repository derrière un Proxy
 	######################################################################
 	writelog "---Autorisation de la commande add-apt-repository derrière un proxy"
-	addtoend /etc/sudoers "Defaults env_keep += ftp_proxy http_proxy https_proxy no_proxy" 2>> $logfile
+	addtoend /etc/sudoers "Defaults env_keep += \"ftp_proxy http_proxy https_proxy no_proxy\"" 2>> $logfile
 	
 	#Paramétrage du Proxy pour snap
 	######################################################################
