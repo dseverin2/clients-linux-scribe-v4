@@ -1,6 +1,5 @@
 #!/bin/sh
 echo "---Installation de chromium"
-source $baserep/config.cfg
 echo "---Installation de chromium---" >> $logfile
 sudo apt remove chromium-browser -y
 sudo snap remove chromium
