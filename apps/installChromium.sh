@@ -1,8 +1,14 @@
 #!/bin/sh
-echo "install chromium"
+echo "---Installation de chromium"
 source $baserep/config.cfg
+echo "---Installation de chromium---" >> $logfile
 sudo apt remove chromium-browser -y
 sudo snap remove chromium
+
+for i in http_proxy https_proxy HTTPS_PROXY HTTP_PROXY; do
+	export $i=http://$scribeuserapt:$scribepass@$proxy_def_ip:$proxy_def_port 2>> $logfile;
+	echo export $i=http://$scribeuserapt:$scribepass@$proxy_def_ip:$proxy_def_port >> $logfile;
+done
 
 sudo -E add-apt-repository ppa:saiarcot895/chromium-beta -y
 sudo apt install chromium-browser --install-suggests -y
@@ -17,3 +23,4 @@ fi
 
 sudo cp -f $baserep/dans_icones/scripts/chromium/master_preferences /etc/chromium-browser/master_preferences
 sudo ln -s /etc/chromium-browser/master_preferences /etc/chromium/master_preferences
+echo "---Fin installation de chromium---"
