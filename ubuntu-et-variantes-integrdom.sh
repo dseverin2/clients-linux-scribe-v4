@@ -74,7 +74,7 @@ if [ -e ./esub_functions.sh ]; then
 	# Création du fichier de log
 	initlog
 	writelog "1/42-Installation de net-tools et python"
-	apt install net-tools python -y
+	apt install net-tools python-is-python3 -y
 	versionPython=$(python -V 2>&1 | grep -Po '(?<=Python )(.+)')
 	# Verification de l'existence d'une mise à jour des scripts sur le git
 	writelog "2/42-Fichiers de configuration... OK"
@@ -96,7 +96,7 @@ majIntegrdom
 
 while [[ -z "$versionPython" ]]; do
 	echo "-----Python non installé : installation en cours-----"
-	apt install net-tools python -y
+	apt install net-tools python-is-python3 -y
 done
 
 if $installdepuisdomaine; then
