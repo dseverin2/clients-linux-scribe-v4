@@ -548,7 +548,8 @@ if [ "$extinction" != "" ]; then
 fi
 
 writelog "FIN de l'integration"
-sudo -u $SUDO_USER zenity --info --width=600 --text="S'il n'existe pas encore copier le dossier _dans_icone/$salle dans icones" 
+sudo -u $SUDO_USER zenity --info --width=600 --text="S'il n'existe pas encore copier le dossier _dans_icone/$salle dans icones
+Pensez aussi à ajouter cette machine au fichier liste_pc_esu.csv dans /tmp/netlogon/icones/scripts/liste_pc_esu.csv" 
 if $reboot; then
 	reboot
 else

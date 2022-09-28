@@ -2,19 +2,17 @@
 
 #### utilitaire pour upkg ####
 # - récupère la valeur du groupe et execute upkg_client si 
-# - ver 2.3
-# - 09 mai 2022
+# - ver 2.4
+# - 28 septembre 2022
 # - CALPETARD Olivier
 # - SEVERIN Didier
 
-#administratif = 10000
-#prof = 10001
-#eleve = 10002
-groupe=$GROUPS
+groupe=$GROUPS 				#administratif = 10000 //  prof = 10001  // eleve = 10002
 netlogonIcons="/tmp/netlogon/icones"
-esublogfile="/tmp/esubupkg.log"
-if [ -e $esublogfile ]; then rm -f $esublogfile; fi
-echo `date` > $esublogfile
+if [ ! -e "$HOME/.esubuntu" ]; then mkdir "$HOME/.esubuntu"; fi
+grouplogfile="$HOME/.esubuntu/groupe-sh.log"
+echo `date` > $grouplogfile
+
 case $groupe in
 10000)
 	usergrp="administratif"
@@ -29,22 +27,20 @@ case $groupe in
 	usergrp="undefined"
 	;;
 esac
-echo "Groupe trouvé : $usergrp" >> $esublogfile
+echo "Groupe trouvé : $usergrp" >> $grouplogfile
 
 
-if [ groupe=10000 ] || [ groupe=10001 ] || [ groupe=10002 ]; then
-	#controle de la présence du fichier liste_pc.csv dans icones qui sert de référence 
-	echo "controle presence liste_pc_esu.csv dans icones";
+if [ "$usergrp" != "undefined" ]; then
  	if [ -f $netlogonIcons/scripts/liste_pc_esu.csv ]; then 
-		echo "La liste des pc existe" >> $esublogfile
+		echo "La liste $netlogonIcons/scripts/liste_pc_esu.csv existe" >> $grouplogfile
+		
 		#recherche nom du pc et son groupe dans le fichier
-
 		adresseMAC=$(cat /sys/class/net/$(ip route show default | awk '/default/ {print $5}')/address)
 		nom=$(grep $adresseMAC $netlogonIcons/scripts/liste_pc_esu.csv | awk -F',' ' {gsub("\r","",$2); printf $2 } ' )
 		salle=$(grep $adresseMAC $netlogonIcons/scripts/liste_pc_esu.csv | awk -F',' ' {gsub("\r","",$1); printf $3 } ' )
 	
 		if [ -z "$salle" ]; then
-			echo "le pc n'existe pas dans la liste" >> $esublogfile
+			echo "le pc n'existe pas dans la liste" >> $grouplogfile
 			salle=linux-grp_eole
 		else
 			salle=$salle
@@ -53,16 +49,16 @@ if [ groupe=10000 ] || [ groupe=10001 ] || [ groupe=10002 ]; then
 	
 		regname=$(cat /etc/hostname)
 		if [ "$regname" = "$nom" ]; then
-			echo "hostname est correctement renseigné"
+			echo "Hostname est correctement renseigné / NOM_PC : $nom" >> $grouplogfile
 		else
-			echo "mise à jour de hostname"
-			echo -e $nom | tee /etc/hostname >> $esublogfile
+			echo "Mise à jour de hostname / NOM_PC : $nom" >> $grouplogfile
+			echo -e $nom | tee /etc/hostname
 		fi	
 	
 		gm_esu=$(cat /etc/GM_ESU)
 
 		if [ $gm_esu != $salle ]; then
-			echo "$salle"
+			echo "Nouveau groupe de machines : $salle" >> $grouplogfile
 			echo "$salle" > /etc/GM_ESU
 
 			#firefox
@@ -71,20 +67,18 @@ if [ groupe=10000 ] || [ groupe=10001 ] || [ groupe=10002 ]; then
 			echo '//
 pref("autoadmin.global_config_url", "file://$netlogonIcons/'$gm_esu'/linux/firefox.js", locked); '> /usr/lib/firefox/firefox.cfg
 		else
-			echo meme groupe on ne fait rien
+			echo "Même groupe de machines : $salle" >> $grouplogfile
 		fi
 		cp -f $netlogonIcons/$gm_esu/linux/chromium/master_preferences /etc/chromium/
-		echo "MAC "$adresseMAC" / host "$nom" / salle "$salle >> $esublogfile
 	else 
-		echo "La liste des pc n'existe pas"
-		#on ne tient pas compte des groupes esu par rapport au fichier
+		echo "ERREUR : La liste $netlogonIcons/scripts/liste_pc_esu.csv n'existe pas" >> $grouplogfile
 	fi
 else 
-	echo  "Groupe de l'utilisateur incorrect"
-	echo  "Groupe de l'utilisateur incorrect" >> $esublogfile
+	echo "ERREUR : Groupe de l'utilisateur incorrect : gid $groupe" >> $grouplogfile
+	echo  "Groupe de l'utilisateur incorrect" >> $grouplogfile
 	exit 0
 fi
 
 #execution de upkg
-sudo sh /etc/esubuntu/upkg_client.sh >> $esublogfile
+sudo sh /etc/esubuntu/upkg_client.sh >> $grouplogfile
 exit 0
