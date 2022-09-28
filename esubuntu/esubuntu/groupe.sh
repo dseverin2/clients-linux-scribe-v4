@@ -73,7 +73,7 @@ pref("autoadmin.global_config_url", "file://$netlogonIcons/'$gm_esu'/linux/firef
 		else
 			echo meme groupe on ne fait rien
 		fi
-		sudo cp -f $netlogonIcons/$gm_esu/linux/chromium/master_preferences /etc/chromium/
+		cp -f $netlogonIcons/$gm_esu/linux/chromium/master_preferences /etc/chromium/
 		echo "MAC "$adresseMAC" / host "$nom" / salle "$salle >> $esublogfile
 	else 
 		echo "La liste des pc n'existe pas"
