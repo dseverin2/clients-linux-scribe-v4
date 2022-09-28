@@ -1,3 +1,4 @@
+#!/bin/bash
 scripts="/tmp/netlogon/icones/scripts"
 for i in `ls /tmp/netlogon/icones/ | grep 'linux'`;
 	grpmachine="/tmp/netlogon/icones/$i"
@@ -5,15 +6,14 @@ for i in `ls /tmp/netlogon/icones/ | grep 'linux'`;
 	echo "1/2 - Copie des scripts"
 	#Esubuntu
 	cp -fp $scripts/esubuntu/*.sh /tmp/netlogon/icones/$i/esubuntu/
-	cp -fp $scripts/linux/* /tmp/netlogon/icones/$i/linux/
+	cp -fpr $scripts/linux/ /tmp/netlogon/icones/$i/
 	#Installateurs communs et stamp.date
 	cp -frp $scripts/*install* /tmp/netlogon/icones/$i/linux/upkg/
 	cp -frp $scripts/stamp* /tmp/netlogon/icones/$i/linux/upkg/
 	#Conky
 	cp -frp $scripts/conky /tmp/netlogon/icones/$i/
-	#Firefox
-	cp -frp $scripts/linux/firefox.js /tmp/netlogon/icones/$i/firefox.js
-	cp -frp $scripts/chromium /tmp/netlogon/icones/$i/	
+	#Firefox & chromium
+	cp -frp $scripts/linux/ /tmp/netlogon/icones/$i/
 	echo "2/2 - Creation des dossiers bureau"
 	for j in '_Machine' 'administratifs' 'DomainAdmins' 'eleves' 'professeurs'; do
 		if [ ! -d /tmp/netlogon/icones/$i/$j/Bureau/ ]; then
