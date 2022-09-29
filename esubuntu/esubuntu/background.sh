@@ -5,7 +5,7 @@
 # - gestion des restriction gsetting
 # - Préparation des icônes du bureau
 # - ver 2.8
-# - 31 août 2022
+# - 29 septembre 2022
 # - CALPETARD Olivier
 # - SEVERIN Didier 
 
@@ -101,7 +101,7 @@ if [ "$XDG_CURRENT_DESKTOP" = "MATE" ] ; then
 elif [ "$XDG_CURRENT_DESKTOP" = "XFCE" ]; then
 	xsetbg -onroot -fullscreen "$wallpaper"
 	for a in 0 1; do
-		for b in 0 1 2 3 4 5; do
+		for b in 0 1 2 3; do
 			xfconf-query -c xfce4-desktop -p /backdrop/screen$a/monitorVGA-$b/workspace0/last-image -s "$wallpaper"
 		done
 	done
@@ -116,8 +116,8 @@ echo "Lancement de conky avec lecture du fichier de conf :" >> $backgroundlogfil
 cp /tmp/netlogon/icones/$gm_esu/conky/conky.cfg ~/.conky.cfg -fr
 
 # Récupération de l'interface ethernet active
-interfaceeth=`ip -br link | grep 'UP' | grep -v 'OWN' | awk '{ print $1 }'`
-#interfaceeth=$(ifconfig | grep UP,BROADCAST,RUNNING,MULTICAST | awk '{print $1}' | sed 's/://g')
+#interfaceeth=`ip -br link | grep 'UP' | grep -v 'OWN' | awk '{ print $1 }'`
+interfaceeth=$(ifconfig | grep UP,BROADCAST,RUNNING,MULTICAST | awk '{print $1}' | sed 's/://g')
 if grep "Adresse IP : \${addr INTERFACEETH}" ~/.conky.cfg > /dev/null; then
 	sed -i "s/Adresse IP : \${addr INTERFACEETH}/Adresse IP : \${addr $interfaceeth}/g" ~/.conky.cfg >> $backgroundlogfile
 fi

@@ -9,7 +9,7 @@
 
 groupe=$GROUPS 				#administratif = 10000 //  prof = 10001  // eleve = 10002
 netlogonIcons="/tmp/netlogon/icones"
-if [ ! -e "$HOME/.esubuntu" ]; then mkdir "$HOME/.esubuntu"; fi
+if [ ! -d "$HOME/.esubuntu" ]; then mkdir "$HOME/.esubuntu"; fi
 grouplogfile="$HOME/.esubuntu/groupe-sh.log"
 echo `date` > $grouplogfile
 
