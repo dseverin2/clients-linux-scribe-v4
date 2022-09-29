@@ -165,7 +165,7 @@ gdebi webapp-manager_1.1.1_all.deb -y
 writelog "ENDBLOC"
 
 writelog "INITBLOC" "[ Video / Audio ]"
-apt-get install -y imagination openshot audacity vlc x264 ffmpeg2theora flac vorbis-tools lame oggvideotools mplayer ogmrip goobox 2>> $logfile
+apt-get install -y imagination openshot audacity vlc x264 ffmpeg2theora flac vorbis-tools lame oggvideotools mplayer ogmrip goobox cheese guvcview gnome-video-effects-frei0r gnome-video-effects-extra 2>> $logfile
 writelog "ENDBLOC"
 
 writelog "INITBLOC" "[ Graphisme / Photo ]"
