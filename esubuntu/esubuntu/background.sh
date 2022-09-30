@@ -9,10 +9,11 @@
 # - CALPETARD Olivier
 # - SEVERIN Didier 
 
-esublogdir="$HOME/.esubuntu"
+esublogdir="/tmp/.esubuntu"
 if [ ! -d $esublogdir ]; then mkdir $esublogdir; fi
 backgroundlogfile="$esublogdir/background-sh.log"
-echo `date` > $backgroundlogfile
+echo "LOG de /etc/esubuntu/groupe.sh lancé par $USER" > $backgroundlogfile
+echo `date` | tee -a $backgroundlogfile
 
 groupe=$GROUPS
 
@@ -25,7 +26,7 @@ if [ -f "/etc/GM_ESU" ];then
 	gm_esu=$(cat /etc/GM_ESU)
 fi
 
-echo "Le PC est dans le groupe esu $gm_esu" >> $backgroundlogfile
+echo "Le PC est dans le groupe esu $gm_esu" | tee -a $backgroundlogfile
 
 sleep 2
 
@@ -72,7 +73,7 @@ else
 		;;
 	*)
 		variable=undefined
-		echo "Groupe trouvé : $variable" >> $backgroundlogfile
+		echo "Groupe trouvé : $variable" | tee -a $backgroundlogfile
 		gsettings set org.gnome.desktop.background picture-uri "file:///home/$USER/Images/images.jpg"
 		exit 0
 		;;
@@ -86,14 +87,14 @@ find ~/Bureau/ -type f -name *.desktop -exec gio set {} metadata::trusted true \
 if [ -e /usr/local/bin/sketchup.sh ]; then
     bash -c "sudo /usr/local/bin/sketchup.sh $(whoami) > ~/.sketchup.log 2>&1"
 fi
-echo "Groupe trouvé : $variable" >> $backgroundlogfile
+echo "Groupe trouvé : $variable" | tee -a $backgroundlogfile
 
 ######################################################################
 #                            PARAM WALLPAPER                         #
 ######################################################################
 
 wallpaper=$(cat /tmp/netlogon/icones/$gm_esu/$variable.txt)
-echo "Wallpaper : $wallpaper" >> $backgroundlogfile
+echo "Wallpaper : $wallpaper" | tee -a $backgroundlogfile
 
 #pour ubuntu mate
 if [ "$XDG_CURRENT_DESKTOP" = "MATE" ] ; then
@@ -112,17 +113,17 @@ fi
 ######################################################################
 #                            PARAM CONKY                             #
 ######################################################################
-echo "Lancement de conky avec lecture du fichier de conf :" >> $backgroundlogfile
+echo "Lancement de conky avec lecture du fichier de conf :" | tee -a $backgroundlogfile
 cp /tmp/netlogon/icones/$gm_esu/conky/conky.cfg ~/.conky.cfg -fr
 
 # Récupération de l'interface ethernet active
 #interfaceeth=`ip -br link | grep 'UP' | grep -v 'OWN' | awk '{ print $1 }'`
 interfaceeth=$(ifconfig | grep UP,BROADCAST,RUNNING,MULTICAST | awk '{print $1}' | sed 's/://g')
 if grep "Adresse IP : \${addr INTERFACEETH}" ~/.conky.cfg > /dev/null; then
-	sed -i "s/Adresse IP : \${addr INTERFACEETH}/Adresse IP : \${addr $interfaceeth}/g" ~/.conky.cfg >> $backgroundlogfile
+	sed -i "s/Adresse IP : \${addr INTERFACEETH}/Adresse IP : \${addr $interfaceeth}/g" ~/.conky.cfg | tee -a $backgroundlogfile
 fi
 if grep "SALLEESU" ~/.conky.cfg > /dev/null; then
-	sed -i "s/SALLEESU/$gm_esu/g" ~/.conky.cfg >> $backgroundlogfile
+	sed -i "s/SALLEESU/$gm_esu/g" ~/.conky.cfg | tee -a $backgroundlogfile
 fi
 conky -c ~/.conky.cfg
 
@@ -130,10 +131,10 @@ conky -c ~/.conky.cfg
 ######################################################################
 #                            PARAM GSET                              #
 ######################################################################
-echo "Lancement du gpo lecture fichier gset du groupe esu :" >> $backgroundlogfile
+echo "Lancement du gpo lecture fichier gset du groupe esu :" | tee -a $backgroundlogfile
 cp /tmp/netlogon/icones/$gm_esu/linux/gset/gset.sh /tmp
 chmod +x /tmp/gset.sh
 /tmp/gset.sh
 rm -f /tmp/gset.sh
-echo "Fin" >> $backgroundlogfile
+echo "Fin" | tee -a $backgroundlogfile
 exit 0

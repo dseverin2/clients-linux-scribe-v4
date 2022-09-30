@@ -105,6 +105,12 @@ writelog "ENDBLOC"
 
 mv $baserep/dans_icones/groupe_esu "$baserep/dans_icones/$salle" 2>> $logfile
 
+writelog "INITBLOC" "Création des fichiers de log"
+mkdir /tmp/.esubuntu/
+for i in background upkgclient groupe; do touch /tmp/.esubuntu/$i-sh.log; done
+chmod 666 /tmp/.esubuntu/*
+chmod 755 /tmp/.esubuntu/
+
 ## 3 dernières lignes non activés car ce script est appelé par l'autre (intgrdom) et il ne faut pas interrompre pendant l'install
 #echo "C'est fini ! bienvenue dans le groupe $salle..."
 #echo "Pour compléter le système installer un serveur apt-cacher et un poste pour gérer les impressions des autres"
