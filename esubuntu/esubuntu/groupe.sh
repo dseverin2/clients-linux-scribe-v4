@@ -7,7 +7,9 @@
 # - CALPETARD Olivier
 # - SEVERIN Didier
 
-groupe=$GROUPS 				#administratif = 10000 //  prof = 10001  // eleve = 10002
+#administratif = 10000 //  prof = 10001  // eleve = 10002
+groupe=$GROUPS 				
+
 netlogonIcons="/tmp/netlogon/icones"
 if [ ! -d "/tmp/.esubuntu" ]; then mkdir "/tmp/.esubuntu"; fi
 grouplogfile="/tmp/.esubuntu/groupe-sh.log"

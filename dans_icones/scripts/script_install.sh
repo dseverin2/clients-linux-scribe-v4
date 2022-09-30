@@ -6,8 +6,8 @@ touch $logfile
 
 # Récupération et application de la configuration du poste
 echo "2-Récupération et application de la configuration du poste"
-source /tmp/netlogon/icones/scripts/installScripts/_configALL.sh
+source /tmp/netlogon/icones/scripts/configScripts/_configALL.sh
 
 # Installations et Désinstallations (Modifiables)
 echo "3-Lancement des installations et désinstallations"
-source /tmp/netlogon/icones/scripts/installScripts/_installALL.sh
+source /tmp/netlogon/icones/scripts/configScripts/_installALL.sh
