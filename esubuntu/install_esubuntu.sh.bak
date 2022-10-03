@@ -106,7 +106,7 @@ writelog "ENDBLOC"
 mv $baserep/dans_icones/groupe_esu "$baserep/dans_icones/$salle" 2>> $logfile
 
 writelog "INITBLOC" "Création des fichiers de log"
-addtoend /etc/profile "if [ ! -d /tmp/.esubuntu ]; then mkdir /tmp/.esubuntu/; fi"
+addtoend /etc/profile "if [ ! -d /tmp/.esubuntu ]; do mkdir /tmp/.esubuntu/; done"
 addtoend /etc/profile "for i in background upkgclient groupe; do echo > /tmp/.esubuntu/$i-sh.log; done"
 addtoend /etc/profile "chmod 755 /tmp/.esubuntu/"
 addtoend /etc/profile "chmod 666 /tmp/.esubuntu/*"
