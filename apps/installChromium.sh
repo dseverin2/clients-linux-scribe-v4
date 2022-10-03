@@ -20,6 +20,6 @@ elif [ -e /usr/bin/chromium ]; then
 	sudo ln -s /etc/chromium /etc/chromium-browser
 fi
 
-sudo cp -f $baserep/dans_icones/scripts/chromium/master_preferences /etc/chromium-browser/master_preferences
+sudo cp -f $baserep/dans_icones/scripts/linux/chromium/master_preferences /etc/chromium-browser/master_preferences
 sudo ln -s /etc/chromium-browser/master_preferences /etc/chromium/master_preferences
 echo "---Fin installation de chromium---"

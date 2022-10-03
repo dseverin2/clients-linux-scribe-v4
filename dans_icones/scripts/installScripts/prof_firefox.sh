@@ -22,7 +22,6 @@ fi
 echo '//
 lockPref("autoadmin.global_config_url", "file:///tmp/netlogon/icones/'$gm_esu'/linux/firefox.js"); '> /usr/lib/firefox/firefox.cfg
 
-
 #modification de channel-pref.js si un paramètre est rentré, ne lit pas la config du serveur
 echo '//
 pref("app.update.channel", "release"); ' > /usr/lib/firefox/defaults/pref/channel-prefs.js 
