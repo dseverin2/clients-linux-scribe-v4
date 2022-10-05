@@ -11,8 +11,9 @@
 groupe=$GROUPS 				
 
 netlogonIcons="/tmp/netlogon/icones"
-if [ ! -d "/tmp/.esubuntu" ]; then mkdir "/tmp/.esubuntu"; fi
-grouplogfile="/tmp/.esubuntu/groupe-sh.log"
+esublogdir="$HOME/.esubuntu"
+if [ ! -d $esublogdir ]; then mkdir $esublogdir; fi
+grouplogfile="$esublogdir/groupe-sh.log"
 echo "LOG de /etc/esubuntu/groupe.sh lancé par $USER" > $grouplogfile
 echo `date` >> $grouplogfile
 

@@ -9,7 +9,7 @@
 # - CALPETARD Olivier
 # - SEVERIN Didier 
 
-esublogdir="/tmp/.esubuntu"
+esublogdir="$HOME/.esubuntu"	
 if [ ! -d $esublogdir ]; then mkdir $esublogdir; fi
 backgroundlogfile="$esublogdir/background-sh.log"
 echo "LOG de /etc/esubuntu/groupe.sh lancé par $USER" > $backgroundlogfile
