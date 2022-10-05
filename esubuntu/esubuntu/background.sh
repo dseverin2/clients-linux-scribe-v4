@@ -28,7 +28,7 @@ fi
 
 echo "Le PC est dans le groupe esu $gm_esu" | tee -a $backgroundlogfile
 
-sleep 2
+sleep 3
 
 
 ######################################################################
