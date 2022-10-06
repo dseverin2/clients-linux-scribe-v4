@@ -33,8 +33,8 @@ apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys CB2DE8E5 2>> $
 writelog "Vérification que le système est à jour"
 apt-get update ; apt-get -y full-upgrade 2>> $logfile; apt-get -y dist-upgrade 2>> $logfile
 
-writelog "Installation de gdebi"
-apt install gdebi-core -y 2>> $logfile
+writelog "Installation de gdebi et flatpak"
+apt install gdebi-core flatpak -y 2>> $logfile
 
 writelog "Installation de geany"
 apt install geany -y 2>> $logfile
