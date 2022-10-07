@@ -372,38 +372,42 @@ fi
 ########################################################################
 writelog "INITBLOC" "24/42-Paramétrage pour remplir pam_mount.conf" "---/media/Serveur_Scribe"
 
-eclairNG="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"eclairng\" mountpoint=\"/media/Scribe\" />"
+eclairNG="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"eclairng\" mountpoint=\"/media/Scribe\" sgrp=\"DomainUsers\" />"
+#eclairNG="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"eclairng\" mountpoint=\"/media/Scribe\" />"
 if ! grep "/media/Scribe" /etc/security/pam_mount.conf.xml  >/dev/null; then
  sed -i "/<\!-- Volume definitions -->/a\ $eclairNG" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
-homes="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"perso\" mountpoint=\"~/Documents\" />"
+homes="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"perso\" mountpoint=\"~/Documents\" sgrp=\"DomainUsers\" />"
+#homes="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"perso\" mountpoint=\"~/Documents\" />"
 if ! grep "~/Documents" /etc/security/pam_mount.conf.xml  >/dev/null; then
  sed -i "/<\!-- Volume definitions -->/a\ $homes" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
-groupes="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"groupes\" mountpoint=\"~/Groupes\" />"
+groupes="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"groupes\" mountpoint=\"~/Groupes\" sgrp=\"DomainUsers\" />"
+#groupes="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"groupes\" mountpoint=\"~/Groupes\" />"
 if ! grep "~/Groupes" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $groupes" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
-commun="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"commun\" mountpoint=\"~/Commun\" />"
+commun="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"commun\" mountpoint=\"~/Commun\" sgrp=\"DomainUsers\" />"
+#commun="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"commun\" mountpoint=\"~/Commun\" />"
 if ! grep "~/Commun" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $commun" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
-professeurs="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"professeurs\" mountpoint=\"~/professeurs\" />"
+professeurs="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"professeurs\" mountpoint=\"~/professeurs\" sgrp=\"DomainUsers\" />"
+#professeurs="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"professeurs\" mountpoint=\"~/professeurs\" />"
 if ! grep "~/professeurs" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $professeurs" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
-#Ajout "test" d'un lien vers icones dans ~
 adminicones="<volume user=\"admin\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"netlogon/icones\" mountpoint=\"~/icones\" />"
 if ! grep "~/icones" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $adminicones" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
 
-netlogon="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"netlogon\" mountpoint=\"/tmp/netlogon\"  sgrp=\"DomainUsers\" />"
+netlogon="<volume user=\"*\" fstype=\"cifs\" server=\"$scribe_def_ip\" path=\"netlogon\" mountpoint=\"/tmp/netlogon\" sgrp=\"DomainUsers\" />"
 if ! grep "/tmp/netlogon" /etc/security/pam_mount.conf.xml  >/dev/null; then
   sed -i "/<\!-- Volume definitions -->/a\ $netlogon" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
