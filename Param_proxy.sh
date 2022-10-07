@@ -68,6 +68,10 @@ Acquire::https::proxy \"http://$scribeuserapt:$scribepass@$proxy_def_ip:$proxy_d
 	apt install snapd -y
 	snap set system proxy.http="http://$scribeuserapt:$scribepass@$proxy_def_ip:$proxy_def_port"
 	snap set system proxy.https="http://$scribeuserapt:$scribepass@$proxy_def_ip:$proxy_def_port"
+	
+	for protocol in http_proxy https_proxy HTTPS_PROXY HTTP_PROXY ftp_proxy FTP_PROXY; do
+		export $protocol="http://$scribeuserapt:$scribepass@$proxy_def_ip:$proxy_def_port/"
+	done
 fi
 
 # Modification pour ne pas avoir de problème lors du rafraichissement des dépots avec un proxy

@@ -106,7 +106,7 @@ writelog "ENDBLOC"
 mv $baserep/dans_icones/groupe_esu "$baserep/dans_icones/$salle" 2>> $logfile
 
 writelog "INITBLOC" "Création des fichiers de log"
-esublogdir="$HOME/.esubuntu"
+esublogdir="\$HOME/.esubuntu"
 addtoend /etc/profile "if [ ! -d $esublogdir ]; then mkdir $esublogdir; fi"
 addtoend /etc/profile "for i in background upkgclient groupe; do echo > $esublogdir/$i-sh.log; done"
 
