@@ -4,5 +4,6 @@
 
 baserep=$(cd $( dirname ${BASH_SOURCE[0]}) && pwd )
 conf="$baserep/config.cfg"
-if [ -d ~/Desktop ]; then sed -i -e "s/desktopDirName/skel-desktop.tar.gz/g" "$conf"; fi
-if [ -d ~/Bureau ]; then sed -i -e "s/desktopDirName/skel-bureau.tar.gz/g" "$conf"; fi
+deskDir=desktop
+if [ -d ~/Bureau ] || [ grep Mint /etc/lsb-release ]; then deskDir=bureau; fi
+sed -i -e "s/desktopDirName/skel-$deskDir.tar.gz/g" "$conf"; fi
