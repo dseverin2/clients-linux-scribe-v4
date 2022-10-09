@@ -413,9 +413,12 @@ if ! grep "/tmp/netlogon" /etc/security/pam_mount.conf.xml  >/dev/null; then
 fi
 
 # Tester sans le nolinux et eventuellement en vers=3.1.1
-if ! grep "<cifsmount>mount -t cifs //%(SERVER)/%(VOLUME) %(MNTPT) -o \"nolinux,noexec,nosetuids,mapchars,cifsacl,serverino,nobrl,iocharset=utf8,user=%(USER),uid=%(USERUID)%(before=\\",\\" OPTIONS),vers=3.0\"</cifsmount>" /etc/security/pam_mount.conf.xml  >/dev/null; then
-  sed -i "/<\!-- pam_mount parameters: Volume-related -->/a\<cifsmount>mount -t cifs //%(SERVER)/%(VOLUME) %(MNTPT) -o \"nolinux,noexec,nosetuids,mapchars,cifsacl,serverino,nobrl,iocharset=utf8,user=%(USER),uid=%(USERUID)%(before=\\",\\" OPTIONS),vers=3.0\"</cifsmount>" /etc/security/pam_mount.conf.xml 2>> $logfile
+#if ! grep "<cifsmount>mount -t cifs //%(SERVER)/%(VOLUME) %(MNTPT) -o \"nolinux,noexec,nosetuids,mapchars,cifsacl,serverino,nobrl,iocharset=utf8,user=%(USER),uid=%(USERUID)%(before=\\",\\" OPTIONS),vers=3.0\"</cifsmount>" /etc/security/pam_mount.conf.xml  >/dev/null; then
+#  sed -i "/<\!-- pam_mount parameters: Volume-related -->/a\<cifsmount>mount -t cifs //%(SERVER)/%(VOLUME) %(MNTPT) -o \"nolinux,noexec,nosetuids,mapchars,cifsacl,serverino,nobrl,iocharset=utf8,user=%(USER),uid=%(USERUID)%(before=\\",\\" OPTIONS),vers=3.0\"</cifsmount>" /etc/security/pam_mount.conf.xml 2>> $logfile
+if ! grep "<cifsmount>mount -t cifs //%(SERVER)/%(VOLUME) %(MNTPT) -o \"noexec,nosetuids,mapchars,cifsacl,serverino,nobrl,iocharset=utf8,user=%(USER),uid=%(USERUID)%(before=\\",\\" OPTIONS),vers=3.1.1\"</cifsmount>" /etc/security/pam_mount.conf.xml  >/dev/null; then
+  sed -i "/<\!-- pam_mount parameters: Volume-related -->/a\<cifsmount>mount -t cifs //%(SERVER)/%(VOLUME) %(MNTPT) -o \"noexec,nosetuids,mapchars,cifsacl,serverino,nobrl,iocharset=utf8,user=%(USER),uid=%(USERUID)%(before=\\",\\" OPTIONS),vers=3.1.1\"</cifsmount>" /etc/security/pam_mount.conf.xml 2>> $logfile
 fi
+
 writelog "ENDBLOC"
 ########################################################################
 #/etc/profile
@@ -463,9 +466,11 @@ fi
 # Droits sur le dossier /etc/skel
 if [ "$version" = "xenial" ] || [ "$version" = "bionic" ]  || [ "$version" = "focal" ] || [ "$version" = "jammy" ]; then
 	if [ "$version" = "focal" ] || [ "$version" = "jammy" ]; then
-		sed -i "30i\session optional        pam_umask=0022 skel=/etc/skel" /etc/pam.d/common-session  2>> $logfile
+		#sed -i "30i\session optional        pam_umask=0022 skel=/etc/skel" /etc/pam.d/common-session  2>> $logfile
+		sed -i "30i\session required        pam_mkhomedir.so skel=/etc/skel umask=0022" /etc/pam.d/common-session  2>> $logfile
+	else
+		sed -i "30i\session optional        pam_mkhomedir.so" /etc/pam.d/common-session 2>> $logfile
 	fi
-	sed -i "30i\session optional        pam_mkhomedir.so" /etc/pam.d/common-session 2>> $logfile
 	writelog "35/42-Création de raccourcis sur le bureau + dans dossier utilisateur (commun+perso+lespartages)"
 	
 	# Détermination et importation du skel spécifique

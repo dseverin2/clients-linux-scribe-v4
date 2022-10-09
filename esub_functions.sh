@@ -107,11 +107,10 @@ function writelog {
 
 # Affectation à la variable "version" suivant la variante utilisé
 function getversion {	
-	# Pour identifier le numéro de la version (14.04, 16.04...)
 	. /etc/lsb-release
-	if [ "$DISTRIB_CODENAME"=="una" ] || [ "$DISTRIB_CODENAME"=="uma" ] || [ "$DISTRIB_CODENAME"=="ulyssa" ] || [ "$DISTRIB_CODENAME"=="ulyana" ] ; then
+	if [ grep "Linux Mint 20" /etc/lsb-release > /dev/null ] ; then
 		version="focal"
-	elif [ "$DISTRIB_CODENAME"=="vanessa" ]; then
+	elif [ grep "Linux Mint 21" /etc/lsb-release > /dev/null ]; then
 		version="jammy"
 	else
 		version=$DISTRIB_CODENAME
