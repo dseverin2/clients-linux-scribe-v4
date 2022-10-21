@@ -86,3 +86,6 @@ fi
 #execution de upkg
 sudo sh /etc/esubuntu/upkg_client.sh >> $grouplogfile
 exit 0
+#
+#
+#

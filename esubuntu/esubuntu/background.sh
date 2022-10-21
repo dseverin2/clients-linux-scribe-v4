@@ -13,7 +13,7 @@ esublogdir="$HOME/.esubuntu"
 if [ ! -d $esublogdir ]; then mkdir $esublogdir; fi
 backgroundlogfile="$esublogdir/background-sh.log"
 echo "LOG de /etc/esubuntu/groupe.sh lancé par $USER" > $backgroundlogfile
-echo `date` | tee -a $backgroundlogfile
+echo `date` >> $backgroundlogfile
 
 groupe=$GROUPS
 
@@ -26,7 +26,7 @@ if [ -f "/etc/GM_ESU" ];then
 	gm_esu=$(cat /etc/GM_ESU)
 fi
 
-echo "Le PC est dans le groupe esu $gm_esu" | tee -a $backgroundlogfile
+echo "Le PC est dans le groupe esu $gm_esu" >> $backgroundlogfile
 
 sleep 3
 
@@ -114,17 +114,19 @@ fi
 ######################################################################
 #                            PARAM CONKY                             #
 ######################################################################
-echo "Lancement de conky avec lecture du fichier de conf :" | tee -a $backgroundlogfile
+echo "Lancement de conky avec lecture du fichier de conf :" >> $backgroundlogfile
 cp /tmp/netlogon/icones/$gm_esu/conky/conky.cfg ~/.conky.cfg -fr
 
 # Récupération de l'interface ethernet active
 #interfaceeth=`ip -br link | grep 'UP' | grep -v 'OWN' | awk '{ print $1 }'`
 interfaceeth=$(ifconfig | grep UP,BROADCAST,RUNNING,MULTICAST | awk '{print $1}' | sed 's/://g')
 if grep "Adresse IP : \${addr INTERFACEETH}" ~/.conky.cfg > /dev/null; then
-	sed -i "s/Adresse IP : \${addr INTERFACEETH}/Adresse IP : \${addr $interfaceeth}/g" ~/.conky.cfg | tee -a $backgroundlogfile
+	sed -i "s/Adresse IP : \${addr INTERFACEETH}/Adresse IP : \${addr $interfaceeth}/g" ~/.conky.cfg 
+	echo "Remplacement de ${addr INTERFACEETH} par ${addr $interfaceeth} dans ~/.conky.cfg" >> $backgroundlogfile
 fi
 if grep "SALLEESU" ~/.conky.cfg > /dev/null; then
-	sed -i "s/SALLEESU/$gm_esu/g" ~/.conky.cfg | tee -a $backgroundlogfile
+	sed -i "s/SALLEESU/$gm_esu/g" ~/.conky.cfg
+	echo "Remplacement de SALLEESU par $gm_esu dans ~/.conky.cfg" >> $backgroundlogfile
 fi
 conky -c ~/.conky.cfg
 
@@ -132,10 +134,13 @@ conky -c ~/.conky.cfg
 ######################################################################
 #                            PARAM GSET                              #
 ######################################################################
-echo "Lancement du gpo lecture fichier gset du groupe esu :" | tee -a $backgroundlogfile
+echo "Lancement du gpo lecture fichier gset du groupe esu :" >> $backgroundlogfile
 cp /tmp/netlogon/icones/$gm_esu/linux/gset/gset.sh /tmp
 chmod +x /tmp/gset.sh
 /tmp/gset.sh
 rm -f /tmp/gset.sh
-echo "Fin" | tee -a $backgroundlogfile
+echo "Fin" >> $backgroundlogfile
 exit 0
+#
+#
+#

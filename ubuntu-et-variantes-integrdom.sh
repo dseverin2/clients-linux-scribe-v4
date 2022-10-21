@@ -467,7 +467,7 @@ fi
 if [ "$version" = "xenial" ] || [ "$version" = "bionic" ]  || [ "$version" = "focal" ] || [ "$version" = "jammy" ]; then
 	if [ "$version" = "focal" ] || [ "$version" = "jammy" ]; then
 		#sed -i "30i\session optional        pam_umask=0022 skel=/etc/skel" /etc/pam.d/common-session  2>> $logfile
-		sed -i "30i\session required        pam_mkhomedir.so skel=/etc/skel umask=0022" /etc/pam.d/common-session  2>> $logfile
+		sed -i "30i\session required        pam_mkhomedir.so skel=/etc/skel pam_umask=0022" /etc/pam.d/common-session  2>> $logfile
 	else
 		sed -i "30i\session optional        pam_mkhomedir.so" /etc/pam.d/common-session 2>> $logfile
 	fi
