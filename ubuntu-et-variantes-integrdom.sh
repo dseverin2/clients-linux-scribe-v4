@@ -475,14 +475,14 @@ if [ "$version" = "xenial" ] || [ "$version" = "bionic" ]  || [ "$version" = "fo
 	
 	# Détermination et importation du skel spécifique (autres que LinuxMint) / Création du lien symbolique desktop=bureau pour Mint	
 	if [ ! grep "destDesktop" /etc/profile ]; then
-	echo "if [ ! -L \"$HOME\"/Desktop ] && [ ! -L \"$HOME\"/Bureau ]; then			
+	echo "if [ ! -L \$HOME/Desktop ] && [ ! -L \$HOME/Bureau ]; then			
 		srcDesktop=Bureau
 		destDesktop=Desktop
-		if [ -d \"$HOME\"/Desktop ]; then
+		if [ -d \$HOME/Desktop ]; then
 			srcDesktop=Desktop
 			destDesktop=Bureau
 		fi
-		ln -s \"$HOME\"/\"$srcDesktop\" \"$HOME\"/\"$destDesktop\"
+		ln -s \$HOME/\$srcDesktop \$HOME/\$destDesktop
 		done
 	fi" >> /etc/profile
 	if [ ! -e /etc/skel ]; then mkdir /etc/skel; else rm -fr /etc/skel/*; fi
