@@ -473,9 +473,23 @@ if [ "$version" = "xenial" ] || [ "$version" = "bionic" ]  || [ "$version" = "fo
 	fi
 	writelog "35/42-Création de raccourcis sur le bureau + dans dossier utilisateur (commun+perso+lespartages)"
 	
-	# Détermination et importation du skel spécifique
-	if [ ! -e /etc/skel ]; then mkdir /etc/skel; else rm -fr /etc/skel/*; fi
-	tar -xzf $skelArchive -C /etc/skel/ 2>> $logfile
+	# Détermination et importation du skel spécifique (autres que LinuxMint) / Création du lien symbolique desktop=bureau pour Mint
+	if [ grep "Mint" /etc/lsb-release > /dev/null ] ; then
+		if [ ! grep "destDesktop" /etc/profile ]; then
+		echo "if [ ! -L $HOME/Desktop ] && [ ! -L $HOME/Bureau ]; then			
+			srcDesktop=Bureau
+			destDesktop=Desktop
+			if [ -d $HOME/Desktop ]; then
+				srcDesktop=Desktop
+				destDesktop=Bureau
+			fi
+			ln -s $HOME/$srcDesktop $HOME/$destDesktop
+			done
+		fi" >> /etc/profile
+	else
+		if [ ! -e /etc/skel ]; then mkdir /etc/skel; else rm -fr /etc/skel/*; fi
+		tar -xzf $skelArchive -C /etc/skel/ 2>> $logfile
+	fi
 fi
 
 # Suppression de notification de mise à niveau
