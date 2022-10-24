@@ -105,11 +105,12 @@ writelog "ENDBLOC"
 
 mv $baserep/dans_icones/groupe_esu "$baserep/dans_icones/$salle" 2>> $logfile
 
-writelog "INITBLOC" "Création des fichiers de log"
-esublogdir="\$HOME/.esubuntu"
-addtoend /etc/profile "if [ ! -d $esublogdir ]; then mkdir $esublogdir; fi"
-addtoend /etc/profile "for i in background upkgclient groupe; do echo > $esublogdir/$i-sh.log; done"
-
+if ! grep \$HOME/.esubuntu /etc/profile >/dev/null; then
+	writelog "INITBLOC" "Création des fichiers de log"
+	esublogdir="\$HOME/.esubuntu"
+	addtoend /etc/profile "if [ ! -d $esublogdir ]; then mkdir $esublogdir; fi"
+	addtoend /etc/profile "for i in background upkgclient groupe; do echo > $esublogdir/$i-sh.log; done"
+fi
 ## 3 dernières lignes non activés car ce script est appelé par l'autre (intgrdom) et il ne faut pas interrompre pendant l'install
 #echo "C'est fini ! bienvenue dans le groupe $salle..."
 #echo "Pour compléter le système installer un serveur apt-cacher et un poste pour gérer les impressions des autres"

@@ -474,7 +474,7 @@ if [ "$version" = "xenial" ] || [ "$version" = "bionic" ]  || [ "$version" = "fo
 	writelog "35/42-Création de raccourcis sur le bureau + dans dossier utilisateur (commun+perso+lespartages)"
 	
 	# Détermination et importation du skel spécifique (autres que LinuxMint) / Création du lien symbolique desktop=bureau pour Mint	
-	if [ ! grep "destDesktop" /etc/profile ]; then
+	if ! grep "destDesktop" /etc/profile >/dev/null; then
 		echo "if [ ! -L \$HOME/Desktop ] && [ ! -L \$HOME/Bureau ]; then			
 			srcDesktop=Bureau
 			destDesktop=Desktop
