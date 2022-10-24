@@ -1,6 +1,27 @@
 #!/bin/sh
 # source https://romainhk.wordpress.com/2014/07/04/partager-une-meme-installation-playonlinux-avec-les-autres-utilisateurs/
 # Script original de Didier SEVERIN (11/09/22)
+
+# Récupération du fichier executable et des bibliothèques windows nécessaires
+sketchupexe=SketchupMake2017frx64.exe
+while ! -e ./$sketchupexe; do
+	zenity --info text="Télécharger sketchup 2017 ici https://aca.re/dseverin2/sketchup ou http://www.rossum.fr/technocollege/telechargements/logiciels/$sketchupexe et placez-le dans ce répertoire (ne pas fermer cette fenêtre avant que ce soit fait)"
+	mv ~/Téléchargements/$sketchupexe .
+done
+
+dotnetexe=NDP452-KB2901907-x86-x64-AllOS-ENU.exe
+while ! -e ./$dotnetexe; do
+	zenity --info text="Télécharger Microsoft .NET Framework ici https://www.microsoft.com/fr-FR/download/details.aspx?id=42642 et placez-le dans ce répertoire (ne pas fermer cette fenêtre avant que ce soit fait)"
+	mv ~/Téléchargements/$dotnetexe .
+done
+
+vc2015=vc_redist.x64.exe
+while ! -e ./$vc2015; do
+	zenity --info text="Télécharger Visual C++ 2015 64 ici https://www.microsoft.com/fr-FR/download/details.aspx?id=48145 et placez-le dans ce répertoire (ne pas fermer cette fenêtre avant que ce soit fait)"
+	mv ~/Téléchargements/$vc2015 .
+done
+
+# Téléchargement de wine 
 wget https://dl.winehq.org/wine-builds/Release.key
 sudo apt-key add Release.key
 sudo apt-add-repository 'https://dl.winehq.org/wine-builds/ubuntu/' -y
@@ -10,13 +31,10 @@ sudo apt update
 sudo apt-add-repository 'https://dl.winehq.org/wine-builds/ubuntu/' -y
 sudo apt-get update
 sudo apt-get install --install-recommends wine-staging winehq-staging -y
-echo "Mettre windows version 7 & dans bibliothèque riched20"
-echo "Rajouter /DisableRubyAPI à la fin de la commande de lancement de sketchup"
+zenity --info text="Dans la fenetre verifier que windows7 est selectionné et dans bibliothèque rajouter riched20"
 
 winecfg
-
-# Not sur the above works, seems better when launching winetricks, default config then in settings selecting win7.
-# Download from https://www.sketchup.com/fr/sketchup/2017/en/sketchupmake-2017-2-2555-90782-en-x64-exe
-sudo -u $SUDO_USER wget http://www.rossum.fr/technocollege/telechargements/logiciels/SketchupMake2017frx64.exe
-zenity --info text="Dans le fenetre verifier que windows7 est selectionné et dans bibliothèque rajouter riched20"
-sudo -u $SUDO_USER wine *ketchup*.exe
+wine $dotnetexe
+wine $vc2015
+wine $sketchupexe
+zenity --info text="Modifier le lanceur Sketchup2017 du bureau et Rajouter /DisableRubyAPI à la fin de la commande"
