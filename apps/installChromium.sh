@@ -3,6 +3,7 @@ echo "---Installation de chromium"
 echo "---Installation de chromium---" >> $logfile
 sudo apt remove chromium-browser -y
 sudo snap remove chromium
+sudo rm -fr /usr/bin/chromium* /etc/chromium*
 
 for i in http_proxy https_proxy HTTPS_PROXY HTTP_PROXY; do
 	export $i=http://$scribeuserapt:$scribepass@$proxy_def_ip:$proxy_def_port 2>> $logfile;
