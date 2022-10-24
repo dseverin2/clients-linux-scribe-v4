@@ -480,14 +480,17 @@ fi
 
 # Création du lien symbolique desktop=bureau s'il n'existe pas	
 if ! grep "destDesktop" /etc/profile >/dev/null; then
-echo "if [ ! -L \$HOME/Desktop ] && [ ! -L \$HOME/Bureau ]; then			
-srcDesktop=Bureau
-destDesktop=Desktop
-if [ -d \$HOME/Desktop ]; then
-	srcDesktop=Desktop
-	destDesktop=Bureau
-fi
-ln -s \$HOME/\$srcDesktop \$HOME/\$destDesktop
+echo "
+
+# Création du lien symbolique desktop=bureau s'il n'existe pas
+if [ ! -L \$HOME/Desktop ] && [ ! -L \$HOME/Bureau ]; then			
+	srcDesktop=Bureau
+	destDesktop=Desktop
+	if [ -d \$HOME/Desktop ]; then
+		srcDesktop=Desktop
+		destDesktop=Bureau
+	fi
+	ln -s \$HOME/\$srcDesktop \$HOME/\$destDesktop
 fi" >> /etc/profile
 fi
 
