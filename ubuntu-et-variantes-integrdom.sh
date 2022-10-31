@@ -63,6 +63,7 @@ if [ "$UID" -ne "0" ]; then
 	exit 
 fi 
 dpkg --configure -a
+apt install --fix-broken -y
 apt install -y dos2unix
 sudo -u "$SUDO_USER" find . -type f -name "*.sh" -exec chmod a+x {} \; -exec dos2unix {} \;
 
