@@ -108,9 +108,9 @@ function writelog {
 # Affectation à la variable "version" suivant la variante utilisé
 function getversion {	
 	. /etc/lsb-release
-	if [ grep "Linux Mint 20" /etc/lsb-release > /dev/null ] ; then
+	if grep "Linux Mint 20" /etc/lsb-release > /dev/null; then
 		version="focal"
-	elif [ grep "Linux Mint 21" /etc/lsb-release > /dev/null ]; then
+	elif grep "Linux Mint 21" /etc/lsb-release > /dev/null; then
 		version="jammy"
 	else
 		version=$DISTRIB_CODENAME
