@@ -16,6 +16,7 @@ zenity --info --text="Télécharger Visual C++ 2015 64 ici https://www.microsoft
 mv ~/Téléchargements/$vc2015 .
 
 # Téléchargement de wine 
+sudo apt remove wine* wine64* -y
 wget https://dl.winehq.org/wine-builds/Release.key
 sudo apt-key add Release.key
 sudo apt-add-repository 'https://dl.winehq.org/wine-builds/ubuntu/' -y
