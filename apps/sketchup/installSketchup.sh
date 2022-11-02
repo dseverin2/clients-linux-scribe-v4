@@ -46,10 +46,10 @@ cp ~/Bureau/SketchUp*.desktop ~/.wine/shortcuts/
 sudo mkdir /var/WINE
 sudo mv ~/.wine/* /var/WINE/
 cp ./sketchup-shared.sh /usr/local/bin/
-echo "%users ALL=NOPASSWD: /usr/local/bin/sketchup-shared.sh" > /etc/sudoers.d/sketchup-shared
+echo "%users ALL=NOPASSWD: /usr/local/bin/sketchup-shared.sh" | sudo tee -a /etc/sudoers.d/sketchup-shared
 chmod +x-w /usr/local/bin/sketchup-shared.sh
 
 if ! grep "/usr/local/bin/sketchup-shared.sh" /etc/profile >/dev/null; then
 	echo '#!/bin/sh
-bash -c "sudo /usr/local/bin/sketchup-shared.sh $(whoami) > ~/.sketchup-shared.log 2>&1"' >> /etc/profile
+bash -c "sudo /usr/local/bin/sketchup-shared.sh $(whoami) > ~/.sketchup-shared.log 2>&1"' | sudo tee -a /etc/profile
 fi
