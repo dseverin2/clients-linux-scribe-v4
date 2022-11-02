@@ -5,7 +5,7 @@ groupe=$(id -gn $1)
 uid=$(id -u $1)
 WINESKET=/var/WINE
 home=$(eval echo ~$1)
-lien=$home/.PlayOnLinux
+lien=$home/.wine
  
 # Sauvegarde du lien précédent
 if [ -d "$lien" ]; then

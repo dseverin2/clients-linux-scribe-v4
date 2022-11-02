@@ -1,19 +1,29 @@
 #!/bin/sh
 # source https://romainhk.wordpress.com/2014/07/04/partager-une-meme-installation-playonlinux-avec-les-autres-utilisateurs/
 # Script original de Didier SEVERIN (11/09/22)
+if [ "$UID" = "0" ]; then
+	echo "Lancez ce script sans sudo svp"
+	exit 
+fi 
 
 # Récupération du fichier executable et des bibliothèques windows nécessaires
 sketchupexe=SketchupMake2017frx64.exe
-zenity --info --text="Télécharger sketchup 2017 ici https://aca.re/dseverin2/sketchup ou http://www.rossum.fr/technocollege/telechargements/logiciels/$sketchupexe et placez-le dans ce répertoire (ne pas fermer cette fenêtre avant que ce soit fait)"
-mv ~/Téléchargements/$sketchupexe .
+sketchupggl=18qU9Ohn1ZCp43_QLsZmfzz3hGWeEUBT2
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=$sketchupggl' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=$sketchupggl" -O ./$sketchupexe && rm -rf /tmp/cookies.txt
+#zenity --info --text="Télécharger sketchup 2017 ici https://aca.re/dseverin2/sketchup ou http://www.rossum.fr/technocollege/telechargements/logiciels/$sketchupexe et placez-le dans ce répertoire (ne pas fermer cette fenêtre avant que ce soit fait)"
+#mv ~/Téléchargements/$sketchupexe .
 
 dotnetexe=NDP452-KB2901907-x86-x64-AllOS-ENU.exe
-zenity --info --text="Télécharger Microsoft .NET Framework ici https://www.microsoft.com/fr-FR/download/details.aspx?id=42642 et placez-le dans ce répertoire (ne pas fermer cette fenêtre avant que ce soit fait)"
-mv ~/Téléchargements/$dotnetexe .
+dotnetggl=17OE26kWrILHSEVlzd388i2BwW7e2xNWJ
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=$dotnetexe' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=$dotnetexe" -O ./$dotnetggl && rm -rf /tmp/cookies.txt
+#zenity --info --text="Télécharger Microsoft .NET Framework ici https://www.microsoft.com/fr-FR/download/details.aspx?id=42642 et placez-le dans ce répertoire (ne pas fermer cette fenêtre avant que ce soit fait)"
+#mv ~/Téléchargements/$dotnetexe .
 
 vc2015=vc_redist.x64.exe
-zenity --info --text="Télécharger Visual C++ 2015 64 ici https://www.microsoft.com/fr-FR/download/details.aspx?id=48145 et placez-le dans ce répertoire (ne pas fermer cette fenêtre avant que ce soit fait)"
-mv ~/Téléchargements/$vc2015 .
+vc2015ggl=1xe5hW0nrTgPCpoMJqXZOErSeoT0bmKRM
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=$vc2015ggl' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=$vc2015ggl" -O ./$vc2015 && rm -rf /tmp/cookies.txt
+#zenity --info --text="Télécharger Visual C++ 2015 64 ici https://www.microsoft.com/fr-FR/download/details.aspx?id=48145 et placez-le dans ce répertoire (ne pas fermer cette fenêtre avant que ce soit fait)"
+#mv ~/Téléchargements/$vc2015 .
 
 # Téléchargement de wine 
 sudo apt remove wine* wine64* -y
@@ -32,14 +42,17 @@ winecfg
 wine $dotnetexe
 wine $vc2015
 wine $sketchupexe
-zenity --info text="Modifier le lanceur Sketchup2017 du bureau et Rajouter /DisableRubyAPI à la fin de la commande"
+#zenity --info text="Modifier le lanceur Sketchup2017 du bureau et Rajouter /DisableRubyAPI à la fin de la commande"
+sed -i 's/SketchUp.exe/SketchUp.exe \/DisableRubyAPI/g' ~/Bureau/SketchUp*.desktop
 mkdir ~/.wine/shortcuts
 cp ~/Bureau/SketchUp*.desktop ~/.wine/shortcuts/
+sudo mkdir /var/WINE
+sudo mv ~/.wine/* /var/WINE/
 cp ./sketchup-shared.sh /usr/local/bin/
 echo "%users ALL=NOPASSWD: /usr/local/bin/sketchup-shared.sh" > /etc/sudoers.d/sketchup-shared
-chmod +x-w /usr/local/bin/sketchup-shared
+chmod +x-w /usr/local/bin/sketchup-shared.sh
 
-if ! grep "/usr/local/bin/sketchup-shared" /etc/profile >/dev/null; then
+if ! grep "/usr/local/bin/sketchup-shared.sh" /etc/profile >/dev/null; then
 	echo '#!/bin/sh
 bash -c "sudo /usr/local/bin/sketchup-shared.sh $(whoami) > ~/.sketchup-shared.log 2>&1"' >> /etc/profile
 fi
