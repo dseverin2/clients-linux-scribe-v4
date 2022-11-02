@@ -33,13 +33,13 @@ sudo apt update
 sudo apt-add-repository 'https://dl.winehq.org/wine-builds/ubuntu/' -y
 sudo apt-get update
 sudo apt-get install --install-recommends wine-staging winehq-staging -y
-zenity --info text="Dans la fenetre verifier que windows7 est selectionné et dans bibliothèque rajouter riched20"
+zenity --info --text="Dans la fenetre verifier que windows7 est selectionné et dans bibliothèque rajouter riched20"
 
 winecfg
 wine $dotnetexe
 wine $vc2015
 wine $sketchupexe
-#zenity --info text="Modifier le lanceur Sketchup2017 du bureau et Rajouter /DisableRubyAPI à la fin de la commande"
+#zenity --info --text="Modifier le lanceur Sketchup2017 du bureau et Rajouter /DisableRubyAPI à la fin de la commande"
 sed -i 's/SketchUp.exe/SketchUp.exe \/DisableRubyAPI/g' ~/Bureau/SketchUp*.desktop
 mkdir ~/.wine/shortcuts
 cp ~/Bureau/SketchUp*.desktop ~/.wine/shortcuts/
