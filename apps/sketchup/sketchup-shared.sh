@@ -1,6 +1,7 @@
 #!/bin/bash
 # Attribution du dossier WINESKET
 # $1 : username
+# 03/11/2022
 groupe=$(id -gn $1)
 uid=$(id -u $1)
 WINESKET=/var/WINE
