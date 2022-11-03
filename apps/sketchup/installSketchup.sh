@@ -5,7 +5,8 @@ if [ $UID -eq 0 ]; then
 	echo "Lancez ce script sans sudo svp"
 	exit 
 fi 
-
+echo 1/5 - RECUPERATION DES INSTALLATEURS
+zenity --notification --text="1/5 - RECUPERATION DES INSTALLATEURS"
 # Récupération du fichier executable et des bibliothèques windows nécessaires
 sketchupexe=SketchupMake2017frx64.exe
 sketchupggl=18qU9Ohn1ZCp43_QLsZmfzz3hGWeEUBT2
@@ -22,7 +23,10 @@ vc2015ggl=1xe5hW0nrTgPCpoMJqXZOErSeoT0bmKRM
 wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=$vc2015ggl' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=$vc2015ggl" -O ./$vc2015 && sudo rm -rf /tmp/cookies.txt
 #Visual C++ 2015 64 ici https://www.microsoft.com/fr-FR/download/details.aspx?id=48145
 
-# Téléchargement de wine 
+# Téléchargement de wine
+clear
+echo 2/5 - INSTALLATION DE WINE 
+zenity --notification --text="2/5 - INSTALLATION DE WINE"
 sudo apt remove wine* wine64* -y
 wget https://dl.winehq.org/wine-builds/Release.key
 sudo apt-key add Release.key
@@ -33,23 +37,32 @@ sudo apt update
 sudo apt-add-repository 'https://dl.winehq.org/wine-builds/ubuntu/' -y
 sudo apt-get update
 sudo apt-get install --install-recommends wine-staging winehq-staging -y
-zenity --info --text="Dans la fenetre verifier que windows7 est selectionné et dans bibliothèque rajouter riched20"
 
+clear
+echo 3/5 - PARAMETRAGE DE WINE ET INSTALLATION DE SKETCHUP 
+zenity --notification --text="3/5 - PARAMETRAGE DE WINE ET INSTALLATION DE SKETCHUP "
+zenity --info --text="Dans la fenetre verifier que windows7 est selectionné et dans bibliothèque rajouter riched20"
 winecfg
 wine $dotnetexe
 wine $vc2015
 wine $sketchupexe
-#zenity --info --text="Modifier le lanceur Sketchup2017 du bureau et Rajouter /DisableRubyAPI à la fin de la commande"
+
+clear
+echo 4/5 - DEFINITION DES RACCOURCIS ET DEPLACEMENT DE SKETCHUP-WINE VERS EMPLACEMENT COMMUN 
+zenity --notification --text="4/5 - DEFINITION DES RACCOURCIS ET DEPLACEMENT DE SKETCHUP-WINE VERS EMPLACEMENT COMMUN"
 sed -i 's/SketchUp.exe/SketchUp.exe \/DisableRubyAPI/g' ~/Bureau/SketchUp*.desktop
 mkdir ~/.wine/shortcuts
 cp ~/Bureau/SketchUp*.desktop ~/.wine/shortcuts/
+rm -f ~/Bureau/Layout\ 2017.* ~/Bureau/Sketchup\ 2017.* ~/Bureau/Style\ Builder\ 2017.*
+
+clear
+echo 5/5 - PARAMETRAGE SKETCHUP SUR WINE POUR TOUS LES UTILISATEURS
+zenity --notification --text="5/5 - PARAMETRAGE SKETCHUP SUR WINE POUR TOUS LES UTILISATEURS"
 sudo mkdir /var/WINE
 sudo mv ~/.wine/* /var/WINE/
 cp ./sketchup-shared.sh /usr/local/bin/
-echo "%users ALL=NOPASSWD: /usr/local/bin/sketchup-shared.sh" | sudo tee -a /etc/sudoers.d/sketchup-shared
 chmod +x-w /usr/local/bin/sketchup-shared.sh
-
+chmod a+s /usr/local/bin/sketchup-shared.sh
 if ! grep "/usr/local/bin/sketchup-shared.sh" /etc/profile >/dev/null; then
-	echo '#!/bin/sh
-bash -c "sudo /usr/local/bin/sketchup-shared.sh $(whoami) > ~/.sketchup-shared.log 2>&1"' | sudo tee -a /etc/profile
+	echo '/usr/local/bin/sketchup-shared.sh $(whoami) > ~/.sketchup-shared.log 2>&1' | sudo tee -a /etc/profile
 fi
