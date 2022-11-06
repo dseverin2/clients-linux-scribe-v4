@@ -3,9 +3,9 @@
 #### changement de fond ecran ouverture de session ubuntu ####
 # - récupère la valeur du groupe et attribue en fonction les fonds ecran générés par esu
 # - gestion des restriction gsetting
-# - Préparation des icônes du bureau
-# - ver 2.8
-# - 29 septembre 2022
+# - Préparation des icônes du bureau (ajout Sketchup 2017)
+# - ver 3.0
+# - 06 novembre 2022
 # - CALPETARD Olivier
 # - SEVERIN Didier 
 
@@ -80,14 +80,17 @@ else
 	esac
 fi
 
+# Pour sketchup 8 (install partagée playonlinux)
+if [ -e /usr/local/bin/sketchup.sh ]; then # Sketchup 8
+    bash -c "sudo /usr/local/bin/sketchup.sh $(whoami) > ~/.sketchup.log 2>&1"
+elif [ -e /usr/local/bin/sketchup-shared.sh ]; then # Sketchup 2017
+	bash -c "/usr/local/bin/sketchup-shared.sh $(whoami) > ~/.sketchup-shared.log 2>&1"
+fi
+
 # Définition du flag "trusted" pour tous les raccourcis du bureau
 find ~/Bureau/ -type f -name *.desktop -exec gio set {} metadata::trusted true \; -exec chmod a+x {} \;
 find ~/Desktop/ -type f -name *.desktop -exec gio set {} metadata::trusted true \; -exec chmod a+x {} \;
 
-# Pour sketchup 8 (install partagée playonlinux)
-if [ -e /usr/local/bin/sketchup.sh ]; then
-    bash -c "sudo /usr/local/bin/sketchup.sh $(whoami) > ~/.sketchup.log 2>&1"
-fi
 echo "Groupe trouvé : $variable" | tee -a $backgroundlogfile
 
 ######################################################################

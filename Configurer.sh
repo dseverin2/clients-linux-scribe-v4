@@ -78,6 +78,7 @@ retour=$(yad --title="Paramétrage Applications 3/3" --form\
  --field="Installer activInspire":CHK\
  --field="Installer WPS Office":CHK\
  --field="Installer Veyon":CHK\
+ --field="Installer Sketchup 2017":CHK\
  --field="Redémarrer à la fin":CHK\
  -- "$pagedemarragepardefaut" "$extinction" "$postinstallbase" "$postinstalladditionnel" "$config_photocopieuse" "$ebeam" "$activinspire" "$WPSOffice" "$Veyon" "$reboot")
 echo "$retour"
@@ -100,7 +101,9 @@ wps=$(echo $retour | awk 'BEGIN {FS="|" } { print $8 }')
 if [ "$wps" != "" ]; then sed -i -e "s/^WPSOffice=.*/WPSOffice=$wps/g" "$conf"; fi
 vey=$(echo $retour | awk 'BEGIN {FS="|" } { print $9 }')
 if [ "$vey" != "" ]; then sed -i -e "s/^Veyon=.*/Veyon=$vey/g" "$conf"; fi
-reb=$(echo $retour | awk 'BEGIN {FS="|" } { print $10 }')
+sketchup=$(echo $retour | awk 'BEGIN {FS="|" } { print $10 }')
+if [ "$sketchup" != "" ]; then sed -i -e "s/^Sketchup=.*/Sketchup=$sketchup/g" "$conf"; fi
+reb=$(echo $retour | awk 'BEGIN {FS="|" } { print $11 }')
 if [ "$reb" != "" ]; then sed -i -e "s/^reboot=.*/reboot=$reb/g" "$conf"; fi
 
 sed -i -e "s/TRUE/true/g" "$conf"

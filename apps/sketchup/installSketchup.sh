@@ -63,6 +63,3 @@ sudo mv ~/.wine/* /var/WINE/
 cp ./sketchup-shared.sh /usr/local/bin/
 chmod +x-w /usr/local/bin/sketchup-shared.sh
 chmod a+s /usr/local/bin/sketchup-shared.sh
-if ! grep "/usr/local/bin/sketchup-shared.sh" /etc/profile >/dev/null; then
-	echo '/usr/local/bin/sketchup-shared.sh $(whoami) > ~/.sketchup-shared.log 2>&1' | sudo tee -a /etc/profile
-fi

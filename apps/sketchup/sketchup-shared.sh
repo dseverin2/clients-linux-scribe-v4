@@ -20,5 +20,3 @@ chown -h -R $1:$groupe $lien
 # Copie des raccourcis sur le bureau
 cp --preserve=ownership $WINESKET/shortcuts/*.desktop $home/Bureau
 sed -i "s|\/home\/[a-Z]*\/.wine|$HOME\/.wine|g" $home/Bureau/SketchUp*.desktop
-chmod a+x $home/Bureau/SketchUp\ 2017.desktop
-gio set $home/Bureau/SketchUp\ 2017.desktop metadata::trusted true
