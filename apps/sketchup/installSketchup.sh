@@ -60,6 +60,6 @@ echo 5/5 - PARAMETRAGE SKETCHUP SUR WINE POUR TOUS LES UTILISATEURS
 zenity --notification --text="5/5 - PARAMETRAGE SKETCHUP SUR WINE POUR TOUS LES UTILISATEURS"
 sudo mkdir /var/WINE
 sudo mv ~/.wine/* /var/WINE/
-cp ./sketchup-shared.sh /usr/local/bin/
-chmod +x-w /usr/local/bin/sketchup-shared.sh
-chmod a+s /usr/local/bin/sketchup-shared.sh
+sudo cp ./sketchup-shared.sh /usr/local/bin/
+sudo chmod +x-w /usr/local/bin/sketchup-shared.sh
+sudo chmod a+s /usr/local/bin/sketchup-shared.sh

@@ -479,20 +479,13 @@ if [ "$version" = "xenial" ] || [ "$version" = "bionic" ]  || [ "$version" = "fo
 	tar -xzf $skelArchive -C /etc/skel/ 2>> $logfile
 fi
 
-# Création du lien symbolique desktop=bureau s'il n'existe pas	
-if ! grep "destDesktop" /etc/profile >/dev/null; then
-echo "
-# Création du lien symbolique desktop=bureau s'il n'existe pas
-if [ ! -e \$HOME/Desktop ] || [ ! -e \$HOME/Bureau ]; then
-	if [ ! -e \$HOME/Desktop ]; then
-		srcDesktop=Bureau
-		destDesktop=Desktop
-	else
-		srcDesktop=Desktop
-		destDesktop=Bureau
+# Copie du skel pour LinuxMint
+if grep "LinuxMint" /etc/lsb-release >/dev/null; then
+	if ! grep "cp -fr /etc/skel/* ~" /etc/profile >/dev/null; then
+	echo "if [ ! -e \$HOME/Desktop ] || [ ! -e \$HOME/Bureau ]; then
+		cp -fr /etc/skel/* ~
+	fi" >> /etc/profile
 	fi
-	ln -s \$HOME/\$srcDesktop \$HOME/\$destDesktop
-fi" >> /etc/profile
 fi
 
 # Suppression de notification de mise à niveau
