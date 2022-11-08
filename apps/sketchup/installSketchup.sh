@@ -50,7 +50,10 @@ wine $sketchupexe
 clear
 echo 4/5 - DEFINITION DES RACCOURCIS ET DEPLACEMENT DE SKETCHUP-WINE VERS EMPLACEMENT COMMUN 
 zenity --notification --text="4/5 - DEFINITION DES RACCOURCIS ET DEPLACEMENT DE SKETCHUP-WINE VERS EMPLACEMENT COMMUN"
-sed -i 's/SketchUp.exe/SketchUp.exe \/DisableRubyAPI/g' ~/Bureau/SketchUp*.desktop
+sed -i 's/SketchUp.exe/SketchUp.exe \/DisableRubyAPI/g' ~/Bureau/SketchUp\ 2017.desktop
+groupesalle=echo $(cat /etc/GM_ESU)
+sed '/^Icon/d' ~/Bureau/SketchUp\ 2017.desktop
+echo "Icon=/tmp/netlogon/icones/$groupesalle/icones/sketchup.png" >> ~/Bureau/SketchUp\ 2017.desktop
 mkdir ~/.wine/shortcuts
 cp ~/Bureau/SketchUp*.desktop ~/.wine/shortcuts/
 rm -f ~/Bureau/Layout\ 2017.* ~/Bureau/Sketchup\ 2017.* ~/Bureau/Style\ Builder\ 2017.*
