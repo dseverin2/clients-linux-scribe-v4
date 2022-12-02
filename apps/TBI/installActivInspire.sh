@@ -22,9 +22,9 @@ sudo dpkg -i libssl*.deb
 rm -f libssl1.0.0*.deb
 
 # Installation des librairies utilisées au lancement d'ActivInspire
-wget http://security.ubuntu.com/ubuntu/pool/main/i/icu/libicu71_71.1-3ubuntu1_amd64.deb
+wget http://security.ubuntu.com/ubuntu/pool/main/i/icu/libicu60_60.2-3ubuntu3_amd64.deb
 sudo dpkg -i libicu*_amd64.deb
-sudo apt install -y libicu71
+sudo apt install -y libicu60
 sudo apt-get install -y gsettings-ubuntu-schemas libjpeg62
 
 # Installation
