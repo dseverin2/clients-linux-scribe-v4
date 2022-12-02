@@ -15,11 +15,6 @@
 # Install the metapackage
 #sudo apt install meta-activsoftware -y
 
-
-#!/bin/bash
-# v1.1 - 24.02.21
-# Didier SEVERIN
-
 # Installation de libssl
 sudo apt install -y libssl-dev
 wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl1.0/libssl1.0.0_1.0.2n-1ubuntu5.10_amd64.deb
