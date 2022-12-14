@@ -46,7 +46,8 @@ retour=$(yad --title="Paramétrage Domaine & Esu 2/3" --form\
  --field="SOS Problème info":CBE\
  --field="Salle":CBE\
  --field="RNE":CBE\
- -- "$esubuntu" "$nom_etab" "$port_cntlm" "$type_cntlm" "$domaine_local" "$sos_info" "$salle" "$rne_etab")
+ --field="Info Machine":CBE\
+ -- "$esubuntu" "$nom_etab" "$port_cntlm" "$type_cntlm" "$domaine_local" "$sos_info" "$salle" "$rne_etab" "$infomachine")
 echo "$retour"
 
 
@@ -66,6 +67,8 @@ lieu=$(echo $retour | awk 'BEGIN {FS="|" } { print $7 }')
 if [ "$lieu" != "" ]; then sed -i -e "s/^salle=.*/salle=\"$lieu\"/g" "$conf"; fi
 rne=$(echo $retour | awk 'BEGIN {FS="|" } { print $8 }')
 if [ "$rne" != "" ]; then sed -i -e "s/^rne_etab=.*/rne_etab=\"$rne\"/g" "$conf"; fi
+infomach=$(echo $retour | awk 'BEGIN {FS="|" } { print $9 }')
+if [ "$infomach" != "" ]; then sed -i -e "s/^infomachine=.*/infomachine=$infomach/g" "$conf"; fi
 
 
 retour=$(yad --title="Paramétrage Applications 3/3" --form\
@@ -77,10 +80,11 @@ retour=$(yad --title="Paramétrage Applications 3/3" --form\
  --field="Installer eBeam":CHK\
  --field="Installer activInspire":CHK\
  --field="Installer WPS Office":CHK\
+ --field="Installer Only Office Desktop":CHK\
  --field="Installer Veyon":CHK\
  --field="Installer Sketchup 2017":CHK\
  --field="Redémarrer à la fin":CHK\
- -- "$pagedemarragepardefaut" "$extinction" "$postinstallbase" "$postinstalladditionnel" "$config_photocopieuse" "$ebeam" "$activinspire" "$WPSOffice" "$Veyon" "$reboot")
+ -- "$pagedemarragepardefaut" "$extinction" "$postinstallbase" "$postinstalladditionnel" "$config_photocopieuse" "$ebeam" "$activinspire" "$WPSOffice" "$OnlyOffice" "$Veyon" "$reboot")
 echo "$retour"
 
 accueil=$(echo $retour | awk 'BEGIN {FS="|" } { print $1 }' | sed 's/\//\\\//g')
@@ -99,11 +103,13 @@ prom=$(echo $retour | awk 'BEGIN {FS="|" } { print $7 }')
 if [ "$prom" != "" ]; then sed -i -e "s/^activinspire=.*/activinspire=$prom/g" "$conf"; fi
 wps=$(echo $retour | awk 'BEGIN {FS="|" } { print $8 }')
 if [ "$wps" != "" ]; then sed -i -e "s/^WPSOffice=.*/WPSOffice=$wps/g" "$conf"; fi
-vey=$(echo $retour | awk 'BEGIN {FS="|" } { print $9 }')
+onlyof=$(echo $retour | awk 'BEGIN {FS="|" } { print $9 }')
+if [ "$onlyof" != "" ]; then sed -i -e "s/^OnlyOffice=.*/OnlyOffice=$onlyof/g" "$conf"; fi
+vey=$(echo $retour | awk 'BEGIN {FS="|" } { print $10 }')
 if [ "$vey" != "" ]; then sed -i -e "s/^Veyon=.*/Veyon=$vey/g" "$conf"; fi
-sketchup=$(echo $retour | awk 'BEGIN {FS="|" } { print $10 }')
+sketchup=$(echo $retour | awk 'BEGIN {FS="|" } { print $11 }')
 if [ "$sketchup" != "" ]; then sed -i -e "s/^Sketchup=.*/Sketchup=$sketchup/g" "$conf"; fi
-reb=$(echo $retour | awk 'BEGIN {FS="|" } { print $11 }')
+reb=$(echo $retour | awk 'BEGIN {FS="|" } { print $12 }')
 if [ "$reb" != "" ]; then sed -i -e "s/^reboot=.*/reboot=$reb/g" "$conf"; fi
 
 sed -i -e "s/TRUE/true/g" "$conf"
