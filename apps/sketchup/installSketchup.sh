@@ -1,6 +1,6 @@
 #!/bin/bash
 # source https://romainhk.wordpress.com/2014/07/04/partager-une-meme-installation-playonlinux-avec-les-autres-utilisateurs/
-# Script original de Didier SEVERIN (11/09/22)
+# Script original de Didier SEVERIN (07/03/23)
 if [ $UID -eq 0 ]; then
 	echo "Lancez ce script sans sudo svp"
 	exit 
@@ -10,18 +10,24 @@ zenity --notification --text="1/5 - RECUPERATION DES INSTALLATEURS"
 # Récupération du fichier executable et des bibliothèques windows nécessaires
 sketchupexe=SketchupMake2017frx64.exe
 sketchupggl=18qU9Ohn1ZCp43_QLsZmfzz3hGWeEUBT2
-wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=$sketchupggl' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=$sketchupggl" -O ./$sketchupexe && sudo rm -rf /tmp/cookies.txt
-#sketchup 2017 ici https://aca.re/dseverin2/sketchup ou http://www.rossum.fr/technocollege/telechargements/logiciels/$sketchupexe 
+if [ ! -e ./$sketchupexe ]; then
+	wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=$sketchupggl' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=$sketchupggl" -O ./$sketchupexe && sudo rm -rf /tmp/cookies.txt
+	#sketchup 2017 ici https://aca.re/dseverin2/sketchup ou http://www.rossum.fr/technocollege/telechargements/logiciels/$sketchupexe 
+fi
 
 dotnetexe=NDP452-KB2901907-x86-x64-AllOS-ENU.exe
 dotnetggl=17OE26kWrILHSEVlzd388i2BwW7e2xNWJ
-wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=$dotnetggl' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=$dotnetggl" -O ./$dotnetexe && sudo rm -rf /tmp/cookies.txt
-#Microsoft .NET Framework ici https://www.microsoft.com/fr-FR/download/details.aspx?id=42642
+if [ ! -e ./$sketchupexe ]; then
+	wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=$dotnetggl' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=$dotnetggl" -O ./$dotnetexe && sudo rm -rf /tmp/cookies.txt
+	#Microsoft .NET Framework ici https://www.microsoft.com/fr-FR/download/details.aspx?id=42642
+fi
 
 vc2015=vc_redist.x64.exe
 vc2015ggl=1xe5hW0nrTgPCpoMJqXZOErSeoT0bmKRM
-wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=$vc2015ggl' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=$vc2015ggl" -O ./$vc2015 && sudo rm -rf /tmp/cookies.txt
-#Visual C++ 2015 64 ici https://www.microsoft.com/fr-FR/download/details.aspx?id=48145
+if [ ! -e ./$sketchupexe ]; then
+	wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=$vc2015ggl' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=$vc2015ggl" -O ./$vc2015 && sudo rm -rf /tmp/cookies.txt
+	#Visual C++ 2015 64 ici https://www.microsoft.com/fr-FR/download/details.aspx?id=48145
+fi
 
 # Téléchargement de wine
 clear
@@ -41,6 +47,8 @@ sudo apt-get install --install-recommends wine-staging winehq-staging -y
 clear
 echo 3/5 - PARAMETRAGE DE WINE ET INSTALLATION DE SKETCHUP 
 zenity --notification --text="3/5 - PARAMETRAGE DE WINE ET INSTALLATION DE SKETCHUP "
+sudo apt install winetricks -y
+winetricks dotnet45
 zenity --info --text="Dans la fenetre verifier que windows7 est selectionné et dans bibliothèque rajouter riched20"
 winecfg
 wine $dotnetexe
