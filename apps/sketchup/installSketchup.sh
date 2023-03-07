@@ -49,6 +49,10 @@ echo 3/5 - PARAMETRAGE DE WINE ET INSTALLATION DE SKETCHUP
 zenity --notification --text="3/5 - PARAMETRAGE DE WINE ET INSTALLATION DE SKETCHUP "
 sudo apt install winetricks -y
 winetricks dotnet45
+wget -nc https://dl.winehq.org/wine/wine-gecko/2.47.3/wine-gecko-2.47.3-x86.tar.xz
+if [ ! -e /usr/share/wine/ ]; then sudo mkdir /usr/share/wine; fi
+sudo tar xvf wine-gecko-2.47.3-x86.tar.xz -C /usr/share/wine/
+sudo mv /usr/share/wine/wine-gecko-2.47.3-x86 /usr/share/wine/gecko
 zenity --info --text="Dans la fenetre verifier que windows7 est selectionné et dans bibliothèque rajouter riched20"
 winecfg
 wine $dotnetexe
